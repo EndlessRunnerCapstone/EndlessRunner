@@ -1,22 +1,20 @@
 fileFormatVersion: 2
-guid: 7c71418b82824fe41970bdf2576a3fb6
+guid: 89bcda79dc6663b49b1ec90461a84e56
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Ground001
-    21300002: Brick001
-    21300004: Brick002
-    21300006: Brick003
-    21300008: Pipe001
-    21300010: Brick004
-    21300012: Coin001
-    21300014: Cloud001
-    21300016: Bush001
-    21300018: Hill001
-    21300020: Hill002
-    21300022: Hill003
-    21300024: Bush002
-    21300026: End Blocks
-    21300028: NES - Super Mario Bros - Tileset_0
+    21300000: Pipe03
+    21300002: Pipe04
+    21300004: Bush02
+    21300006: Hill01
+    21300008: Hill02
+    21300010: Cloud02
+    21300012: Flag01
+    21300014: Flag02
+    21300016: Flag03
+    21300018: Flag04
+    21300020: Flag05
+    21300022: Little Castle
+    21300024: Big Castle
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -58,7 +56,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,97 +91,28 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ground001
+      name: Pipe03
       rect:
         serializedVersion: 2
-        x: 0
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 405dae33e844ee04c98881bf90753005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick001
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c593d05a7da1885419b52ac7cb002ef4
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick002
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e2b900a2653582458d3b44ed53095dd
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick003
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7743db3600c9ed24c82ce50f4cd1c9e3
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Pipe001
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 288
+        x: 230
+        y: 500
         width: 32
-        height: 31
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,18 +120,38 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ab8dcf9585899442a8d55147b609dde
+      spriteID: 658bb26d18d29ec44be85e5c1928435a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Brick004
+      name: Pipe04
       rect:
         serializedVersion: 2
-        x: 384
-        y: 432
-        width: 16
+        x: 271
+        y: 500
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ee9e8f30bc57184b890ec0c9ade3739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bush02
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 909
+        width: 64
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -211,78 +160,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80b98dcaec7df0f47a2a217131c6e0d2
+      spriteID: 7e129a19a284d914cb680a09b71d5f13
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coin001
+      name: Hill01
       rect:
         serializedVersion: 2
-        x: 387
-        y: 416
-        width: 10
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f87a1e2ef780b174c9789034797ab8d9
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cloud001
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 104
-        width: 32
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b131831e969304443b8ff41802bd93dd
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bush001
-      rect:
-        serializedVersion: 2
-        x: 184
-        y: 288
-        width: 32
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 27217af68b6a0ae48ac1fd432f590f48
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hill001
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 288
-        width: 16
+        x: 169
+        y: 909
+        width: 48
         height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -291,19 +180,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3d4ef632b71d3b4f96c6d946886d608
+      spriteID: eb10665df1f3139429befe043f9d0e08
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hill002
+      name: Hill02
       rect:
         serializedVersion: 2
-        x: 128
-        y: 288
-        width: 16
-        height: 32
+        x: 86
+        y: 909
+        width: 80
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,19 +200,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1ef833b4ca43e44789a6b056d0ead01
+      spriteID: 9e133fae8cabc8241804c5cc617e9e4f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hill003
+      name: Cloud02
       rect:
         serializedVersion: 2
-        x: 160
-        y: 288
-        width: 16
-        height: 32
+        x: 145
+        y: 856
+        width: 63
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,39 +220,79 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c0a34c2b6ad45f4fab5f3ac92a211ec
+      spriteID: 109d876040e589841a6474ce78b21615
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bush002
+      name: Flag01
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 187
+        width: 17
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79cc857e9ed364243b0496439b6612fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flag02
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 187
+        width: 16
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9075ac4367146024190ec5e1034051b0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flag03
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 187
+        width: 16
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91cbf5562179269449ba3c863cca3c35
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flag04
       rect:
         serializedVersion: 2
         x: 224
-        y: 256
+        y: 187
         width: 16
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 1, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 660692cb29af56d4dba2fddf944ccb03
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: End Blocks
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 416
-        width: 16
-        height: 16
+        height: 168
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -371,27 +300,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 659f4e4c21aa6f44895dffa360cda1d6
+      spriteID: 94c71fb82bcdfc5418a61432775a60b2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NES - Super Mario Bros - Tileset_0
+      name: Flag05
       rect:
         serializedVersion: 2
-        x: 16
-        y: 416
-        width: 16
-        height: 16
+        x: 249
+        y: 187
+        width: 24
+        height: 168
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 688e035acd7f69f46aca475f7ae7a8c4
+      spriteID: debd85de63228384d9c338a1e376fecc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Little Castle
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 6
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e36c8f4ed001ec14a83c2ac0ec0fd097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big Castle
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 6
+        width: 148
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff1292ae00e29a5489bed4f59d65bfab
       vertices: []
       indices: 
       edges: []
@@ -399,7 +368,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 84fdb544ab09bd341a15d27cf722c52d
+    spriteID: ed22c5bb2a0389e4db8eec10750efbed
     vertices: []
     indices: 
     edges: []
