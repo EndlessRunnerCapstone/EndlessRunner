@@ -4,40 +4,89 @@ using UnityEngine;
 
 public class Player_Move : MonoBehaviour {
 
-	public int playerSpeed = 10;
+	public float playerSpeed = 10;
 	private bool facingRight = false;
-	public int playerJumpPower = 1250;
+	public float jumpForce;
+     public float jumpTime;
+     public float jumpTimeCounter;
 	private float moveX;
-	
-	// Update is called once per frame
-	void Update () {
+     private Rigidbody2D rb;
+     public bool stoppedJumping;
+     public bool isGrounded;
+     public bool noMoreJumping;
+     public float fallMultiplier = 2;
+
+     private void Start()
+     {
+          playerSpeed = 2.1f;
+          rb = GetComponent<Rigidbody2D>();
+          rb.gravityScale = 2;
+          jumpForce = 4;
+          stoppedJumping = true;
+          jumpTime = .2f;
+          jumpTimeCounter = jumpTime;
+          isGrounded = true;
+          noMoreJumping = false;
+     }
+
+     // Update is called once per frame
+     void Update () {
 		PlayerMove ();
+          if (Input.GetButtonDown("Jump"))
+          {
+               if (isGrounded)
+               {
+                    Jump();
+               }               
+          }
 
-	}
 
-	void PlayerMove ()
+          if (Input.GetButtonUp("Jump"))
+          {
+               jumpTimeCounter = 0;
+               stoppedJumping = true;
+               noMoreJumping = true;
+          }
+
+          if (rb.velocity.y < 0)
+          {
+               rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+          }
+     }
+
+     private void FixedUpdate()
+     {
+          if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping)
+          {
+               if (jumpTimeCounter > 0) 
+               {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    jumpTimeCounter -= Time.deltaTime;
+               }
+          }
+     }
+
+     void PlayerMove ()
 	{
 		// CONTROLS
 		moveX = Input.GetAxis ("Horizontal");
-		if(Input.GetButtonDown ("Jump")){
-			Jump();
-		}
-		// ANIMATIONS
+          // ANIMATIONS
 
-		// PLAYER DIRECTION
-		if (moveX < 0.0f && facingRight == false) {
+          // PLAYER DIRECTION
+          if (moveX < 0.0f && facingRight == false) {
 			FlipPlayer();
 		} else if (moveX > 0.0f && facingRight == true) {
 			FlipPlayer();
 		}
 
 		// PHYSICS
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+		rb.velocity = new Vector2 (moveX * playerSpeed, rb.velocity.y);
 	}
 
 	void Jump(){
-		// JUMP CODE
-		GetComponent<Rigidbody2D>().AddForce (Vector2.up * playerJumpPower);
+          // JUMP CODE
+          rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+          stoppedJumping = false;
 	}
 
 	void FlipPlayer(){
@@ -46,4 +95,22 @@ public class Player_Move : MonoBehaviour {
 		localScale.x *= -1;
 		transform.localScale = localScale;
 	}
+
+     private void OnCollisionStay2D(Collision2D collision)
+     {
+          if (collision.collider.gameObject.layer == 9)
+          {
+               isGrounded = true;
+               jumpTimeCounter = jumpTime;
+               noMoreJumping = false;
+          }
+     }
+
+     private void OnCollisionExit2D(Collision2D collision)
+     {
+          if (collision.collider.gameObject.layer == 9)
+          {
+               isGrounded = false;
+          }
+     }
 }

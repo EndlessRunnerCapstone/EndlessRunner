@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 62892649}
   - component: {fileID: 62892648}
   - component: {fileID: 62892650}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 75214107}
   - component: {fileID: 75214106}
   - component: {fileID: 75214105}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Coin Block OW (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 222024452}
   - component: {fileID: 222024451}
   - component: {fileID: 222024453}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1206,8 +1206,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &455676943
-CircleCollider2D:
+--- !u!61 &455676943
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1219,8 +1219,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.12, y: 0.16}
+    newSize: {x: 0.12, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.08
+  m_Size: {x: 0.12, y: 0.16}
+  m_EdgeRadius: 0
 --- !u!212 &455676944
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1273,7 +1283,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 455676941}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.36, y: -4.695, z: 0}
+  m_LocalPosition: {x: -9.36, y: -4.719, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1291,7 +1301,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 7
-  playerJumpPower: 1250
+  jumpForce: 0
+  jumpTime: 0
+  jumpTimeCounter: 0
+  stoppedJumping: 0
+  isGrounded: 0
+  noMoreJumping: 0
+  fallMultiplier: 2.5
 --- !u!1 &520736917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,8 +1465,8 @@ GameObject:
   m_Component:
   - component: {fileID: 557906039}
   - component: {fileID: 557906041}
-  - component: {fileID: 557906040}
-  m_Layer: 0
+  - component: {fileID: 557906042}
+  m_Layer: 9
   m_Name: Pipe01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1464,37 +1480,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 557906038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.793, y: -1.376, z: -0.17163195}
+  m_LocalPosition: {x: 2.794, y: -1.385, z: -0.17163195}
   m_LocalScale: {x: 0.952814, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1117330111}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &557906040
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 557906038}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.31}
-    newSize: {x: 0.32, y: 0.31}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.31}
-  m_EdgeRadius: 0
 --- !u!212 &557906041
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1540,6 +1531,31 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!61 &557906042
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 557906038}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.31}
+    newSize: {x: 0.32, y: 0.31}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32, y: 0.31}
+  m_EdgeRadius: 0
 --- !u!1 &584063655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1997,7 +2013,7 @@ GameObject:
   - component: {fileID: 823127565}
   - component: {fileID: 823127567}
   - component: {fileID: 823127566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8725,7 +8741,7 @@ GameObject:
   - component: {fileID: 835893765}
   - component: {fileID: 835893764}
   - component: {fileID: 835893763}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Coin Block OW (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9319,7 +9335,7 @@ GameObject:
   - component: {fileID: 1161508338}
   - component: {fileID: 1161508337}
   - component: {fileID: 1161508339}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9420,7 +9436,7 @@ GameObject:
   - component: {fileID: 1177331648}
   - component: {fileID: 1177331647}
   - component: {fileID: 1177331646}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Coin Block OW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9608,7 +9624,7 @@ GameObject:
   - component: {fileID: 1277291212}
   - component: {fileID: 1277291211}
   - component: {fileID: 1277291210}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Coin Block OW (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10017,7 +10033,7 @@ GameObject:
   - component: {fileID: 1584180211}
   - component: {fileID: 1584180210}
   - component: {fileID: 1584180212}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11477,7 +11493,7 @@ GameObject:
   - component: {fileID: 2116515438}
   - component: {fileID: 2116515437}
   - component: {fileID: 2116515439}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
