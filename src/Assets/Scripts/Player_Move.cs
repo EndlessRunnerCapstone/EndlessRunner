@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player_Move : MonoBehaviour {
 
-	public float playerSpeed = 10;
+	public float runSpeed;
+     public float sprintSpeed;
 	private bool facingRight = false;
 	public float jumpForce;
      public float jumpTime;
@@ -15,10 +16,13 @@ public class Player_Move : MonoBehaviour {
      public bool isGrounded;
      public bool noMoreJumping;
      public float fallMultiplier = 2;
+     private Animator myAnimator;
+     bool isRunning;
 
      private void Start()
      {
-          playerSpeed = 2.1f;
+          runSpeed = 1.6f;
+          sprintSpeed = 3f;
           rb = GetComponent<Rigidbody2D>();
           rb.gravityScale = 2;
           jumpForce = 4;
@@ -27,11 +31,14 @@ public class Player_Move : MonoBehaviour {
           jumpTimeCounter = jumpTime;
           isGrounded = true;
           noMoreJumping = false;
+          myAnimator = GetComponent<Animator>();
      }
 
      // Update is called once per frame
      void Update () {
 		PlayerMove ();
+          FlipPlayer();
+          Animate();
           if (Input.GetButtonDown("Jump"))
           {
                if (isGrounded)
@@ -72,16 +79,21 @@ public class Player_Move : MonoBehaviour {
 		moveX = Input.GetAxis ("Horizontal");
           // ANIMATIONS
 
-          // PLAYER DIRECTION
-          if (moveX < 0.0f && facingRight == false) {
-			FlipPlayer();
-		} else if (moveX > 0.0f && facingRight == true) {
-			FlipPlayer();
-		}
+          // PHYSICS
+          if (Input.GetKey(KeyCode.LeftShift))
+          {
+               rb.velocity = new Vector2(moveX * sprintSpeed, rb.velocity.y);
+          }
+          else
+          {
+               rb.velocity = new Vector2(moveX * runSpeed, rb.velocity.y);
+          }
+          bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+          bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
+          myAnimator.SetBool("Running", playerHasHorizontalSpeed);
+          myAnimator.SetBool("Jumping", playerHasVerticalSpeed);
 
-		// PHYSICS
-		rb.velocity = new Vector2 (moveX * playerSpeed, rb.velocity.y);
-	}
+     }
 
 	void Jump(){
           // JUMP CODE
@@ -90,10 +102,11 @@ public class Player_Move : MonoBehaviour {
 	}
 
 	void FlipPlayer(){
-		facingRight = !facingRight;
-		Vector2 localScale = gameObject.transform.localScale;
-		localScale.x *= -1;
-		transform.localScale = localScale;
+          bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+          if (playerHasHorizontalSpeed)
+          {
+               transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
+          }
 	}
 
      private void OnCollisionStay2D(Collision2D collision)
@@ -111,6 +124,18 @@ public class Player_Move : MonoBehaviour {
           if (collision.collider.gameObject.layer == 9)
           {
                isGrounded = false;
+          }
+     }
+
+     void Animate()
+     {
+          if (rb.velocity.x != 0)
+          {
+               myAnimator.SetBool("Running", true);
+          }
+          else
+          {
+               myAnimator.SetBool("Running", false);
           }
      }
 }
