@@ -4,46 +4,138 @@ using UnityEngine;
 
 public class Player_Move : MonoBehaviour {
 
-	public int playerSpeed = 10;
+	public float runSpeed;
+     public float sprintSpeed;
 	private bool facingRight = false;
-	public int playerJumpPower = 1250;
+	public float jumpForce;
+     public float jumpTime;
+     public float jumpTimeCounter;
 	private float moveX;
-	
-	// Update is called once per frame
-	void Update () {
+     private Rigidbody2D rb;
+     public bool stoppedJumping;
+     public bool isGrounded;
+     public bool noMoreJumping;
+     public float fallMultiplier = 2;
+     private Animator myAnimator;
+     bool isRunning;
+
+     private void Start()
+     {
+          runSpeed = 1.6f;
+          sprintSpeed = 3f;
+          rb = GetComponent<Rigidbody2D>();
+          rb.gravityScale = 2;
+          jumpForce = 4;
+          stoppedJumping = true;
+          jumpTime = .2f;
+          jumpTimeCounter = jumpTime;
+          isGrounded = true;
+          noMoreJumping = false;
+          myAnimator = GetComponent<Animator>();
+     }
+
+     // Update is called once per frame
+     void Update () {
 		PlayerMove ();
+          FlipPlayer();
+          Animate();
+          if (Input.GetButtonDown("Jump"))
+          {
+               if (isGrounded)
+               {
+                    Jump();
+               }               
+          }
 
-	}
 
-	void PlayerMove ()
+          if (Input.GetButtonUp("Jump"))
+          {
+               jumpTimeCounter = 0;
+               stoppedJumping = true;
+               noMoreJumping = true;
+          }
+
+          if (rb.velocity.y < 0)
+          {
+               rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+          }
+     }
+
+     private void FixedUpdate()
+     {
+          if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping)
+          {
+               if (jumpTimeCounter > 0) 
+               {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    jumpTimeCounter -= Time.deltaTime;
+               }
+          }
+     }
+
+     void PlayerMove ()
 	{
 		// CONTROLS
 		moveX = Input.GetAxis ("Horizontal");
-		if(Input.GetButtonDown ("Jump")){
-			Jump();
-		}
-		// ANIMATIONS
+          // ANIMATIONS
 
-		// PLAYER DIRECTION
-		if (moveX < 0.0f && facingRight == false) {
-			FlipPlayer();
-		} else if (moveX > 0.0f && facingRight == true) {
-			FlipPlayer();
-		}
+          // PHYSICS
+          if (Input.GetKey(KeyCode.LeftShift))
+          {
+               rb.velocity = new Vector2(moveX * sprintSpeed, rb.velocity.y);
+          }
+          else
+          {
+               rb.velocity = new Vector2(moveX * runSpeed, rb.velocity.y);
+          }
+          bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+          bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
+          myAnimator.SetBool("Running", playerHasHorizontalSpeed);
+          myAnimator.SetBool("Jumping", playerHasVerticalSpeed);
 
-		// PHYSICS
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
-	}
+     }
 
 	void Jump(){
-		// JUMP CODE
-		GetComponent<Rigidbody2D>().AddForce (Vector2.up * playerJumpPower);
+          // JUMP CODE
+          rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+          stoppedJumping = false;
 	}
 
 	void FlipPlayer(){
-		facingRight = !facingRight;
-		Vector2 localScale = gameObject.transform.localScale;
-		localScale.x *= -1;
-		transform.localScale = localScale;
+          bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+          if (playerHasHorizontalSpeed)
+          {
+               transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
+          }
 	}
+
+     private void OnCollisionStay2D(Collision2D collision)
+     {
+          if (collision.collider.gameObject.layer == 9)
+          {
+               isGrounded = true;
+               jumpTimeCounter = jumpTime;
+               noMoreJumping = false;
+          }
+     }
+
+     private void OnCollisionExit2D(Collision2D collision)
+     {
+          if (collision.collider.gameObject.layer == 9)
+          {
+               isGrounded = false;
+          }
+     }
+
+     void Animate()
+     {
+          if (rb.velocity.x != 0)
+          {
+               myAnimator.SetBool("Running", true);
+          }
+          else
+          {
+               myAnimator.SetBool("Running", false);
+          }
+     }
 }
