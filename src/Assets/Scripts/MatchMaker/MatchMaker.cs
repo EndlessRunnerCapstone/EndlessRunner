@@ -62,7 +62,7 @@ public class MatchMaker : PunBehaviour
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
-        if(PhotonNetwork.isMasterClient)
+        if(PhotonNetwork.isMasterClient && PhotonNetwork.room.PlayerCount > 1)
         {
             PhotonNetwork.LoadLevel("Level01");
         }
