@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Move : MonoBehaviour {
+public class Player_Move : Photon.MonoBehaviour {
 
 	public float runSpeed;
      public float sprintSpeed;
@@ -36,6 +36,11 @@ public class Player_Move : MonoBehaviour {
 
      // Update is called once per frame
      void Update () {
+        if(!photonView.isMine && PhotonNetwork.connected)
+        {
+            return;
+        }
+
 		PlayerMove ();
           FlipPlayer();
           Animate();
