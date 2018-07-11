@@ -5,8 +5,7 @@ using UnityEngine;
 public class Player_Move : MonoBehaviour {
 
 	public float runSpeed;
-     public float sprintSpeed;
-	private bool facingRight = false;
+     public float sprintSpeed;	
 	public float jumpForce;
      public float jumpTime;
      public float jumpTimeCounter;
@@ -18,6 +17,10 @@ public class Player_Move : MonoBehaviour {
      public float fallMultiplier = 2;
      private Animator myAnimator;
      bool isRunning;
+     public GameObject leftCast;
+     public GameObject rightCast;
+     public LayerMask groundLayer;
+     
 
      private void Start()
      {
@@ -32,13 +35,15 @@ public class Player_Move : MonoBehaviour {
           isGrounded = true;
           noMoreJumping = false;
           myAnimator = GetComponent<Animator>();
+          leftCast = GameObject.Find("LeftRaycast");
+          rightCast = GameObject.Find("RightRaycast");
      }
 
      // Update is called once per frame
      void Update () {
 		PlayerMove ();
-          FlipPlayer();
           Animate();
+          FlipPlayer();          
           if (Input.GetButtonDown("Jump"))
           {
                if (isGrounded)
@@ -71,6 +76,9 @@ public class Player_Move : MonoBehaviour {
                     jumpTimeCounter -= Time.deltaTime;
                }
           }
+
+
+          groundCheck();
      }
 
      void PlayerMove ()
@@ -88,11 +96,6 @@ public class Player_Move : MonoBehaviour {
           {
                rb.velocity = new Vector2(moveX * runSpeed, rb.velocity.y);
           }
-          bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-          bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
-          myAnimator.SetBool("Running", playerHasHorizontalSpeed);
-          myAnimator.SetBool("Jumping", playerHasVerticalSpeed);
-
      }
 
 	void Jump(){
@@ -109,33 +112,29 @@ public class Player_Move : MonoBehaviour {
           }
 	}
 
-     private void OnCollisionStay2D(Collision2D collision)
+     void Animate()
      {
-          if (collision.collider.gameObject.layer == 9)
+          bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+          bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
+          myAnimator.SetBool("Running", playerHasHorizontalSpeed);
+          myAnimator.SetBool("Jumping", playerHasVerticalSpeed);
+     }
+
+     void groundCheck()
+     {
+          bool leftGrounded = Physics2D.Raycast(leftCast.transform.position, Vector2.down, 0.03f, groundLayer);
+          bool rightGrounded = Physics2D.Raycast(rightCast.transform.position, Vector2.down, 0.03f, groundLayer);
+          Debug.Log(leftGrounded);
+          Debug.Log(rightGrounded);
+          if (leftGrounded || rightGrounded)
           {
                isGrounded = true;
                jumpTimeCounter = jumpTime;
                noMoreJumping = false;
           }
-     }
-
-     private void OnCollisionExit2D(Collision2D collision)
-     {
-          if (collision.collider.gameObject.layer == 9)
-          {
-               isGrounded = false;
-          }
-     }
-
-     void Animate()
-     {
-          if (rb.velocity.x != 0)
-          {
-               myAnimator.SetBool("Running", true);
-          }
           else
           {
-               myAnimator.SetBool("Running", false);
+               isGrounded = false;
           }
      }
 }
