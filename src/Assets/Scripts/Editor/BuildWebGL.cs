@@ -10,7 +10,7 @@ public class WebGLBuilder : MonoBehaviour
 {
     public static void build()
     {
-        string[] scenes = { "Assets/Scenes/MainMenu.unity", "Assets/Scenes/Level01.unity" };
+        string[] scenes = { "Assets/Scenes/MainMenu.unity", "Assets/Scenes/WaitingForPlayer.unity", "Assets/Scenes/Level01.unity" };
         BuildPipeline.BuildPlayer(scenes, "WebGL", BuildTarget.WebGL, BuildOptions.None);
     }
 }
