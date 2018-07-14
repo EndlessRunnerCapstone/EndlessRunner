@@ -468,8 +468,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 764832195
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 266aad21b7cc2a14e838c41d3e0b936f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -525,10 +525,10 @@ RectTransform:
   m_Father: {fileID: 364967902}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 298.45, y: 224.67}
-  m_SizeDelta: {x: 61.602, y: 22.32}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -81.20001, y: -33.434998}
+  m_SizeDelta: {x: 77.2, y: 26.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &120356526
 MonoBehaviour:
@@ -779,7 +779,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 209841322}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.0796456, y: 0.34327626, z: -0.17163195}
+  m_LocalPosition: {x: -2.93, y: -5.63, z: -0.17163195}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 688913459}
@@ -1020,7 +1020,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5ca578bc12c12b849812762903b71059, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1147,10 +1147,10 @@ RectTransform:
   m_Father: {fileID: 364967902}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 92.07, y: 223.8}
-  m_SizeDelta: {x: 74.68, y: 24.06}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 126.29, y: -38.669983}
+  m_SizeDelta: {x: 93.81, y: 26.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &289837479
 MonoBehaviour:
@@ -1433,7 +1433,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -885296589
+  m_SortingLayerID: 837880325
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &364967902
@@ -1985,10 +1985,10 @@ RectTransform:
   m_Father: {fileID: 364967902}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -127.5, y: 202.35}
-  m_SizeDelta: {x: 56.35, y: 22.32}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -59.8, y: -62.339996}
+  m_SizeDelta: {x: 72.84, y: 29.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &594082875
 MonoBehaviour:
@@ -2303,10 +2303,10 @@ RectTransform:
   m_Father: {fileID: 364967902}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -317.97, y: 202.35}
-  m_SizeDelta: {x: 109.59, y: 18.83}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 126.650024, y: -63.809998}
+  m_SizeDelta: {x: 137.91, y: 27.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &698874737
 MonoBehaviour:
@@ -2519,10 +2519,10 @@ RectTransform:
   m_Father: {fileID: 364967902}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 92.07, y: 198.64}
-  m_SizeDelta: {x: 49.37, y: 18.375}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 121.2, y: -70}
+  m_SizeDelta: {x: 64.21, y: 27.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &781549897
 MonoBehaviour:
@@ -10144,8 +10144,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 764832195
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 266aad21b7cc2a14e838c41d3e0b936f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10201,10 +10201,10 @@ RectTransform:
   m_Father: {fileID: 364967902}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 302.82, y: 201.48}
-  m_SizeDelta: {x: 52.863, y: 20.58}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -73, y: -63.809998}
+  m_SizeDelta: {x: 71.76, y: 26.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &981623365
 MonoBehaviour:
@@ -11001,8 +11001,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 764832195
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 266aad21b7cc2a14e838c41d3e0b936f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11246,8 +11246,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 764832195
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 266aad21b7cc2a14e838c41d3e0b936f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11941,8 +11941,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 96.28, y: -34.75}
-  m_SizeDelta: {x: 84.6, y: 21.48}
+  m_AnchoredPosition: {x: 111.10004, y: -33.909973}
+  m_SizeDelta: {x: 106.81, y: 27.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657028210
 MonoBehaviour:
@@ -12119,7 +12119,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1704508574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.28, y: -3.343, z: 0}
+  m_LocalPosition: {x: 11.083, y: -3.343, z: 0}
   m_LocalScale: {x: 6.7301364, y: 1.3767917, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12326,15 +12326,15 @@ Camera:
   m_BackGroundColor: {r: 0.54509807, g: 0.5731209, b: 1, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.125
+    x: 0.135
     y: 0
-    width: 0.75
+    width: 0.7
     height: 1
   near clip plane: -1000
   far clip plane: 2000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.9229718
+  orthographic size: 1.3563845
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12357,7 +12357,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1748513453}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.64, y: -3.17, z: -10}
+  m_LocalPosition: {x: -9.02, y: -3.698, z: -10}
   m_LocalScale: {x: 1, y: 0.52500033, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12375,6 +12375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 455676941}
+  lockY: 1
 --- !u!1 &1759517979
 GameObject:
   m_ObjectHideFlags: 0
