@@ -15,7 +15,7 @@ TagManager:
   - 
   - PostProcessing
   - groundLayer
-  - 
+  - enemyLayer
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2134992861
+    locked: 0
+  - name: enemyLayer
+    uniqueID: 844142093
     locked: 0
   - name: Foreground
     uniqueID: 659605839
