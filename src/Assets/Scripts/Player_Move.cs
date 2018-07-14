@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class Player_Move : Photon.MonoBehaviour {
 
+     //movement variables
 	public float runSpeed;
      public float sprintSpeed;
-	private bool facingRight = false;
-	public float jumpForce;
+     private float moveX;
+     bool isRunning;
+     public float fallMultiplier = 2;
+
+     //jumping variables
+     public float jumpForce;
      public float jumpTime;
      public float jumpTimeCounter;
-	private float moveX;
-     private Rigidbody2D rb;
      public bool stoppedJumping;
-     public bool isGrounded;
      public bool noMoreJumping;
-     public float fallMultiplier = 2;
+
+     //game components
+     private Rigidbody2D rb;
      private Animator myAnimator;
-     bool isRunning;
+
+     //ground check variables
+     public bool isGrounded;
+     public LayerMask groundLayer;
+     public GameObject leftCast;
+     public GameObject rightCast;
+     public GameObject upCast;
+     
 
      private void Start()
      {
@@ -36,16 +47,18 @@ public class Player_Move : Photon.MonoBehaviour {
 
      // Update is called once per frame
      void Update () {
-        if(!photonView.isMine && PhotonNetwork.connected)
-        {
+          if (!photonView.isMine && PhotonNetwork.connected)
+          {
             return;
-        }
+          }
 
 		PlayerMove ();
           FlipPlayer();
           Animate();
+          
+
           if (Input.GetButtonDown("Jump"))
-          {
+          {               
                if (isGrounded)
                {
                     Jump();
@@ -68,6 +81,8 @@ public class Player_Move : Photon.MonoBehaviour {
 
      private void FixedUpdate()
      {
+          GroundCheck();
+          CollisionCheckAbove();
           if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping)
           {
                if (jumpTimeCounter > 0) 
@@ -75,14 +90,13 @@ public class Player_Move : Photon.MonoBehaviour {
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                     jumpTimeCounter -= Time.deltaTime;
                }
-          }
+          }          
      }
 
      void PlayerMove ()
 	{
 		// CONTROLS
 		moveX = Input.GetAxis ("Horizontal");
-          // ANIMATIONS
 
           // PHYSICS
           if (Input.GetKey(KeyCode.LeftShift))
@@ -93,11 +107,6 @@ public class Player_Move : Photon.MonoBehaviour {
           {
                rb.velocity = new Vector2(moveX * runSpeed, rb.velocity.y);
           }
-          bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-          bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
-          myAnimator.SetBool("Running", playerHasHorizontalSpeed);
-          myAnimator.SetBool("Jumping", playerHasVerticalSpeed);
-
      }
 
 	void Jump(){
@@ -114,33 +123,49 @@ public class Player_Move : Photon.MonoBehaviour {
           }
 	}
 
-     private void OnCollisionStay2D(Collision2D collision)
-     {
-          if (collision.collider.gameObject.layer == 9)
-          {
-               isGrounded = true;
-               jumpTimeCounter = jumpTime;
-               noMoreJumping = false;
-          }
-     }
-
-     private void OnCollisionExit2D(Collision2D collision)
-     {
-          if (collision.collider.gameObject.layer == 9)
-          {
-               isGrounded = false;
-          }
-     }
-
      void Animate()
      {
-          if (rb.velocity.x != 0)
+          bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+          bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
+
+          if (playerHasHorizontalSpeed)
           {
                myAnimator.SetBool("Running", true);
           }
           else
           {
                myAnimator.SetBool("Running", false);
+          }
+
+          if (playerHasVerticalSpeed)
+          {
+               myAnimator.SetBool("Jumping", true);
+          }
+          else
+          {
+               myAnimator.SetBool("Jumping", false);
+          }
+     }
+
+     void GroundCheck()
+     {
+          bool groundedLeft = Physics2D.Raycast(leftCast.transform.position, Vector2.down, 0.03f, groundLayer);
+          bool groundedRight = Physics2D.Raycast(rightCast.transform.position, Vector2.down, 0.03f, groundLayer);
+          isGrounded = groundedLeft || groundedRight;
+
+          if (isGrounded)
+          {
+               jumpTimeCounter = jumpTime;
+               noMoreJumping = false;
+          }
+     }
+
+     void CollisionCheckAbove()
+     {
+          bool hitAbove = Physics2D.Raycast(upCast.transform.position, Vector2.up, 0.03f, groundLayer);
+          if (hitAbove)
+          {
+               jumpTimeCounter = 0;
           }
      }
 }
