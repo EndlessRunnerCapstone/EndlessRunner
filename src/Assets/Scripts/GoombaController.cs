@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoombaController : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class GoombaController : MonoBehaviour {
      public bool isWalkingLeft = true;
      public LayerMask groundLayer;
      private Rigidbody2D rb;
+     public LayerMask playerLayer;
 
      private bool grounded = false;
 
@@ -32,8 +34,9 @@ public class GoombaController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
      { 
-          UpdateEnemyPosition();
-	}
+          UpdateEnemyPosition();          
+     }
+
 
      private void OnBecameVisible()
      {
@@ -66,34 +69,12 @@ public class GoombaController : MonoBehaviour {
                     }                    
                }
 
-               if (velocity.y <= 0)
-               {
-                    pos = CheckGround(pos);
-               }
-
                transform.localPosition = pos;
                transform.localScale = scale;
+               CheckPlayerCollision(pos);
           }
      }
 
-
-     Vector3 CheckGround(Vector3 pos)
-     {
-          Vector2 originLeft = new Vector2(pos.x - 0.5f + 0.2f, pos.y - 0.5f);
-          Vector2 originMiddle = new Vector2(pos.x, pos.y - 0.5f);
-          Vector2 originRight = new Vector2(pos.x + 0.5f - 0.2f, pos.y - 0.5f);
-
-          RaycastHit2D groundLeft = Physics2D.Raycast(originLeft, Vector2.down, velocity.y * Time.deltaTime, groundLayer);
-          RaycastHit2D groundMiddle = Physics2D.Raycast(originMiddle, Vector2.down, velocity.y * Time.deltaTime, groundLayer);
-          RaycastHit2D groundRight = Physics2D.Raycast(originRight, Vector2.down, velocity.y * Time.deltaTime, groundLayer);
-
-          if(groundLeft.collider != null || groundMiddle.collider != null || groundRight.collider != null)
-          {    grounded = true;
-               velocity.y = 0;
-               state = EnemyState.walking;
-          }
-          return pos;
-     }
 
      void CheckWallCollision()
      {
@@ -108,5 +89,68 @@ public class GoombaController : MonoBehaviour {
           {
                isWalkingLeft = true;
           }
-     }     
+     }   
+
+     void CheckPlayerCollision(Vector3 pos)
+     {
+          
+          RaycastHit2D leftSide = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.07f, transform.localPosition.y), Vector2.down, 0.11f, playerLayer);
+          RaycastHit2D middle = Physics2D.Raycast(transform.localPosition, Vector2.down, 0.11f, playerLayer);
+          RaycastHit2D rightSide = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.07f, transform.localPosition.y), Vector2.down, 0.11f, playerLayer);
+
+          RaycastHit2D topLeftCast = Physics2D.Raycast(new Vector2(pos.x, pos.y + 0.065f), Vector2.left, 0.11f, playerLayer);
+          RaycastHit2D topRightCast = Physics2D.Raycast(new Vector2(pos.x, pos.y + 0.065f), Vector2.right, 0.11f, playerLayer);
+          RaycastHit2D midLeftCast = Physics2D.Raycast(new Vector2(pos.x, pos.y), Vector2.left, 0.11f, playerLayer);
+          RaycastHit2D midRightCast = Physics2D.Raycast(new Vector2(pos.x, pos.y), Vector2.right, 0.11f, playerLayer);
+          RaycastHit2D bottomLeftCast = Physics2D.Raycast(new Vector2(pos.x, pos.y - 0.065f), Vector2.left, 0.11f, playerLayer);
+          RaycastHit2D bottomRightCast = Physics2D.Raycast(new Vector2(pos.x, pos.y - 0.065f), Vector2.right, 0.11f, playerLayer);
+
+
+          if (leftSide.collider != null || middle.collider != null || rightSide.collider != null || topLeftCast.collider != null || topRightCast.collider != null || midLeftCast.collider != null || midRightCast.collider != null || bottomLeftCast.collider != null || bottomRightCast.collider != null)
+          {
+               RaycastHit2D hitRay;
+               if (leftSide)
+               {
+                    hitRay = leftSide;
+               }
+               else if (middle)
+               {
+                    hitRay = middle;
+               }
+               else if (rightSide)
+               {
+                    hitRay = rightSide;
+               }
+               else if (topLeftCast)
+               {
+                    hitRay = topLeftCast;
+               }
+               else if (topRightCast)
+               {
+                    hitRay = topRightCast;
+               }
+               else if (midLeftCast)
+               {
+                    hitRay = midLeftCast;
+               }
+               else if (midRightCast)
+               {
+                    hitRay = midRightCast;
+               }
+               else if (bottomLeftCast)
+               {
+                    hitRay = bottomLeftCast;
+               }
+               else
+               {
+                    hitRay = bottomRightCast;
+               }
+
+               Debug.Log(hitRay.collider);
+               if(hitRay.collider.tag == "Player")
+               {
+                    SceneManager.LoadScene("Level01");
+               }
+          }
+     }
 }
