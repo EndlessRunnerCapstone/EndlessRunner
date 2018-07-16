@@ -9,7 +9,7 @@ public class Player_Move : Photon.MonoBehaviour {
      public float sprintSpeed;
      private float moveX;
      bool isRunning;
-     public float fallMultiplier = 2;     
+     public float fallMultiplier;     
 
      //jumping variables
      public float jumpForce;
@@ -40,6 +40,7 @@ public class Player_Move : Photon.MonoBehaviour {
           isGrounded = true;
           noMoreJumping = false;
           myAnimator = GetComponent<Animator>();
+          fallMultiplier = 1.5f;
      }
 
      // Update is called once per frame
