@@ -11,8 +11,10 @@ public class GoombaController : MonoBehaviour {
      public LayerMask groundLayer;
      private Rigidbody2D rb;
      public LayerMask playerLayer;
-
      private bool grounded = false;
+     private bool shouldDie;
+     private float deathTimer = 0;
+     public float timeBeforeDestroy = 1.0f;
 
      private enum EnemyState
      {
@@ -34,7 +36,8 @@ public class GoombaController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
      { 
-          UpdateEnemyPosition();          
+          UpdateEnemyPosition();
+          checkDeath();
      }
 
 
@@ -150,6 +153,31 @@ public class GoombaController : MonoBehaviour {
                if(hitRay.collider.tag == "Player")
                {
                     SceneManager.LoadScene("Level01");
+               }
+          }
+     }
+
+     public void Death()
+     {
+          state = EnemyState.dead;
+          GetComponent<Rigidbody2D>().gravityScale = 0;
+          GetComponent<Animator>().SetBool("isCrushed", true);
+          GetComponent<Collider2D>().enabled = false;          
+          shouldDie = true;
+     }
+
+     void checkDeath()
+     {
+          if (shouldDie)
+          {
+               if (deathTimer <= timeBeforeDestroy)
+               {
+                    deathTimer += Time.deltaTime;
+               }
+               else
+               {
+                    shouldDie = false;
+                    Destroy(this.gameObject);
                }
           }
      }

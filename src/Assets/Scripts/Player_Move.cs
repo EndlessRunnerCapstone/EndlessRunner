@@ -9,7 +9,7 @@ public class Player_Move : Photon.MonoBehaviour {
      public float sprintSpeed;
      private float moveX;
      bool isRunning;
-     public float fallMultiplier = 2;
+     public float fallMultiplier;     
 
      //jumping variables
      public float jumpForce;
@@ -24,11 +24,8 @@ public class Player_Move : Photon.MonoBehaviour {
 
      //ground check variables
      public bool isGrounded;
-     public LayerMask groundLayer;
-     public GameObject leftCast;
-     public GameObject rightCast;
-     public GameObject upCast;
-     
+     public LayerMask floorMask;
+     public GameObject upCast;     
 
      private void Start()
      {
@@ -43,6 +40,7 @@ public class Player_Move : Photon.MonoBehaviour {
           isGrounded = true;
           noMoreJumping = false;
           myAnimator = GetComponent<Animator>();
+          fallMultiplier = 1.5f;
      }
 
      // Update is called once per frame
@@ -55,13 +53,15 @@ public class Player_Move : Photon.MonoBehaviour {
 		PlayerMove ();
           FlipPlayer();
           Animate();
-          
+          GroundCheck();
+
 
           if (Input.GetButtonDown("Jump"))
           {               
                if (isGrounded)
                {
                     Jump();
+                    isGrounded = false;
                }               
           }
 
@@ -80,8 +80,7 @@ public class Player_Move : Photon.MonoBehaviour {
      }
 
      private void FixedUpdate()
-     {
-          GroundCheck();
+     {          
           CollisionCheckAbove();
           if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping)
           {
@@ -149,20 +148,52 @@ public class Player_Move : Photon.MonoBehaviour {
 
      void GroundCheck()
      {
-          bool groundedLeft = Physics2D.Raycast(leftCast.transform.position, Vector2.down, 0.03f, groundLayer);
-          bool groundedRight = Physics2D.Raycast(rightCast.transform.position, Vector2.down, 0.03f, groundLayer);
-          isGrounded = groundedLeft || groundedRight;
+          RaycastHit2D left = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+          RaycastHit2D middle = Physics2D.Raycast(new Vector2(transform.localPosition.x, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+          RaycastHit2D right = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
 
-          if (isGrounded)
+          if (left.collider != null || middle.collider != null || right.collider != null)
           {
-               jumpTimeCounter = jumpTime;
-               noMoreJumping = false;
+               RaycastHit2D hitRay = right;
+
+               if (left)
+               {
+                    hitRay = left;
+               }
+               else if (middle)
+               {
+                    hitRay = middle;
+               }
+               else if (right)
+               {
+                    hitRay = right;
+               }
+
+               if (hitRay.collider.gameObject.layer == 9)
+               {
+                    jumpTimeCounter = jumpTime;
+                    noMoreJumping = false;
+                    isGrounded = true;
+               }
+
+               if (hitRay.collider.tag == "Enemy")
+               {
+                    hitRay.collider.GetComponent<GoombaController>().Death();
+                    if (Input.GetButton("Jump"))
+                    {
+                         rb.velocity = new Vector2(rb.velocity.x, 7);
+                    }
+                    else
+                    {
+                         rb.velocity = new Vector2(rb.velocity.x, 1);
+                    }
+               }
           }
      }
 
      void CollisionCheckAbove()
      {
-          bool hitAbove = Physics2D.Raycast(upCast.transform.position, Vector2.up, 0.03f, groundLayer);
+          bool hitAbove = Physics2D.Raycast(upCast.transform.position, Vector2.up, 0.03f, floorMask);
           if (hitAbove)
           {
                jumpTimeCounter = 0;
