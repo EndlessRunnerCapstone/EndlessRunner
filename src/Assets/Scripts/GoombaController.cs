@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GoombaController : MonoBehaviour {
-
-     public float gravity;
+     
      public Vector2 velocity;
      public bool isWalkingLeft = true;
      public LayerMask groundLayer;
@@ -29,7 +28,6 @@ public class GoombaController : MonoBehaviour {
           rb = GetComponent<Rigidbody2D>();
           rb.freezeRotation = true;
           enabled = false;          
-          gravity = 60f;
           velocity.x = 0.5f;
 	}
 	

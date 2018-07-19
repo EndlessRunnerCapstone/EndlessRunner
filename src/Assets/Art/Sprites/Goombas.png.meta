@@ -108,18 +108,18 @@ TextureImporter:
       name: Goombas_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
+        x: 1
+        y: 107
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02de7c40e660df1409d604cde9744de9
+      spriteID: 18bf873403ebc114db635a7e5fc4185f
       vertices: []
       indices: 
       edges: []
@@ -128,18 +128,18 @@ TextureImporter:
       name: Goombas_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 96
+        x: 18
+        y: 107
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb477202e59c6d14dbbb72dc1976d079
+      spriteID: 6daf219687f17ca4faeef3465112268b
       vertices: []
       indices: 
       edges: []
@@ -148,18 +148,18 @@ TextureImporter:
       name: Goombas_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
+        x: 13
+        y: 88
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 715fd0d35e8f74943ac5547533612020
+      spriteID: f71d5f2654ac5b34b8658613f7879c1a
       vertices: []
       indices: 
       edges: []
@@ -170,16 +170,16 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 16
+        width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76aeef196bf5dc346a7cbcd694c7823e
+      spriteID: c07cd580b8a8e2741b25e5813660f327
       vertices: []
       indices: 
       edges: []
@@ -188,18 +188,18 @@ TextureImporter:
       name: Goombas_4
       rect:
         serializedVersion: 2
-        x: 16
+        x: 32
         y: 64
         width: 16
-        height: 16
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1d225b175c8f6a48ad2ab36e84ea712
+      spriteID: 507e45a08d51b4a41ae7c2baa0edf534
       vertices: []
       indices: 
       edges: []
@@ -208,18 +208,18 @@ TextureImporter:
       name: Goombas_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
-        width: 16
+        x: 0
+        y: 32
+        width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1973d7084045b8e4b9c379a0fe8fcf38
+      spriteID: f9176738efca0144280733a816e39678
       vertices: []
       indices: 
       edges: []
@@ -228,18 +228,18 @@ TextureImporter:
       name: Goombas_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 32
         width: 16
-        height: 16
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b33042bd79b3ac4894091ee6701159d
+      spriteID: 1873f764ac6a7194aa015d725e4353b8
       vertices: []
       indices: 
       edges: []
@@ -248,18 +248,18 @@ TextureImporter:
       name: Goombas_7
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
+        x: 0
+        y: 0
+        width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47fd32b9ac1af344db38533607952958
+      spriteID: a5d1a1b64cd202248a571dbedb9d8455
       vertices: []
       indices: 
       edges: []
@@ -269,77 +269,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4fe96d54c7bec814088cd48f56f7fe4e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Goombas_9
-      rect:
-        serializedVersion: 2
-        x: 0
         y: 0
         width: 16
-        height: 16
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11bac17b3363abb48b36ba09bf021c5e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Goombas_10
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1edf6e9868e12be4da47734499a71734
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Goombas_11
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 56a4ef2d0a95c26479a679e663153da7
+      spriteID: 2b55bdbeb3be89b48a62f57da88a650e
       vertices: []
       indices: 
       edges: []
