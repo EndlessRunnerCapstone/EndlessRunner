@@ -9,11 +9,17 @@ public class DeathArea : MonoBehaviour {
      {
           if (collision.gameObject.tag == "Enemy")
           {
-               Destroy(collision.gameObject);
+              if (!Globals.TwoPlayer)
+              {
+                  Destroy(collision.gameObject);
+              }
           }
           else if (collision.gameObject.tag == "Player")
           {
-               SceneManager.LoadScene("Level01");
+              if (!Globals.TwoPlayer)
+              {
+                  SceneManager.LoadScene("Level01");
+              }
           }
      }
 }

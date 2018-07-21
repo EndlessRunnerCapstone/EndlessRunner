@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Player_Move : Photon.MonoBehaviour {
 
+    public static GameObject LocalPlayerInstance;
+
      //movement variables
 	public float runSpeed;
      public float sprintSpeed;
@@ -34,10 +36,36 @@ public class Player_Move : Photon.MonoBehaviour {
      private bool invincible;
      float invincibilityTime = 3f;
      float flickerTime = 0.1f;
-     
 
-     private void Start()
+
+    private void Awake()
+    {
+        if(!PhotonNetwork.connected || photonView.isMine)
+        {
+            LocalPlayerInstance = this.gameObject;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void ResetMario()
+    {
+        isBig = false;
+        GroundCheck();
+    }
+
+    private void Start()
      {
+        CameraControl cameraControl = this.gameObject.GetComponent<CameraControl>();
+
+        if(cameraControl != null)
+        {
+            if(!PhotonNetwork.connected || photonView.isMine)
+            {
+                cameraControl.OnStartFollowing();
+            }
+        }
+
           runSpeed = 1.3f;
           sprintSpeed = 2.5f;
           rb = GetComponent<Rigidbody2D>();
@@ -354,6 +382,12 @@ public class Player_Move : Photon.MonoBehaviour {
 
      void OnEnemyHit(RaycastHit2D hitRay)
      {
+          //TODO: Multiplayer
+          if(Globals.TwoPlayer)
+          {
+              return;
+          }
+
           if(!invincible)
           {
                if (isBig)

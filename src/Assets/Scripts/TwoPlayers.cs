@@ -15,6 +15,7 @@ public class TwoPlayers : MonoBehaviour
 
     public void LoadScene()
     {
+        Globals.TwoPlayer = true;
         SceneManager.LoadScene("WaitingForPlayer");
     }
 }

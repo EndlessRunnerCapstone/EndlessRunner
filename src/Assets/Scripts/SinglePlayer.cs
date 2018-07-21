@@ -13,6 +13,7 @@ public class SinglePlayer : MonoBehaviour {
     }
 
     public void LoadScene() {
+        Globals.TwoPlayer = false;
         SceneManager.LoadScene("Level01");
     }
 }
