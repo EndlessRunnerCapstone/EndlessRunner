@@ -93,7 +93,6 @@ public class GoombaController : MonoBehaviour {
           }
      }  
 
-
      public void Death()
      {
           state = EnemyState.dead;

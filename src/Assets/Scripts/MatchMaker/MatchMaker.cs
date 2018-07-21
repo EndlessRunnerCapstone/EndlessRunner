@@ -59,12 +59,4 @@ public class MatchMaker : PunBehaviour
         // TODO: Change to room level
         Debug.Log("TODO!!!!");
     }
-
-    public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
-    {
-        if(PhotonNetwork.isMasterClient && PhotonNetwork.room.PlayerCount > 1)
-        {
-            PhotonNetwork.LoadLevel("Level01");
-        }
-    }
 }

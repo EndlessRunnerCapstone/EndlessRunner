@@ -5,23 +5,51 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour {
 
-	public GameObject player;
 	public bool lockY = true;
 	private Vector3 offset;
 	private Vector3 tempVect;
+    private Transform cameraTransform;
+
+    public bool FollowOnStart = false;
+
+    private bool isFollowing = false;
 
 	void Start ()
 	{
-		offset = transform.position - player.transform.position; // initial camera offest
-
+        if(FollowOnStart)
+        {
+            OnStartFollowing();
+        }
 	}
 
-	void LateUpdate ()
+    public void OnStartFollowing()
+    {
+        cameraTransform = Camera.main.transform;
+        isFollowing = true;
+        offset = cameraTransform.position - transform.position; // initial camera offest
+
+        Apply();
+    }
+
+    void LateUpdate ()
 	{
-		tempVect = player.transform.position + offset;
-		if(lockY) 
-			tempVect.y -= player.transform.position.y + 4.7f; // remove y component of player position
-		transform.position = tempVect;
+        if(cameraTransform == null && isFollowing)
+        {
+            OnStartFollowing();
+        }
+
+        if(isFollowing)
+        {
+            Apply();
+        }
 	}
+
+    void Apply()
+    {
+        tempVect = transform.position + offset;
+        if (lockY)
+            tempVect.y -= transform.position.y + 4.7f; // remove y component of player position
+        cameraTransform.position = tempVect;
+    }
 
 }
