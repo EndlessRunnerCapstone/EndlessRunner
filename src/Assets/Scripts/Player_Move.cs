@@ -34,7 +34,7 @@ public class Player_Move : Photon.MonoBehaviour {
 
      //Invincibility
      private bool invincible;
-     float invincibilityTime = 3f;
+     float invincibilityTime = 2f;
      float flickerTime = 0.1f;
 
 
@@ -188,6 +188,7 @@ public class Player_Move : Photon.MonoBehaviour {
           }
           else
           {
+               myAnimator.SetBool("isBig", false);
                if (playerHasHorizontalSpeed)
                {
                     myAnimator.SetBool("Running", true);
@@ -364,11 +365,10 @@ public class Player_Move : Photon.MonoBehaviour {
           isBig = false;
           float time = 0f;
           bool showSprite = false;
-          invincible = true;
-          
+          invincible = true;        
 
           while (time < invincibilityTime)
-          {
+          {               
                GetComponent<SpriteRenderer>().enabled = showSprite;
                yield return new WaitForSeconds(flickerTime);
                showSprite = !showSprite;
@@ -376,8 +376,7 @@ public class Player_Move : Photon.MonoBehaviour {
           }
 
           GetComponent<SpriteRenderer>().enabled = true;
-          invincible = false;
-          GroundCheck();
+          invincible = false; 
      }
 
      void OnEnemyHit(RaycastHit2D hitRay)
