@@ -25,12 +25,15 @@ public class Player_Move : Photon.MonoBehaviour {
      //ground check variables
      public bool isGrounded;
      public LayerMask floorMask;
-     public GameObject upCast;     
+     public GameObject upCast;
+
+     //Animation bools
+     private bool isBig = false;
 
      private void Start()
      {
-          runSpeed = 1.6f;
-          sprintSpeed = 3f;
+          runSpeed = 1.3f;
+          sprintSpeed = 2.5f;
           rb = GetComponent<Rigidbody2D>();
           rb.gravityScale = 2;
           jumpForce = 4;
@@ -127,30 +130,66 @@ public class Player_Move : Photon.MonoBehaviour {
           bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
           bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
 
-          if (playerHasHorizontalSpeed)
+          if (isBig)
           {
-               myAnimator.SetBool("Running", true);
-          }
-          else
-          {
-               myAnimator.SetBool("Running", false);
-          }
+               myAnimator.SetBool("isBig", true);
+               if (playerHasHorizontalSpeed == true)
+               {
+                    myAnimator.SetBool("Running", true);
+               }
+               else
+               {
+                    myAnimator.SetBool("Running", false);
+               }
 
-          if (playerHasVerticalSpeed)
-          {
-               myAnimator.SetBool("Jumping", true);
+               if (playerHasVerticalSpeed == true)
+               {
+                    myAnimator.SetBool("Jumping", true);
+               }
+               else
+               {
+                    myAnimator.SetBool("Jumping", false);
+               }
           }
           else
           {
-               myAnimator.SetBool("Jumping", false);
+               if (playerHasHorizontalSpeed)
+               {
+                    myAnimator.SetBool("Running", true);
+               }
+               else
+               {
+                    myAnimator.SetBool("Running", false);
+               }
+
+               if (playerHasVerticalSpeed)
+               {
+                    myAnimator.SetBool("Jumping", true);
+               }
+               else
+               {
+                    myAnimator.SetBool("Jumping", false);
+               }
           }
      }
 
      void GroundCheck()
      {
-          RaycastHit2D left = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
-          RaycastHit2D middle = Physics2D.Raycast(new Vector2(transform.localPosition.x, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
-          RaycastHit2D right = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+          RaycastHit2D left, middle, right;
+          if (isBig)
+          {
+               left = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.05f, transform.localPosition.y - 0.145f), Vector2.down, 0.04f, floorMask);
+               middle = Physics2D.Raycast(new Vector2(transform.localPosition.x, transform.localPosition.y - 0.145f), Vector2.down, 0.04f, floorMask);
+               right = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.05f, transform.localPosition.y - 0.145f), Vector2.down, 0.04f, floorMask);
+          }
+          else
+          {
+               left = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+               middle = Physics2D.Raycast(new Vector2(transform.localPosition.x, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+               right = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+          }
+
+
 
           if (left.collider != null || middle.collider != null || right.collider != null)
           {
@@ -189,6 +228,10 @@ public class Player_Move : Photon.MonoBehaviour {
                     }
                }
           }
+          else
+          {
+               isGrounded = false;
+          }
      }
 
      void CollisionCheckAbove()
@@ -197,6 +240,15 @@ public class Player_Move : Photon.MonoBehaviour {
           if (hitAbove)
           {
                jumpTimeCounter = 0;
+          }
+     }
+
+     private void OnCollisionEnter2D(Collision2D collision)
+     {
+          if (collision.gameObject.tag == "RedMushroom")
+          {
+               isBig = true;
+               Destroy(collision.gameObject);
           }
      }
 }
