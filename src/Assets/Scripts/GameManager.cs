@@ -41,6 +41,13 @@ public class GameManager : Photon.PunBehaviour {
         else
         {
             Player_Move.LocalPlayerInstance.transform.position = test;
+
+            Player_Move player = Player_Move.LocalPlayerInstance.GetComponent<Player_Move>();
+
+            if (player != null)
+            {
+                player.ResetMario();
+            }
         }
 		
 	}

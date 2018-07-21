@@ -48,6 +48,12 @@ public class Player_Move : Photon.MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    public void ResetMario()
+    {
+        isBig = false;
+        GroundCheck();
+    }
+
     private void Start()
      {
         CameraControl cameraControl = this.gameObject.GetComponent<CameraControl>();
