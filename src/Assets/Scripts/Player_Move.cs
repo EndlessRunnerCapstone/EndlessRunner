@@ -36,7 +36,7 @@ public class Player_Move : Photon.MonoBehaviour {
      private bool invincible;
      float invincibilityTime = 3f;
      float flickerTime = 0.1f;
-     
+
 
     private void Awake()
     {

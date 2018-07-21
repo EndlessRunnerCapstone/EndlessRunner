@@ -17,14 +17,16 @@ public class GameManager : Photon.PunBehaviour {
     // Use this for initialization
     void Start ()
     {
+
+        var test = new Vector3 { x = -7.85f, y = -4.719f, z = 0 };
+
+
         if (Player_Move.LocalPlayerInstance == null)
         {
             if(!PhotonNetwork.connected && Globals.TwoPlayer)
             {
                 return;
             }
-
-            var test = new Vector3 { x = -7.85f, y = -4.719f, z = 0 };
 
             if (PhotonNetwork.connected)
             {
@@ -35,6 +37,10 @@ public class GameManager : Photon.PunBehaviour {
                 
                 Instantiate(PlayerPrefab, test, Quaternion.identity);
             }
+        }
+        else
+        {
+            Player_Move.LocalPlayerInstance.transform.position = test;
         }
 		
 	}
