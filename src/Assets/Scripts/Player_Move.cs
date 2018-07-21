@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Move : Photon.MonoBehaviour {
 
@@ -24,13 +25,21 @@ public class Player_Move : Photon.MonoBehaviour {
 
      //ground check variables
      public bool isGrounded;
-     public LayerMask floorMask;
-     public GameObject upCast;     
+     public LayerMask floorMask;    
+
+     //Animation bools
+     public bool isBig = false;
+
+     //Invincibility
+     private bool invincible;
+     float invincibilityTime = 3f;
+     float flickerTime = 0.1f;
+     
 
      private void Start()
      {
-          runSpeed = 1.6f;
-          sprintSpeed = 3f;
+          runSpeed = 1.3f;
+          sprintSpeed = 2.5f;
           rb = GetComponent<Rigidbody2D>();
           rb.gravityScale = 2;
           jumpForce = 4;
@@ -54,6 +63,8 @@ public class Player_Move : Photon.MonoBehaviour {
           FlipPlayer();
           Animate();
           GroundCheck();
+          CollisionCheckAbove();
+          CheckSideCollision();
 
 
           if (Input.GetButtonDown("Jump"))
@@ -80,8 +91,7 @@ public class Player_Move : Photon.MonoBehaviour {
      }
 
      private void FixedUpdate()
-     {          
-          CollisionCheckAbove();
+     { 
           if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping)
           {
                if (jumpTimeCounter > 0) 
@@ -127,30 +137,66 @@ public class Player_Move : Photon.MonoBehaviour {
           bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
           bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
 
-          if (playerHasHorizontalSpeed)
+          if (isBig)
           {
-               myAnimator.SetBool("Running", true);
-          }
-          else
-          {
-               myAnimator.SetBool("Running", false);
-          }
+               myAnimator.SetBool("isBig", true);
+               if (playerHasHorizontalSpeed == true)
+               {
+                    myAnimator.SetBool("Running", true);
+               }
+               else
+               {
+                    myAnimator.SetBool("Running", false);
+               }
 
-          if (playerHasVerticalSpeed)
-          {
-               myAnimator.SetBool("Jumping", true);
+               if (playerHasVerticalSpeed == true)
+               {
+                    myAnimator.SetBool("Jumping", true);
+               }
+               else
+               {
+                    myAnimator.SetBool("Jumping", false);
+               }
           }
           else
           {
-               myAnimator.SetBool("Jumping", false);
+               if (playerHasHorizontalSpeed)
+               {
+                    myAnimator.SetBool("Running", true);
+               }
+               else
+               {
+                    myAnimator.SetBool("Running", false);
+               }
+
+               if (playerHasVerticalSpeed)
+               {
+                    myAnimator.SetBool("Jumping", true);
+               }
+               else
+               {
+                    myAnimator.SetBool("Jumping", false);
+               }
           }
      }
 
      void GroundCheck()
      {
-          RaycastHit2D left = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
-          RaycastHit2D middle = Physics2D.Raycast(new Vector2(transform.localPosition.x, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
-          RaycastHit2D right = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+          RaycastHit2D left, middle, right;
+          if (isBig)
+          {
+               left = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.05f, transform.localPosition.y - 0.145f), Vector2.down, 0.04f, floorMask);
+               middle = Physics2D.Raycast(new Vector2(transform.localPosition.x, transform.localPosition.y - 0.145f), Vector2.down, 0.04f, floorMask);
+               right = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.05f, transform.localPosition.y - 0.145f), Vector2.down, 0.04f, floorMask);
+          }
+          else
+          {
+               left = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+               middle = Physics2D.Raycast(new Vector2(transform.localPosition.x, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+               right = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.05f, transform.localPosition.y - 0.06f), Vector2.down, 0.04f, floorMask);
+          }
+
+
 
           if (left.collider != null || middle.collider != null || right.collider != null)
           {
@@ -189,14 +235,135 @@ public class Player_Move : Photon.MonoBehaviour {
                     }
                }
           }
+          else
+          {
+               isGrounded = false;
+          }
      }
 
      void CollisionCheckAbove()
      {
-          bool hitAbove = Physics2D.Raycast(upCast.transform.position, Vector2.up, 0.03f, floorMask);
+          RaycastHit2D hitAbove;
+          if (!isBig)
+          {
+               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.06f), Vector2.up, 0.03f, floorMask);
+          }
+          else
+          {
+              hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.145f), Vector2.up, 0.03f, floorMask);
+          }
+
           if (hitAbove)
           {
                jumpTimeCounter = 0;
+
+               if (hitAbove.collider.tag == "Enemy")
+               {
+                    OnEnemyHit(hitAbove);
+               }
+          }
+     }
+
+     private void OnCollisionEnter2D(Collision2D collision)
+     {
+          if (collision.gameObject.tag == "RedMushroom")
+          {
+               isBig = true;
+               Destroy(collision.gameObject);
+          }
+     }
+
+     private void CheckSideCollision()
+     {
+          RaycastHit2D hitRay, upLeft, midLeft, botLeft, upRight, midRight, botRight;
+          if (!isBig)
+          {
+               upLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y + 0.06f), Vector2.left, 0.04f, floorMask);
+               midLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y), Vector2.left, 0.04f, floorMask);
+               botLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y - 0.06f), Vector2.left, 0.04f, floorMask);
+               upRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y + 0.06f), Vector2.right, 0.04f, floorMask);
+               midRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y), Vector2.right, 0.04f, floorMask);
+               botRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y - 0.06f), Vector2.right, 0.04f, floorMask);
+          }
+          else
+          {
+               upLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y + 0.12f), Vector2.left, 0.04f, floorMask);
+               midLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y), Vector2.left, 0.04f, floorMask);
+               botLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y - 0.12f), Vector2.left, 0.04f, floorMask);
+               upRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y + 0.12f), Vector2.right, 0.04f, floorMask);
+               midRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y), Vector2.right, 0.04f, floorMask);
+               botRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y - 0.12f), Vector2.right, 0.04f, floorMask);
+          }
+
+          hitRay = upLeft;
+          if (upLeft.collider != null || midLeft.collider != null || botLeft.collider != null || upRight.collider != null || midRight.collider != null || botRight.collider != null)
+          {
+               if (upLeft.collider != null)
+               {
+                    hitRay = upLeft;
+               }
+               else if (midLeft.collider != null)
+               {
+                    hitRay = midLeft;
+               }
+               else if (botLeft.collider != null)
+               {
+                    hitRay = botLeft;
+               }
+               else if (upRight.collider != null)
+               {
+                    hitRay = upRight;
+               }
+               else if (midRight.collider != null)
+               {
+                    hitRay = midRight;
+               }
+               else if (botRight.collider != null)
+               {
+                    hitRay = botRight;
+               }
+          }
+
+          if (hitRay && hitRay.collider.tag == "Enemy")
+          {
+               OnEnemyHit(hitRay);
+          }
+
+     }
+
+     public IEnumerator Invincible()
+     {
+          isBig = false;
+          float time = 0f;
+          bool showSprite = false;
+          invincible = true;
+          
+
+          while (time < invincibilityTime)
+          {
+               GetComponent<SpriteRenderer>().enabled = showSprite;
+               yield return new WaitForSeconds(flickerTime);
+               showSprite = !showSprite;
+               time = time + flickerTime;
+          }
+
+          GetComponent<SpriteRenderer>().enabled = true;
+          invincible = false;
+          GroundCheck();
+     }
+
+     void OnEnemyHit(RaycastHit2D hitRay)
+     {
+          if(!invincible)
+          {
+               if (isBig)
+               {
+                    StartCoroutine(Invincible());
+               }
+               else
+               {
+                    SceneManager.LoadScene("Level01");
+               }
           }
      }
 }
