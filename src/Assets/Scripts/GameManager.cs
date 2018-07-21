@@ -24,15 +24,16 @@ public class GameManager : Photon.PunBehaviour {
                 return;
             }
 
+            var test = new Vector3 { x = -7.85f, y = -4.719f, z = 0 };
+
             if (PhotonNetwork.connected)
             {
-                var test = new Vector3 { x = -7.85f, y = -4.719f, z = 0 };
                 PhotonNetwork.Instantiate(this.PlayerPrefab.name, test, Quaternion.identity, 0);
             }
             else
             {
                 
-                Instantiate(PlayerPrefab);
+                Instantiate(PlayerPrefab, test, Quaternion.identity);
             }
         }
 		

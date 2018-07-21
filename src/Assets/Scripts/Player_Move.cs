@@ -376,6 +376,12 @@ public class Player_Move : Photon.MonoBehaviour {
 
      void OnEnemyHit(RaycastHit2D hitRay)
      {
+          //TODO: Multiplayer
+          if(Globals.TwoPlayer)
+          {
+              return;
+          }
+
           if(!invincible)
           {
                if (isBig)
