@@ -73,8 +73,7 @@ public class GoombaController : MonoBehaviour {
                }
 
                transform.localPosition = pos;
-               transform.localScale = scale;
-               CheckPlayerCollision(pos);
+               transform.localScale = scale;               
           }
      }
 
@@ -92,70 +91,8 @@ public class GoombaController : MonoBehaviour {
           {
                isWalkingLeft = true;
           }
-     }   
+     }  
 
-     void CheckPlayerCollision(Vector3 pos)
-     {
-          
-          RaycastHit2D leftSide = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.07f, transform.localPosition.y), Vector2.down, 0.11f, playerLayer);
-          RaycastHit2D middle = Physics2D.Raycast(transform.localPosition, Vector2.down, 0.11f, playerLayer);
-          RaycastHit2D rightSide = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.07f, transform.localPosition.y), Vector2.down, 0.11f, playerLayer);
-
-          RaycastHit2D topLeftCast = Physics2D.Raycast(new Vector2(pos.x, pos.y + 0.065f), Vector2.left, 0.11f, playerLayer);
-          RaycastHit2D topRightCast = Physics2D.Raycast(new Vector2(pos.x, pos.y + 0.065f), Vector2.right, 0.11f, playerLayer);
-          RaycastHit2D midLeftCast = Physics2D.Raycast(new Vector2(pos.x, pos.y), Vector2.left, 0.11f, playerLayer);
-          RaycastHit2D midRightCast = Physics2D.Raycast(new Vector2(pos.x, pos.y), Vector2.right, 0.11f, playerLayer);
-          RaycastHit2D bottomLeftCast = Physics2D.Raycast(new Vector2(pos.x, pos.y - 0.065f), Vector2.left, 0.11f, playerLayer);
-          RaycastHit2D bottomRightCast = Physics2D.Raycast(new Vector2(pos.x, pos.y - 0.065f), Vector2.right, 0.11f, playerLayer);
-
-
-          if (leftSide.collider != null || middle.collider != null || rightSide.collider != null || topLeftCast.collider != null || topRightCast.collider != null || midLeftCast.collider != null || midRightCast.collider != null || bottomLeftCast.collider != null || bottomRightCast.collider != null)
-          {
-               RaycastHit2D hitRay;
-               if (leftSide)
-               {
-                    hitRay = leftSide;
-               }
-               else if (middle)
-               {
-                    hitRay = middle;
-               }
-               else if (rightSide)
-               {
-                    hitRay = rightSide;
-               }
-               else if (topLeftCast)
-               {
-                    hitRay = topLeftCast;
-               }
-               else if (topRightCast)
-               {
-                    hitRay = topRightCast;
-               }
-               else if (midLeftCast)
-               {
-                    hitRay = midLeftCast;
-               }
-               else if (midRightCast)
-               {
-                    hitRay = midRightCast;
-               }
-               else if (bottomLeftCast)
-               {
-                    hitRay = bottomLeftCast;
-               }
-               else
-               {
-                    hitRay = bottomRightCast;
-               }
-
-               Debug.Log(hitRay.collider);
-               if(hitRay.collider.tag == "Player")
-               {
-                    SceneManager.LoadScene("Level01");
-               }
-          }
-     }
 
      public void Death()
      {
