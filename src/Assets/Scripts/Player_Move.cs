@@ -37,6 +37,9 @@ public class Player_Move : Photon.MonoBehaviour {
      float invincibilityTime = 2f;
      float flickerTime = 0.1f;
 
+     //Death
+     private bool isDead;
+
 
     private void Awake()
     {
@@ -50,9 +53,11 @@ public class Player_Move : Photon.MonoBehaviour {
 
     public void ResetMario()
     {
-        isBig = false;
-        GroundCheck();
-    }
+          isDead = false;
+          isBig = false;
+          GroundCheck();
+          invincible = false;          
+     }
 
     private void Start()
      {
@@ -87,40 +92,47 @@ public class Player_Move : Photon.MonoBehaviour {
             return;
           }
 
-		PlayerMove ();
-          FlipPlayer();
-          Animate();
-          GroundCheck();
-          CollisionCheckAbove();
-          CheckSideCollision();
+          if (!isDead)
+          {
+               PlayerMove();
+               FlipPlayer();
+               GroundCheck();
+               CollisionCheckAbove();
+               CheckSideCollision();
+          }
+		
+          Animate();        
 
-
-          if (Input.GetButtonDown("Jump"))
-          {               
-               if (isGrounded)
+          if (!isDead)
+          {
+               if (Input.GetButtonDown("Jump"))
                {
-                    Jump();
-                    isGrounded = false;
-               }               
-          }
+                    if (isGrounded)
+                    {
+                         Jump();
+                         isGrounded = false;
+                    }
+               }
 
 
-          if (Input.GetButtonUp("Jump"))
-          {
-               jumpTimeCounter = 0;
-               stoppedJumping = true;
-               noMoreJumping = true;
-          }
+               if (Input.GetButtonUp("Jump"))
+               {
+                    jumpTimeCounter = 0;
+                    stoppedJumping = true;
+                    noMoreJumping = true;
+               }
 
-          if (rb.velocity.y < 0)
-          {
-               rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+               if (rb.velocity.y < 0)
+               {
+                    rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+               }
           }
+          
      }
 
      private void FixedUpdate()
      { 
-          if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping)
+          if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping && !isDead)
           {
                if (jumpTimeCounter > 0) 
                {
@@ -295,10 +307,13 @@ public class Player_Move : Photon.MonoBehaviour {
 
      private void OnCollisionEnter2D(Collision2D collision)
      {
-          if (collision.gameObject.tag == "RedMushroom")
+          if (!isDead)
           {
-               isBig = true;
-               Destroy(collision.gameObject);
+               if (collision.gameObject.tag == "RedMushroom")
+               {
+                    isBig = true;
+                    Destroy(collision.gameObject);
+               }
           }
      }
 
@@ -395,8 +410,25 @@ public class Player_Move : Photon.MonoBehaviour {
                }
                else
                {
-                    SceneManager.LoadScene("Level01");
+                    if (!isDead)
+                    {
+                         StartCoroutine(Die());
+                    }
                }
           }
+     }
+
+     public IEnumerator Die()
+     {
+          rb.gravityScale = 0.9f;
+          myAnimator.SetBool("isDead", true);
+          isDead = true;
+          GetComponent<BoxCollider2D>().enabled = false;
+          rb.velocity = new Vector2(0, 5f);
+          yield return new WaitForSeconds(2);
+          GetComponent<BoxCollider2D>().enabled = true;
+          myAnimator.SetBool("isDead", false);
+          rb.gravityScale = 2;
+          SceneManager.LoadScene("Level01");
      }
 }
