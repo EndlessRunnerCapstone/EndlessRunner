@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Player_Move : Photon.MonoBehaviour {
 
+    [SerializeField] SoundEffectsManager sfx;
+    [SerializeField] AudioClip smallJumpSound;
+    [SerializeField] AudioClip bigJumpSound;
+    [SerializeField] AudioClip marioDies;
+
+    public GameObject soundScript;
+    public SoundEffectsManager other;
+   
     public static GameObject LocalPlayerInstance;
 
      //movement variables
@@ -43,7 +51,10 @@ public class Player_Move : Photon.MonoBehaviour {
 
     private void Awake()
     {
-        if(!PhotonNetwork.connected || photonView.isMine)
+        GameObject soundScript = GameObject.Find("Audio_Manager/Sound_Effects");
+        sfx = soundScript.GetComponent<SoundEffectsManager>();
+
+        if (!PhotonNetwork.connected || photonView.isMine)
         {
             LocalPlayerInstance = this.gameObject;
         }
@@ -61,6 +72,7 @@ public class Player_Move : Photon.MonoBehaviour {
 
     private void Start()
      {
+        
         CameraControl cameraControl = this.gameObject.GetComponent<CameraControl>();
 
         if(cameraControl != null)
@@ -162,7 +174,8 @@ public class Player_Move : Photon.MonoBehaviour {
           // JUMP CODE
           rb.velocity = new Vector2(rb.velocity.x, jumpForce);
           stoppedJumping = false;
-	}
+          sfx.PlaySoundEffect(smallJumpSound);
+    }
 
 	void FlipPlayer(){
           bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
