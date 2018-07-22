@@ -4,8 +4,6 @@ using NUnit.Framework;
 using System.Collections;
 using Assets.Scripts.MatchMaker;
 
-using NSubstitute;
-
 public class Test {
 
     [Test]
