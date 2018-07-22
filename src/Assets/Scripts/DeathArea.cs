@@ -18,7 +18,7 @@ public class DeathArea : MonoBehaviour {
           {
               if (!Globals.TwoPlayer)
               {
-                  SceneManager.LoadScene("Level01");
+                    StartCoroutine(collision.GetComponent<Player_Move>().Die());
               }
           }
      }
