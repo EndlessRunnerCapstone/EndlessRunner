@@ -1,0 +1,12 @@
+{
+    "name": "Photon-Editor",
+    "references": [
+        "Photon"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
