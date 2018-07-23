@@ -8,6 +8,7 @@ TagManager:
   - BrickNoDestroy
   - RedMushroom
   - DeathArea
+  - Star
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - groundLayer
   - enemyLayer
   - Player
-  - 
+  - Item
   - 
   - 
   - 
