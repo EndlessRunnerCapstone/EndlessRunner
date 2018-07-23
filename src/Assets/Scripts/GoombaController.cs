@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GoombaController : MonoBehaviour {
 
-     public float gravity;
+    [SerializeField] SoundEffectsManager sfx;
+    [SerializeField] AudioClip squishSound;
+
+    public float gravity;
      public Vector2 velocity;
      public bool isWalkingLeft = true;
      public LayerMask groundLayer;
@@ -95,7 +98,8 @@ public class GoombaController : MonoBehaviour {
 
      public void Death()
      {
-          state = EnemyState.dead;
+        sfx.PlaySoundEffect(squishSound);
+        state = EnemyState.dead;
           GetComponent<Rigidbody2D>().gravityScale = 0;
           GetComponent<Animator>().SetBool("isCrushed", true);
           GetComponent<Collider2D>().enabled = false;          
