@@ -102,6 +102,15 @@ public class GoombaController : MonoBehaviour {
           shouldDie = true;
      }
 
+     public void StarDeath()
+     {
+          state = EnemyState.dead;
+          GetComponent<Collider2D>().enabled = false;
+          transform.rotation = new Quaternion(180, 0, 0, 0);
+          rb.velocity = new Vector2(0.5f, 2f);
+          shouldDie = true;
+     }
+
      void checkDeath()
      {
           if (shouldDie)

@@ -12240,7 +12240,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4989218584981270, guid: d06fc8cad6b654944b4e959151541b43, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4989218584981270, guid: d06fc8cad6b654944b4e959151541b43, type: 2}
       propertyPath: m_LocalRotation.z
@@ -12248,7 +12248,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4989218584981270, guid: d06fc8cad6b654944b4e959151541b43, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4989218584981270, guid: d06fc8cad6b654944b4e959151541b43, type: 2}
       propertyPath: m_RootOrder
@@ -12267,6 +12267,14 @@ Prefab:
         type: 2}
       propertyPath: m_Mass
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989218584981270, guid: d06fc8cad6b654944b4e959151541b43, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989218584981270, guid: d06fc8cad6b654944b4e959151541b43, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d06fc8cad6b654944b4e959151541b43, type: 2}
@@ -13059,11 +13067,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4902890689588714, guid: 3358b701eeba151428b4220f4f22b564, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.829
+      value: -2.538
       objectReference: {fileID: 0}
     - target: {fileID: 4902890689588714, guid: 3358b701eeba151428b4220f4f22b564, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.706
+      value: -4.708
       objectReference: {fileID: 0}
     - target: {fileID: 4902890689588714, guid: 3358b701eeba151428b4220f4f22b564, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13088,6 +13096,15 @@ Prefab:
     - target: {fileID: 4902890689588714, guid: 3358b701eeba151428b4220f4f22b564, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114578316508036054, guid: 3358b701eeba151428b4220f4f22b564,
+        type: 2}
+      propertyPath: floorMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200155143963792, guid: 3358b701eeba151428b4220f4f22b564, type: 2}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3358b701eeba151428b4220f4f22b564, type: 2}
@@ -13855,15 +13872,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4394709822531792, guid: f9b953ed754d20845940a88b271d5f12, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4394709822531792, guid: f9b953ed754d20845940a88b271d5f12, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4394709822531792, guid: f9b953ed754d20845940a88b271d5f12, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4394709822531792, guid: f9b953ed754d20845940a88b271d5f12, type: 2}
       propertyPath: m_LocalRotation.w
@@ -13895,6 +13912,14 @@ Prefab:
         type: 2}
       propertyPath: m_SortingLayer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394709822531792, guid: f9b953ed754d20845940a88b271d5f12, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394709822531792, guid: f9b953ed754d20845940a88b271d5f12, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b953ed754d20845940a88b271d5f12, type: 2}

@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class MushroomController : MonoBehaviour {     
      public Vector2 velocity;
-     public bool isMovingLeft = true;
-     private bool grounded = false;
+     public bool isMovingLeft;
      public LayerMask floorMask;
 
-	// Use this for initialization
-	void Start () {
+     // Use this for initialization
+     void Start()
+     {
           GetComponent<Rigidbody2D>().freezeRotation = true;
           velocity.x = 0.5f;
-	}
+          isMovingLeft = false;
+     }
 	
 	// Update is called once per frame
 	void Update () {
-          MoveMushroom();
+          MoveMushroom();          
 	}
 
 
@@ -45,17 +46,17 @@ public class MushroomController : MonoBehaviour {
      void CheckWallCollision()
      {
           bool leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.09f, floorMask);
-          bool RightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.09f, floorMask);
+          bool rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.09f, floorMask);          
           Debug.DrawRay(transform.position, Vector2.right * 0.09f, Color.red);
           Debug.DrawRay(transform.position, Vector2.left * 0.09f, Color.red);
 
           if (leftCollision)
           {
-               isMovingLeft = false;
+               isMovingLeft = false;               
           }
-          else if (RightCollision)
+          else if (rightCollision)
           {
-               isMovingLeft = true;
+               isMovingLeft = true;               
           }
      }
 }

@@ -36,6 +36,7 @@ public class Player_Move : Photon.MonoBehaviour {
      private bool invincible;
      float invincibilityTime = 2f;
      float flickerTime = 0.1f;
+     private bool starPower;
 
      //Death
      private bool isDead;
@@ -56,7 +57,8 @@ public class Player_Move : Photon.MonoBehaviour {
           isDead = false;
           isBig = false;
           GroundCheck();
-          invincible = false;          
+          invincible = false;
+          starPower = false;
      }
 
     private void Start()
@@ -82,7 +84,7 @@ public class Player_Move : Photon.MonoBehaviour {
           isGrounded = true;
           noMoreJumping = false;
           myAnimator = GetComponent<Animator>();
-          fallMultiplier = 1.5f;
+          fallMultiplier = 1.5f;          
      }
 
      // Update is called once per frame
@@ -314,6 +316,12 @@ public class Player_Move : Photon.MonoBehaviour {
                     isBig = true;
                     Destroy(collision.gameObject);
                }
+
+               if (collision.gameObject.tag == "Star")
+               {
+                    Destroy(collision.gameObject);
+                    StartCoroutine(StarPower());
+               }
           }
      }
 
@@ -402,17 +410,24 @@ public class Player_Move : Photon.MonoBehaviour {
               return;
           }
 
-          if(!invincible)
+          if (starPower)
           {
-               if (isBig)
+               hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
+          }
+          else
+          {
+               if (!invincible)
                {
-                    StartCoroutine(Invincible());
-               }
-               else
-               {
-                    if (!isDead)
+                    if (isBig)
                     {
-                         StartCoroutine(Die());
+                         StartCoroutine(Invincible());
+                    }
+                    else
+                    {
+                         if (!isDead)
+                         {
+                              StartCoroutine(Die());
+                         }
                     }
                }
           }
@@ -430,5 +445,12 @@ public class Player_Move : Photon.MonoBehaviour {
           myAnimator.SetBool("isDead", false);
           rb.gravityScale = 2;
           SceneManager.LoadScene("Level01");
+     }
+
+     private IEnumerator StarPower()
+     {
+          starPower = true;
+          yield return new WaitForSeconds(10);
+          starPower = false;          
      }
 }
