@@ -99,10 +99,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfx: {fileID: 0}
   coinSfx: {fileID: 8300000, guid: 2eeb87ba94bd01b41bba0ed6d3898034, type: 3}
-  afterHitSprite: {fileID: 0}
+  afterHitSprite: {fileID: 21300014, guid: 266aad21b7cc2a14e838c41d3e0b936f, type: 3}
   coinMoveSpeed: 8
   coinMoveHeight: 3
   coinFallDistance: 2
+  spinningCoin: {fileID: 1860257858440404, guid: 51ae87b68565a9045b058fc8b4ce683b,
+    type: 2}
 --- !u!212 &212065866921329342
 SpriteRenderer:
   m_ObjectHideFlags: 1

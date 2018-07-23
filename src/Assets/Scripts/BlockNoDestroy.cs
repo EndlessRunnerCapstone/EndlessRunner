@@ -17,10 +17,12 @@ public class BlockNoDestroy : MonoBehaviour
     public float coinMoveHeight = 3;
     public float coinFallDistance = 2;
 
+  
     // Use this for initialization
     void Start()
     {
         originalPos = transform.position;
+
 
     }
 
@@ -31,7 +33,7 @@ public class BlockNoDestroy : MonoBehaviour
 
     void CreateCoin()
     {
-        GameObject spinningCoin = (GameObject)Instantiate(Resources.Load("Prefabs/SpinningCoin", typeof(GameObject)));
+        GameObject spinningCoin = Instantiate(Resources.Load("Prefabs/SpinningCoin")) as GameObject;
         spinningCoin.transform.SetParent(this.transform.parent);
         spinningCoin.transform.position = new Vector3(originalPos.x, originalPos.y + 0.5f, originalPos.z);
         StartCoroutine(MoveCoin(spinningCoin));
