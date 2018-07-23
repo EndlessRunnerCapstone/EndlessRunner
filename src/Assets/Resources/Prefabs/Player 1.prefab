@@ -305,6 +305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2925e29c3a321424d92f18382c1e01c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfx: {fileID: 0}
+  smallJumpSound: {fileID: 8300000, guid: 5466c5fa1d41d254897512a7c85c5d2b, type: 3}
+  bigJumpSound: {fileID: 8300000, guid: cfe33046c64159642a3fdf5085900bc9, type: 3}
+  marioDies: {fileID: 8300000, guid: 3defc7a315ab19c4cb82bfaff5b9eb2b, type: 3}
+  soundScript: {fileID: 0}
+  other: {fileID: 0}
   runSpeed: 0
   sprintSpeed: 0
   fallMultiplier: 2.5
