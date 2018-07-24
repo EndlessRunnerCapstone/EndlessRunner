@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MushroomController : MonoBehaviour {     
-     public Vector2 velocity;
+public class MushroomController : MonoBehaviour {
+
+    [SerializeField] SoundEffectsManager sfx;
+    [SerializeField] AudioClip squishSound;
+    public Vector2 velocity;
      public bool isMovingLeft;
      public LayerMask floorMask;
 
