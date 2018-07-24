@@ -22,7 +22,6 @@ public class QuestionBlock : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        originalPosition = transform.localPosition;
         originalPos = transform.position;
     }
 
