@@ -1,29 +1,16 @@
-﻿using Assets.Scripts.MatchMaker;
-using Photon;
+﻿using Photon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MatchMaker : PunBehaviour
 {
-    private INetworkAbstractionLayer networkAbstractionLayer;
-
-    public MatchMaker()
-    {
-        networkAbstractionLayer = new PunNetwork();
-    }
-
-    public MatchMaker(INetworkAbstractionLayer networkAbstractionLayer)
-    {
-        this.networkAbstractionLayer = networkAbstractionLayer;
-    }
-
     private const string GameVersion = "1";
 
-    public void Awake()
+    private void Awake()
     {
-        networkAbstractionLayer.autoJoinLobby = false;
-        networkAbstractionLayer.automaticallySyncScene = true;
+        PhotonNetwork.autoJoinLobby = false;
+        PhotonNetwork.automaticallySyncScene = true;
     }
 
     // Use this for initialization
@@ -42,11 +29,11 @@ public class MatchMaker : PunBehaviour
     {
         if (PhotonNetwork.connected)
         {
-            networkAbstractionLayer.JoinRandomRoom();
+            PhotonNetwork.JoinRandomRoom();
         }
         else
         {
-            networkAbstractionLayer.ConnectUsingSettings(GameVersion);
+            PhotonNetwork.ConnectUsingSettings(GameVersion);
         }
     }
 
