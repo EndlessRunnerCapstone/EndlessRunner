@@ -450,7 +450,9 @@ public class Player_Move : Photon.MonoBehaviour {
      private IEnumerator StarPower()
      {
           starPower = true;
+          myAnimator.SetBool("starPower", true);
           yield return new WaitForSeconds(10);
-          starPower = false;          
+          starPower = false;
+          myAnimator.SetBool("starPower", false);
      }
 }
