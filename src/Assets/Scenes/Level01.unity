@@ -13170,7 +13170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2a1a535c6df7846b961238a3672d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Goomba: {fileID: 1485224002416828, guid: 6b49025432f446945bf485657726953f, type: 2}
+  Goomba: {fileID: 1766943514197660, guid: 6b49025432f446945bf485657726953f, type: 2}
 --- !u!4 &1543518475
 Transform:
   m_ObjectHideFlags: 0
