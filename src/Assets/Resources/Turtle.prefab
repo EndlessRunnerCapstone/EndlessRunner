@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4589065544589258}
   - component: {fileID: 212998663211576964}
   - component: {fileID: 50386597042532632}
-  - component: {fileID: 60365422084811298}
   - component: {fileID: 114739374524832878}
   - component: {fileID: 95773795579756162}
+  - component: {fileID: 61410733066624670}
   m_Layer: 10
   m_Name: Turtle
   m_TagString: Turtle
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1847807162049856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.76, y: -0.491, z: 0}
+  m_LocalPosition: {x: -35.854, y: -0.486, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,8 +64,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &60365422084811298
-PolygonCollider2D:
+--- !u!61 &61410733066624670
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -76,7 +76,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.03817588}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -86,15 +86,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.08, y: 0.12}
-      - {x: -0.08, y: -0.12}
-      - {x: 0.08, y: -0.12}
-      - {x: 0.08000183, y: 0.018767178}
-      - {x: 0.03378296, y: 0.04612142}
-      - {x: -0.0014572144, y: 0.03735286}
-      - {x: -0.012191772, y: 0.11876756}
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.16364825}
+  m_EdgeRadius: 0
 --- !u!95 &95773795579756162
 Animator:
   serializedVersion: 3
@@ -127,13 +121,14 @@ MonoBehaviour:
   gravity: 0
   velocity: {x: 0, y: 0}
   isMovingLeft: 1
-  groundLayer:
+  groundEnemyMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
   timeBeforeDestroy: 1
+  state: 0
 --- !u!212 &212998663211576964
 SpriteRenderer:
   m_ObjectHideFlags: 1

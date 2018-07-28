@@ -309,7 +309,7 @@ public class Player_Move : Photon.MonoBehaviour {
                }
 
                if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
-               {
+               {                    
                     if (starPower)
                     {
                          if (hitRay.collider.tag == "Goomba")
@@ -318,9 +318,10 @@ public class Player_Move : Photon.MonoBehaviour {
                          }                         
                     }
                     else
-                    {
-                         if(hitRay.collider.tag == "Goomba")
+                    {                         
+                         if (hitRay.collider.tag == "Goomba")
                          {
+                              Debug.Log(hitRay);
                               hitRay.collider.GetComponent<GoombaController>().Death();
                          }
                          
@@ -330,7 +331,7 @@ public class Player_Move : Photon.MonoBehaviour {
                          }
                          else
                          {
-                              rb.velocity = new Vector2(rb.velocity.x, 1);
+                              rb.velocity = new Vector2(rb.velocity.x, 2);
                          }
                     }
                }
@@ -346,8 +347,7 @@ public class Player_Move : Photon.MonoBehaviour {
           RaycastHit2D hitAbove;
           if (!isBig)
           {
-               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up, 0.04f, floorMask);
-               Debug.DrawRay(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up * 0.04f, Color.red);
+               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up, 0.04f, floorMask);               
           }
           else
           {
@@ -465,6 +465,13 @@ public class Player_Move : Photon.MonoBehaviour {
           invincible = false; 
      }
 
+     public IEnumerator TurtleHitInvincibility()
+     {
+          invincible = true;
+          yield return new WaitForSeconds(0.2f);
+          invincible = false;
+     }
+
      void OnEnemyHit(RaycastHit2D hitRay)
      {
           //TODO: Multiplayer
@@ -475,10 +482,19 @@ public class Player_Move : Photon.MonoBehaviour {
 
           if (starPower)
           {
-               hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
+               if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("Goomba"))
+               {
+                    hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
+               }               
           }
           else
           {
+               if(hitRay.collider.tag == "Turtle" && hitRay.collider.gameObject.GetComponent<TurtleController>().state == TurtleController.EnemyState.shellIdle)
+               {
+                    StartCoroutine(TurtleHitInvincibility());
+                    return;
+               }
+
                if (!invincible)
                {
                     if (isBig)

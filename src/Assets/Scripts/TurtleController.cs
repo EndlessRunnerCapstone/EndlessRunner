@@ -9,7 +9,7 @@ public class TurtleController : MonoBehaviour
      public float gravity;
      public Vector2 velocity;
      public bool isMovingLeft = true;
-     public LayerMask groundLayer;
+     public LayerMask groundEnemyMask;
      private Rigidbody2D rb;
      public LayerMask playerLayer;
      private bool grounded = false;
@@ -17,15 +17,16 @@ public class TurtleController : MonoBehaviour
      private float deathTimer = 0;
      public float timeBeforeDestroy = 1.0f;
      private Animator myAnimator;
+     private bool neverHit = true;
 
-     private enum EnemyState
+     public enum EnemyState
      {
           walking,
           shellIdle,
           movingShell
      }
 
-     private EnemyState state = EnemyState.walking;
+     public EnemyState state = EnemyState.walking;
 
      // Use this for initialization
      void Start()
@@ -43,6 +44,19 @@ public class TurtleController : MonoBehaviour
      {
           UpdateEnemyPosition();
           CheckAbove();
+
+          if (state == EnemyState.walking)
+          {
+               CheckWallCollisionWalking();
+          }
+          else if (state == EnemyState.shellIdle)
+          {
+               CheckWallCollisionIdleShell();
+          }
+          else
+          {
+               CheckWallCollisionMovingShell();
+          }
           //checkDeath();
      }
 
@@ -67,36 +81,98 @@ public class TurtleController : MonoBehaviour
 
                if (state == EnemyState.walking)
                {
-                    CheckWallCollision();
-                    if (isMovingLeft)
-                    {
-                         pos.x -= velocity.x * Time.deltaTime;
-                    }
-                    else
-                    {
-                         pos.x += velocity.x * Time.deltaTime;
-                    }
+                    CheckWallCollisionWalking();
+               }
+
+               if (isMovingLeft)
+               {
+                    pos.x -= velocity.x * Time.deltaTime;
+               }
+               else
+               {
+                    pos.x += velocity.x * Time.deltaTime;
                }
 
                transform.localPosition = pos;
                transform.localScale = scale;
-          }
+          }          
      }
 
 
-     void CheckWallCollision()
+     void CheckWallCollisionWalking()
      {
-          bool leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.09f, groundLayer);
-          bool RightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.09f, groundLayer);
+          bool leftCollision, rightCollision;        
+          leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, groundEnemyMask);
+          rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, groundEnemyMask);
 
           if (leftCollision)
           {
                isMovingLeft = false;
           }
-          else if (RightCollision)
+          else if (rightCollision)
           {
                isMovingLeft = true;
           }
+     }
+
+     void CheckWallCollisionIdleShell()
+     {
+          RaycastHit2D leftCollision, rightCollision;
+          leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, playerLayer);
+          rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, playerLayer);
+          Debug.DrawRay(transform.position, Vector2.left * 0.1f, Color.red);
+          if (leftCollision.collider != null || rightCollision.collider != null)
+          {
+               if (leftCollision.collider != null)
+               {                    
+                    state = EnemyState.movingShell;
+                    isMovingLeft = false;
+                    velocity.x = 2.5f;
+               }
+               else
+               {
+                    state = EnemyState.movingShell;
+                    isMovingLeft = true;
+                    velocity.x = 2.5f;
+               }
+          }
+     }
+     void CheckWallCollisionMovingShell()
+     {
+          RaycastHit2D groundEnemyCollision, playerCollision;
+
+          if (isMovingLeft)
+          {
+               groundEnemyCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, groundEnemyMask);
+               playerCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, playerLayer);
+          }
+          else
+          {
+               groundEnemyCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, groundEnemyMask);
+               playerCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, playerLayer);
+          }         
+          
+          if (groundEnemyCollision.collider != null || playerCollision.collider != null)
+          {
+               if (groundEnemyCollision.collider != null)
+               {
+                    if (groundEnemyCollision.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
+                    {
+                         if (groundEnemyCollision.collider.tag == "Goomba")
+                         {
+                              groundEnemyCollision.collider.gameObject.GetComponent<GoombaController>().StarDeath();
+                         }
+                    }
+                    else
+                    {
+                         isMovingLeft = !isMovingLeft;
+                    }
+               }
+               else
+               {
+                    isMovingLeft = !isMovingLeft;
+               }
+          }          
      }
 
      void CheckAbove()
