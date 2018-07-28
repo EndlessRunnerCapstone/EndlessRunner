@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114746300717980262}
   - component: {fileID: 114836579457974496}
   - component: {fileID: 114764171933808268}
+  - component: {fileID: 82074840020268758}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -93,6 +94,101 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.12, y: 0.16}
   m_EdgeRadius: 0
+--- !u!82 &82074840020268758
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1906762562208096}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 5894707c64097124ca89b95af91e5f0c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95773991152098396
 Animator:
   serializedVersion: 3
@@ -122,6 +218,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2925e29c3a321424d92f18382c1e01c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smallJumpSound: {fileID: 8300000, guid: 5894707c64097124ca89b95af91e5f0c, type: 3}
+  bigJumpSound: {fileID: 8300000, guid: f38cfc91151f7454dbcb43d8ca8cb78e, type: 3}
+  gameOverSound: {fileID: 8300000, guid: dfae6913dcd5ad443a56c83521ad6562, type: 3}
+  redMushroomSound: {fileID: 8300000, guid: 0c359632566a98f48a906b27f81ebd22, type: 3}
+  loseBigSound: {fileID: 8300000, guid: 1984e162d0eff6642bf26529d9e6bdf0, type: 3}
   runSpeed: 0
   sprintSpeed: 0
   fallMultiplier: 2.5
@@ -262,9 +363,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isBig
-  - Type: 1
-    SynchronizeType: 1
-    Name: Blend
+  - Type: 4
+    SynchronizeType: 0
+    Name: isDead
+  - Type: 4
+    SynchronizeType: 0
+    Name: starPower
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

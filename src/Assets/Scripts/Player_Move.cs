@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Player_Move : Photon.MonoBehaviour {
 
     public static GameObject LocalPlayerInstance;
 
-     //movement variables
-	public float runSpeed;
+    // sound variables
+    private AudioSource sfxPlayer;
+    public AudioClip smallJumpSound;
+    public AudioClip bigJumpSound;
+    public AudioClip gameOverSound;
+    public AudioClip redMushroomSound;
+    public AudioClip loseBigSound;
+    private AudioSource[] allAudioSources;
+
+    //movement variables
+    public float runSpeed;
      public float sprintSpeed;
      private float moveX;
      bool isRunning;
@@ -42,10 +53,25 @@ public class Player_Move : Photon.MonoBehaviour {
      private bool isDead;
      Coroutine hasStarPower = null;
 
+    public void PlaySoundEffect(AudioClip sfx)
+    {
+        sfxPlayer.PlayOneShot(sfx);
+    }
+
+    private void StopAllAudio()
+    {
+        allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+        foreach(AudioSource audioS in allAudioSources)
+        {
+            audioS.Stop();
+        }
+    }
 
     private void Awake()
     {
-        if(!PhotonNetwork.connected || photonView.isMine)
+        sfxPlayer = GetComponent<AudioSource>();
+        
+        if (!PhotonNetwork.connected || photonView.isMine)
         {
             LocalPlayerInstance = this.gameObject;
         }
@@ -69,6 +95,7 @@ public class Player_Move : Photon.MonoBehaviour {
 
     private void Start()
      {
+
         CameraControl cameraControl = this.gameObject.GetComponent<CameraControl>();
 
         if(cameraControl != null)
@@ -170,7 +197,17 @@ public class Player_Move : Photon.MonoBehaviour {
           // JUMP CODE
           rb.velocity = new Vector2(rb.velocity.x, jumpForce);
           stoppedJumping = false;
-	}
+
+        if (isBig)
+        {
+            PlaySoundEffect(bigJumpSound);
+        }
+        else
+        {
+            PlaySoundEffect(smallJumpSound);
+        }
+
+    }
 
 	void FlipPlayer(){
           bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
@@ -326,8 +363,9 @@ public class Player_Move : Photon.MonoBehaviour {
           {
                if (collision.gameObject.tag == "RedMushroom")
                {
-                    isBig = true;
-                    Destroy(collision.gameObject);
+                   PlaySoundEffect(redMushroomSound);
+                   isBig = true;
+                   Destroy(collision.gameObject);
                }
 
                if (collision.gameObject.tag == "Star")
@@ -436,6 +474,7 @@ public class Player_Move : Photon.MonoBehaviour {
                {
                     if (isBig)
                     {
+                         PlaySoundEffect(loseBigSound);
                          StartCoroutine(Invincible());
                     }
                     else
@@ -451,6 +490,8 @@ public class Player_Move : Photon.MonoBehaviour {
 
      public IEnumerator Die()
      {
+          StopAllAudio();
+          PlaySoundEffect(gameOverSound);
           rb.gravityScale = 0.9f;
           myAnimator.SetBool("isDead", true);
           isDead = true;
