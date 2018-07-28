@@ -223,14 +223,6 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: dfae6913dcd5ad443a56c83521ad6562, type: 3}
   redMushroomSound: {fileID: 8300000, guid: 0c359632566a98f48a906b27f81ebd22, type: 3}
   loseBigSound: {fileID: 8300000, guid: 1984e162d0eff6642bf26529d9e6bdf0, type: 3}
-  runSpeed: 0
-  sprintSpeed: 0
-  fallMultiplier: 2.5
-  jumpForce: 0
-  jumpTime: 0
-  jumpTimeCounter: 0
-  stoppedJumping: 0
-  noMoreJumping: 0
   isGrounded: 0
   floorMask:
     serializedVersion: 2
