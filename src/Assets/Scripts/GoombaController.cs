@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GoombaController : MonoBehaviour {
+public class GoombaController : Photon.MonoBehaviour {
 
-    [SerializeField] SoundEffectsManager sfx;
-    [SerializeField] AudioClip squishSound;
+    //[SerializeField] SoundEffectsManager sfx;
+    //[SerializeField] AudioClip squishSound;
+    AudioSource audioSource;
+    public AudioClip squishSound;
     public float gravity;
      public Vector2 velocity;
      public bool isWalkingLeft = true;
@@ -14,7 +16,7 @@ public class GoombaController : MonoBehaviour {
      private Rigidbody2D rb;
      public LayerMask playerLayer;
      private bool grounded = false;
-     private bool shouldDie;
+     private bool shouldDie = false;
      private float deathTimer = 0;
      public float timeBeforeDestroy = 1.0f;
 
@@ -26,8 +28,13 @@ public class GoombaController : MonoBehaviour {
 
      private EnemyState state = EnemyState.walking;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    // Use this for initialization
+    void Start () {
           rb = GetComponent<Rigidbody2D>();
           rb.freezeRotation = true;
           enabled = false;          
@@ -41,11 +48,17 @@ public class GoombaController : MonoBehaviour {
           UpdateEnemyPosition();
           checkDeath();
      }
-
-
+     
      private void OnBecameVisible()
      {
-          enabled = true;
+        if(PhotonNetwork.connected)
+        {
+            photonView.RPC("SetEnabled", PhotonTargets.All);
+        }
+        else
+        {
+            SetEnabled();
+        }
      }
 
 
@@ -97,13 +110,36 @@ public class GoombaController : MonoBehaviour {
 
      public void Death()
      {
-          sfx.PlaySoundEffect(squishSound);
-          state = EnemyState.dead;
-          GetComponent<Rigidbody2D>().gravityScale = 0;
-          GetComponent<Animator>().SetBool("isCrushed", true);
-          GetComponent<Collider2D>().enabled = false;          
-          shouldDie = true;
+        if (PhotonNetwork.connected)
+        {
+            photonView.RPC("DeathInternal", PhotonTargets.All);
+        }
+        else
+        {
+
+            DeathInternal(new PhotonMessageInfo { });
+        }
+
      }
+
+     [PunRPC]
+     private void DeathInternal(PhotonMessageInfo info)
+     {
+        Debug.Log(info.sender);
+
+        audioSource.PlayOneShot(squishSound);
+        state = EnemyState.dead;
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<Animator>().SetBool("isCrushed", true);
+        GetComponent<Collider2D>().enabled = false;
+        shouldDie = true;
+     }
+
+    [PunRPC]
+    private void SetEnabled()
+    {
+        enabled = true;
+    }
 
      public void StarDeath()
      {
@@ -124,9 +160,17 @@ public class GoombaController : MonoBehaviour {
                }
                else
                {
+                    if (!PhotonNetwork.connected)
+                    {
+                        Destroy(this.gameObject);
+                    }
+                    else if(PhotonNetwork.isMasterClient)
+                    {
+                        PhotonNetwork.Destroy(this.gameObject);
+                    }
+
                     shouldDie = false;
-                    Destroy(this.gameObject);
-               }
+            }
           }
      }
 }
