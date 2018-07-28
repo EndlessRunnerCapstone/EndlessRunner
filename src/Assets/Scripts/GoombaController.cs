@@ -48,11 +48,17 @@ public class GoombaController : Photon.MonoBehaviour {
           UpdateEnemyPosition();
           checkDeath();
      }
-
-
+     
      private void OnBecameVisible()
      {
-          enabled = true;
+        if(PhotonNetwork.connected)
+        {
+            photonView.RPC("SetEnabled", PhotonTargets.All);
+        }
+        else
+        {
+            SetEnabled();
+        }
      }
 
 
@@ -127,8 +133,13 @@ public class GoombaController : Photon.MonoBehaviour {
         GetComponent<Animator>().SetBool("isCrushed", true);
         GetComponent<Collider2D>().enabled = false;
         shouldDie = true;
-
      }
+
+    [PunRPC]
+    private void SetEnabled()
+    {
+        enabled = true;
+    }
 
      public void StarDeath()
      {
