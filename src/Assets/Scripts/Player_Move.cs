@@ -19,18 +19,18 @@ public class Player_Move : Photon.MonoBehaviour {
     private AudioSource[] allAudioSources;
 
     //movement variables
-    public float runSpeed;
-     public float sprintSpeed;
-     private float moveX;
-     bool isRunning;
-     public float fallMultiplier;     
+    private float runSpeed;
+    private float sprintSpeed;
+    private float moveX;
+    private bool isRunning;
+    private float fallMultiplier;     
 
      //jumping variables
-     public float jumpForce;
-     public float jumpTime;
-     public float jumpTimeCounter;
-     public bool stoppedJumping;
-     public bool noMoreJumping;
+     private float jumpForce;
+     private float jumpTime;
+     private float jumpTimeCounter;
+     private bool stoppedJumping;
+     private bool noMoreJumping;
 
      //game components
      private Rigidbody2D rb;
@@ -308,7 +308,7 @@ public class Player_Move : Photon.MonoBehaviour {
                     isGrounded = true;
                }
 
-               if (ContainsLayer(hitRay.collider.gameObject.layer))
+               if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
                {
                     if (starPower)
                     {
@@ -319,7 +319,11 @@ public class Player_Move : Photon.MonoBehaviour {
                     }
                     else
                     {
-                         hitRay.collider.GetComponent<GoombaController>().Death();
+                         if(hitRay.collider.tag == "Goomba")
+                         {
+                              hitRay.collider.GetComponent<GoombaController>().Death();
+                         }
+                         
                          if (Input.GetButton("Jump"))
                          {
                               rb.velocity = new Vector2(rb.velocity.x, 7);
@@ -356,7 +360,7 @@ public class Player_Move : Photon.MonoBehaviour {
                rb.velocity = new Vector2(rb.velocity.x, 0);
 
 
-               if (ContainsLayer(hitAbove.collider.gameObject.layer))
+               if (hitAbove.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
                {
                     OnEnemyHit(hitAbove);
                }
@@ -434,13 +438,12 @@ public class Player_Move : Photon.MonoBehaviour {
                {
                     hitRay = botRight;
                }
-          }
 
-          if (hitRay && hitRay.collider.tag == "Enemy")
-          {
-               OnEnemyHit(hitRay);
+               if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
+               {
+                    OnEnemyHit(hitRay);
+               }
           }
-
      }
 
      public IEnumerator Invincible()
@@ -503,7 +506,7 @@ public class Player_Move : Photon.MonoBehaviour {
           isDead = true;
           GetComponent<BoxCollider2D>().enabled = false;
           rb.velocity = new Vector2(0, 5f);
-          yield return new WaitForSeconds(2);
+          yield return new WaitForSeconds(3);
           GetComponent<BoxCollider2D>().enabled = true;
           myAnimator.SetBool("isDead", false);
           myAnimator.SetBool("starPower", false);
@@ -518,10 +521,5 @@ public class Player_Move : Photon.MonoBehaviour {
           yield return new WaitForSeconds(10);
           starPower = false;
           myAnimator.SetBool("starPower", false);
-     }
-
-     bool ContainsLayer(int layer)
-     {
-          return floorMask == (1 << layer);
      }
 }
