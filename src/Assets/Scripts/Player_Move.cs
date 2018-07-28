@@ -40,6 +40,7 @@ public class Player_Move : Photon.MonoBehaviour {
 
      //Death
      private bool isDead;
+     Coroutine hasStarPower = null;
 
 
     private void Awake()
@@ -59,6 +60,11 @@ public class Player_Move : Photon.MonoBehaviour {
           GroundCheck();
           invincible = false;
           starPower = false;
+          if(hasStarPower != null)
+          {
+               StopCoroutine(hasStarPower);
+          }
+          myAnimator.SetBool("starPower", false);
      }
 
     private void Start()
@@ -267,14 +273,21 @@ public class Player_Move : Photon.MonoBehaviour {
 
                if (hitRay.collider.tag == "Enemy")
                {
-                    hitRay.collider.GetComponent<GoombaController>().Death();
-                    if (Input.GetButton("Jump"))
+                    if (starPower)
                     {
-                         rb.velocity = new Vector2(rb.velocity.x, 7);
+                         hitRay.collider.GetComponent<GoombaController>().StarDeath();
                     }
                     else
                     {
-                         rb.velocity = new Vector2(rb.velocity.x, 1);
+                         hitRay.collider.GetComponent<GoombaController>().Death();
+                         if (Input.GetButton("Jump"))
+                         {
+                              rb.velocity = new Vector2(rb.velocity.x, 7);
+                         }
+                         else
+                         {
+                              rb.velocity = new Vector2(rb.velocity.x, 1);
+                         }
                     }
                }
           }
@@ -320,7 +333,10 @@ public class Player_Move : Photon.MonoBehaviour {
                if (collision.gameObject.tag == "Star")
                {
                     Destroy(collision.gameObject);
-                    StartCoroutine(StarPower());
+                    if (!starPower)
+                    {
+                         hasStarPower = StartCoroutine(StarPower());
+                    }                    
                }
           }
      }
@@ -443,6 +459,7 @@ public class Player_Move : Photon.MonoBehaviour {
           yield return new WaitForSeconds(2);
           GetComponent<BoxCollider2D>().enabled = true;
           myAnimator.SetBool("isDead", false);
+          myAnimator.SetBool("starPower", false);
           rb.gravityScale = 2;
           SceneManager.LoadScene("Level01");
      }
@@ -450,7 +467,9 @@ public class Player_Move : Photon.MonoBehaviour {
      private IEnumerator StarPower()
      {
           starPower = true;
+          myAnimator.SetBool("starPower", true);
           yield return new WaitForSeconds(10);
-          starPower = false;          
+          starPower = false;
+          myAnimator.SetBool("starPower", false);
      }
 }
