@@ -235,7 +235,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9c4620f6312db4999c9f032e669ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx: {fileID: 511882957}
+  sfx: {fileID: 0}
   flagSound: {fileID: 8300000, guid: 813f4e3747662164d98bfb6c3524892e, type: 3}
   anim: {fileID: 0}
 --- !u!1 &60652374
@@ -714,130 +714,6 @@ Transform:
   m_Father: {fileID: 1117330111}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &126062137
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 126062138}
-  - component: {fileID: 126062139}
-  m_Layer: 9
-  m_Name: Level Music
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &126062138
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 126062137}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 286748313}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &126062139
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 126062137}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5ca578bc12c12b849812762903b71059, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &163680394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +968,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 0}
     - target: {fileID: 114798314085931926, guid: d06fc8cad6b654944b4e959151541b43,
         type: 2}
       propertyPath: squishSound
@@ -1300,6 +1176,48 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!1001 &228280082
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4215774346192962, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5.874
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215774346192962, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.079
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215774346192962, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215774346192962, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215774346192962, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215774346192962, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215774346192962, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215774346192962, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5adf2a7f0c8733944870f8848e7ee35a, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &234758664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,7 +1298,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -1427,7 +1345,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (5)
@@ -1440,36 +1358,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4188629960966654, guid: 722a64920da38e744a562ba18d501335,
     type: 2}
   m_PrefabInternal: {fileID: 278949041}
---- !u!1 &286748310
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 286748313}
-  m_Layer: 9
-  m_Name: Audio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &286748313
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 286748310}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.874, y: -4.079, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 126062138}
-  - {fileID: 511882955}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &289837477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,7 +1822,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f7e54d36d5f50144984e40aae5d9932, type: 2}
   m_IsPrefabAsset: 0
@@ -2003,7 +1891,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 0}
     - target: {fileID: 114798314085931926, guid: d06fc8cad6b654944b4e959151541b43,
         type: 2}
       propertyPath: squishSound
@@ -2218,7 +2106,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -2384,7 +2272,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (4)
@@ -2485,7 +2373,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -2555,17 +2443,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &511882955 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd,
-    type: 2}
-  m_PrefabInternal: {fileID: 1122631340}
---- !u!114 &511882957 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114103793006751426, guid: 9253771b9b3e4d64a8a124a61a168cfd,
-    type: 2}
-  m_PrefabInternal: {fileID: 1122631340}
-  m_Script: {fileID: 11500000, guid: d3bbed4ae2209f8479003c4b688148e4, type: 3}
 --- !u!1 &518824403
 GameObject:
   m_ObjectHideFlags: 0
@@ -3380,7 +3257,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -3706,7 +3583,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -3780,7 +3657,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 114798314085931926, guid: d06fc8cad6b654944b4e959151541b43,
         type: 2}
       propertyPath: squishSound
@@ -3836,7 +3713,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (1)
@@ -3961,7 +3838,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (7)
@@ -11233,7 +11110,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (8)
@@ -11297,7 +11174,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -11344,7 +11221,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (2)
@@ -11404,7 +11281,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -11764,7 +11641,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 0}
     - target: {fileID: 114798314085931926, guid: d06fc8cad6b654944b4e959151541b43,
         type: 2}
       propertyPath: squishSound
@@ -12144,7 +12021,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -12224,53 +12101,6 @@ Transform:
   m_Father: {fileID: 1117330111}
   m_RootOrder: 87
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1122631340
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 286748313}
-    m_Modifications:
-    - target: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495650401501924, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114103793006751426, guid: 9253771b9b3e4d64a8a124a61a168cfd,
-        type: 2}
-      propertyPath: levelMusic
-      value: 
-      objectReference: {fileID: 126062139}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9253771b9b3e4d64a8a124a61a168cfd, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1001 &1125773827
 Prefab:
   m_ObjectHideFlags: 0
@@ -12485,7 +12315,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -12537,7 +12367,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (13)
@@ -12601,7 +12431,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (3)
@@ -12687,7 +12517,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 114798314085931926, guid: d06fc8cad6b654944b4e959151541b43,
         type: 2}
       propertyPath: squishSound
@@ -12743,7 +12573,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -12916,7 +12746,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (11)
@@ -13351,7 +13181,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (6)
@@ -13372,6 +13202,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4188629960966654, guid: 722a64920da38e744a562ba18d501335,
     type: 2}
   m_PrefabInternal: {fileID: 1425593919}
+--- !u!114 &1448232587 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114151933856791090, guid: 5adf2a7f0c8733944870f8848e7ee35a,
+    type: 2}
+  m_PrefabInternal: {fileID: 228280082}
+  m_Script: {fileID: 11500000, guid: d3bbed4ae2209f8479003c4b688148e4, type: 3}
 --- !u!1 &1466852257
 GameObject:
   m_ObjectHideFlags: 0
@@ -13536,7 +13372,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (12)
@@ -13615,7 +13451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffc2f271d2e60c438d229d07a75ad7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx: {fileID: 511882957}
+  sfx: {fileID: 0}
   fireworksSound: {fileID: 8300000, guid: 72ae3b3c6e9dbaf48b235078fc2c4796, type: 3}
   anim: {fileID: 409350741}
   fireworks: {fileID: 1229383392}
@@ -13934,7 +13770,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 0}
     - target: {fileID: 114798314085931926, guid: d06fc8cad6b654944b4e959151541b43,
         type: 2}
       propertyPath: squishSound
@@ -14185,7 +14021,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (9)
@@ -14637,7 +14473,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 0}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW
@@ -15216,7 +15052,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 114798314085931926, guid: d06fc8cad6b654944b4e959151541b43,
         type: 2}
       propertyPath: squishSound
@@ -15286,7 +15122,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -15487,7 +15323,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661c605b3f1153342b8fcce93fe13196, type: 2}
   m_IsPrefabAsset: 0
@@ -15864,7 +15700,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1232748007137554, guid: 722a64920da38e744a562ba18d501335, type: 2}
       propertyPath: m_Name
       value: Coin Block OW (10)
@@ -16078,7 +15914,7 @@ Prefab:
         type: 2}
       propertyPath: sfx
       value: 
-      objectReference: {fileID: 511882957}
+      objectReference: {fileID: 1448232587}
     - target: {fileID: 1162593458533362, guid: 5f7e54d36d5f50144984e40aae5d9932, type: 2}
       propertyPath: m_Name
       value: BrickNoDestroy (1)
