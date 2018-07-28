@@ -18,8 +18,9 @@ public class GameManager : Photon.PunBehaviour {
     void Start ()
     {
 
-        var test = new Vector3 { x = -7.85f, y = -4.719f, z = 0 };
+        var masterPosition = new Vector3 { x = -7.85f, y = -4.719f, z = 0 };
 
+        var secondPosition = new Vector3 { x = -8.15f, y = -4.719f, z = 0 };
 
         if (Player_Move.LocalPlayerInstance == null)
         {
@@ -30,17 +31,31 @@ public class GameManager : Photon.PunBehaviour {
 
             if (PhotonNetwork.connected)
             {
-                PhotonNetwork.Instantiate(this.PlayerPrefab.name, test, Quaternion.identity, 0);
+                if (PhotonNetwork.isMasterClient)
+                {
+                    PhotonNetwork.Instantiate(this.PlayerPrefab.name, masterPosition, Quaternion.identity, 0);
+                }
+                else
+                {
+                    PhotonNetwork.Instantiate(this.PlayerPrefab.name, secondPosition, Quaternion.identity, 0);
+                }
             }
             else
             {
                 
-                Instantiate(PlayerPrefab, test, Quaternion.identity);
+                Instantiate(PlayerPrefab, masterPosition, Quaternion.identity);
             }
         }
         else
         {
-            Player_Move.LocalPlayerInstance.transform.position = test;
+            if (!Globals.TwoPlayer || PhotonNetwork.isMasterClient)
+            {
+                Player_Move.LocalPlayerInstance.transform.position = masterPosition;
+            }
+            else
+            {
+                Player_Move.LocalPlayerInstance.transform.position = secondPosition;
+            }
 
             Player_Move player = Player_Move.LocalPlayerInstance.GetComponent<Player_Move>();
 
