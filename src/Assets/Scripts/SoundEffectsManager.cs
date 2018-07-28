@@ -8,8 +8,7 @@ public class SoundEffectsManager : MonoBehaviour
 
     AudioSource sfxPlayer;
     public AudioSource levelMusic;
-    [SerializeField]
-    AudioClip stageClear;
+    [SerializeField] AudioClip stageClear;
 
     public void Start()
     {
