@@ -9,6 +9,8 @@ TagManager:
   - RedMushroom
   - DeathArea
   - Star
+  - Turtle
+  - Goomba
   layers:
   - Default
   - TransparentFX

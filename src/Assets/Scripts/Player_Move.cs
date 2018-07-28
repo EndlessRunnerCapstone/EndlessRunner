@@ -308,11 +308,14 @@ public class Player_Move : Photon.MonoBehaviour {
                     isGrounded = true;
                }
 
-               if (hitRay.collider.tag == "Enemy")
+               if (ContainsLayer(hitRay.collider.gameObject.layer))
                {
                     if (starPower)
                     {
-                         hitRay.collider.GetComponent<GoombaController>().StarDeath();
+                         if (hitRay.collider.tag == "Goomba")
+                         {
+                              hitRay.collider.GetComponent<GoombaController>().StarDeath();
+                         }                         
                     }
                     else
                     {
@@ -339,18 +342,21 @@ public class Player_Move : Photon.MonoBehaviour {
           RaycastHit2D hitAbove;
           if (!isBig)
           {
-               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.06f), Vector2.up, 0.03f, floorMask);
+               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up, 0.04f, floorMask);
+               Debug.DrawRay(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up * 0.04f, Color.red);
           }
           else
           {
-              hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.145f), Vector2.up, 0.03f, floorMask);
+               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.145f), Vector2.up, 0.03f, floorMask);
           }
 
           if (hitAbove)
           {
                jumpTimeCounter = 0;
+               rb.velocity = new Vector2(rb.velocity.x, 0);
 
-               if (hitAbove.collider.tag == "Enemy")
+
+               if (ContainsLayer(hitAbove.collider.gameObject.layer))
                {
                     OnEnemyHit(hitAbove);
                }
@@ -512,5 +518,10 @@ public class Player_Move : Photon.MonoBehaviour {
           yield return new WaitForSeconds(10);
           starPower = false;
           myAnimator.SetBool("starPower", false);
+     }
+
+     bool ContainsLayer(int layer)
+     {
+          return floorMask == (1 << layer);
      }
 }
