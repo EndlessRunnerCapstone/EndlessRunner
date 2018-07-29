@@ -44,4 +44,6 @@ MonoBehaviour:
   - TaggedPlayer
   - DeathInternal
   - SetEnabled
+  - HitInternal
+  - DestroyInternal
   DisableAutoOpenWizard: 1
