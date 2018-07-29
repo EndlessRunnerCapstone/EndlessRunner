@@ -30,6 +30,8 @@ TextureImporter:
     21300050: NES - Super Mario Bros - Tileset_5
     21300052: NES - Super Mario Bros - Tileset_6
     21300054: NES - Super Mario Bros - Tileset_7
+    21300056: NES - Super Mario Bros - Tileset_8
+    21300058: NES - Super Mario Bros - Tileset_9
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -671,13 +673,53 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: f8b221d11b019324a85719af59353437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NES - Super Mario Bros - Tileset_8
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 416
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7b1d1bc46da8404ca6328c9febc7d85
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NES - Super Mario Bros - Tileset_9
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 416
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884be76bf341beb4a8cfff1024450f90
       vertices: []
       indices: 
       edges: []

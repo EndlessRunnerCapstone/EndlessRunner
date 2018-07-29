@@ -13,6 +13,7 @@ TextureImporter:
     21300016: ugbrick
     21300018: Moving_Platform
     21300020: Double_Cloud
+    21300022: Single_Cloud
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -314,13 +315,33 @@ TextureImporter:
         width: 48
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 1a2c5a0505d15ee4a86b2fd09dae4f46
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Single_Cloud
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 1030
+        width: 32
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f84e6160173b300489550376a7ff8436
       vertices: []
       indices: 
       edges: []
