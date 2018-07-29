@@ -6,10 +6,8 @@ using UnityEngine;
 public class QuestionBlock : Photon.MonoBehaviour
 {
 
-    [SerializeField]
-    SoundEffectsManager sfx;
-    [SerializeField]
-    AudioClip coinSfx;
+    [SerializeField] SoundEffectsManager sfx;
+    [SerializeField] AudioClip coinSfx;
     private bool canBounce = true;
     private Vector2 originalPosition;
     private int hitCount = 0;
