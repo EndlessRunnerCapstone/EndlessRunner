@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrickDestroy : MonoBehaviour
+public class BrickDestroy : Photon.MonoBehaviour
 {
 
     [SerializeField] SoundEffectsManager sfx;
@@ -20,11 +20,28 @@ public class BrickDestroy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "Player")
+        if (coll.gameObject.tag != "Player")
         {
-            sfx.PlaySoundEffect(breakSound);
-            Destroy(gameObject);
+            return;
         }
+
+        if (Globals.TwoPlayer)
+        {
+
+            photonView.RPC("HitInternal", PhotonTargets.All);
+
+        }
+        else
+        {
+            HitInternal();
+        }
+    }
+
+    [PunRPC]
+    void HitInternal()
+    {
+        sfx.PlaySoundEffect(breakSound);
+        Destroy(gameObject);
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Controls bounce of question mark block
-public class QuestionBlock : MonoBehaviour
+public class QuestionBlock : Photon.MonoBehaviour
 {
 
     [SerializeField]
@@ -53,6 +53,19 @@ public class QuestionBlock : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(Globals.TwoPlayer)
+        {
+            photonView.RPC("HitInternal", PhotonTargets.All);   
+        }
+        else
+        {
+            HitInternal();
+        }
+    }
+
+    [PunRPC]
+    void HitInternal()
     {
         if (hitCount == 0)
         {
