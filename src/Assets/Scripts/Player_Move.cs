@@ -23,7 +23,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     private float sprintSpeed;
     private float moveX;
     private bool isRunning;
-    private float fallMultiplier;     
+    private float fallMultiplier;
 
      //jumping variables
      private float jumpForce;
@@ -38,7 +38,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
      //ground check variables
      public bool isGrounded;
-     public LayerMask floorMask;    
+     public LayerMask floorMask;
 
      //Animation bools
      public bool isBig = false;
@@ -77,7 +77,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
         PhotonNetwork.sendRateOnSerialize = 20;
 
         sfxPlayer = GetComponent<AudioSource>();
-        
+
         if (!PhotonNetwork.connected || photonView.isMine)
         {
             LocalPlayerInstance = this.gameObject;
@@ -124,7 +124,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           isGrounded = true;
           noMoreJumping = false;
           myAnimator = GetComponent<Animator>();
-          fallMultiplier = 1.5f;          
+          fallMultiplier = 1.5f;
      }
 
      // Update is called once per frame
@@ -142,8 +142,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                CollisionCheckAbove();
                CheckSideCollision();
           }
-		
-          Animate();        
+
+          Animate();
 
           if (!isDead)
           {
@@ -169,7 +169,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
                }
           }
-          
+
      }
 
      private void FixedUpdate()
@@ -323,22 +323,22 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                }
 
                if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
-               {                    
+               {
                     if (starPower)
                     {
                          if (hitRay.collider.tag == "Goomba")
                          {
                               hitRay.collider.GetComponent<GoombaController>().StarDeath();
-                         }                         
+                         }
                     }
                     else
-                    {                         
+                    {
                          if (hitRay.collider.tag == "Goomba")
                          {
                               Debug.Log(hitRay);
                               hitRay.collider.GetComponent<GoombaController>().Death();
                          }
-                         
+
                          if (Input.GetButton("Jump"))
                          {
                               rb.velocity = new Vector2(rb.velocity.x, 7);
@@ -361,7 +361,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           RaycastHit2D hitAbove;
           if (!isBig)
           {
-               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up, 0.04f, floorMask);               
+               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up, 0.04f, floorMask);
           }
           else
           {
@@ -398,7 +398,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     if (!starPower)
                     {
                          hasStarPower = StartCoroutine(StarPower());
-                    }                    
+                    }
                }
           }
      }
@@ -465,10 +465,10 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           isBig = false;
           float time = 0f;
           bool showSprite = false;
-          invincible = true;        
+          invincible = true;
 
           while (time < invincibilityTime)
-          {               
+          {
                GetComponent<SpriteRenderer>().enabled = showSprite;
                yield return new WaitForSeconds(flickerTime);
                showSprite = !showSprite;
@@ -476,7 +476,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           }
 
           GetComponent<SpriteRenderer>().enabled = true;
-          invincible = false; 
+          invincible = false;
      }
 
      public IEnumerator TurtleHitInvincibility()
@@ -503,7 +503,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                if (hitRay.collider.tag == "Goomba")
                {
                     hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
-               }   
+               }
                else if (hitRay.collider.tag == "Turtle")
                {
                     hitRay.collider.gameObject.GetComponent<TurtleController>().StarDeath();
