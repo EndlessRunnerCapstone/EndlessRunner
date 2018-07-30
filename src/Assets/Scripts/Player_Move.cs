@@ -572,8 +572,25 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           myAnimator.SetBool("isDead", false);
           myAnimator.SetBool("starPower", false);
           rb.gravityScale = 2;
-          SceneManager.LoadScene("Level01");
-     }
+        if (SceneManager.GetActiveScene().name == "Level01")
+        {
+            SceneManager.LoadScene("Level01");
+        }
+        else if (SceneManager.GetActiveScene().name == "Level02")
+        {
+            SceneManager.LoadScene("Level02");
+        }
+        else if (SceneManager.GetActiveScene().name == "Level03")
+        {
+            SceneManager.LoadScene("Level03");
+        }
+        else if (SceneManager.GetActiveScene().name == "Level04")
+        {
+            SceneManager.LoadScene("Level04");
+        }
+        else
+            Debug.Log("Issue with player death level loading.");
+    }
 
      private IEnumerator StarPower()
      {
