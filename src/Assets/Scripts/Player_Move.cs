@@ -44,7 +44,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      public bool isBig = false;
 
      //Invincibility
-     private bool invincible;
+     [SerializeField] private bool invincible;
      float invincibilityTime = 2f;
      float flickerTime = 0.1f;
      private bool starPower;
@@ -511,14 +511,14 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           }
           else
           {
-               if(hitRay.collider.tag == "Turtle" && hitRay.collider.gameObject.GetComponent<TurtleController>().state == TurtleController.EnemyState.shellIdle)
-               {
+               if((hitRay.collider.tag == "Turtle" && hitRay.collider.gameObject.GetComponent<TurtleController>().state == TurtleController.EnemyState.shellIdle) ||
+                    (hitRay.collider.tag == "FlyingTurtle" && hitRay.collider.gameObject.GetComponent<FlyingTurtleController>().state == FlyingTurtleController.EnemyState.shellIdle))
+               {                    
                     invincible = true;
                     turtleInvincibility = StartCoroutine(TurtleHitInvincibility());
                     return;
                }
-
-               if (!invincible)
+               else if (!invincible)
                {
                     if (isBig)
                     {
