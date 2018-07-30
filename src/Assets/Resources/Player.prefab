@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4553548433549444}
   - component: {fileID: 212445004892947208}
   - component: {fileID: 50539751490989016}
+  - component: {fileID: 114297762869956178}
   - component: {fileID: 114089271973686300}
   - component: {fileID: 61899533745133418}
   - component: {fileID: 95773991152098396}
-  - component: {fileID: 114297762869956178}
   - component: {fileID: 114746300717980262}
   - component: {fileID: 114836579457974496}
   - component: {fileID: 114764171933808268}
@@ -248,8 +248,8 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 114746300717980262}
   - {fileID: 114764171933808268}
+  - {fileID: 114089271973686300}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1906762562208096}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 

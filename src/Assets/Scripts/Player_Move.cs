@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class Player_Move : Photon.MonoBehaviour {
+public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
     public static GameObject LocalPlayerInstance;
 
@@ -53,6 +53,10 @@ public class Player_Move : Photon.MonoBehaviour {
      private bool isDead;
      Coroutine hasStarPower = null;
 
+    //Network
+    private Vector2 networkPosition;
+    private float networkRotation;
+
     public void PlaySoundEffect(AudioClip sfx)
     {
         sfxPlayer.PlayOneShot(sfx);
@@ -69,6 +73,8 @@ public class Player_Move : Photon.MonoBehaviour {
 
     private void Awake()
     {
+        PhotonNetwork.sendRateOnSerialize = 20;
+
         sfxPlayer = GetComponent<AudioSource>();
         
         if (!PhotonNetwork.connected || photonView.isMine)
@@ -166,15 +172,22 @@ public class Player_Move : Photon.MonoBehaviour {
      }
 
      private void FixedUpdate()
-     { 
-          if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping && !isDead)
-          {
-               if (jumpTimeCounter > 0) 
-               {
+     {
+        if (!photonView.isMine)
+        {
+            rb.position = Vector2.MoveTowards(rb.position, networkPosition, Time.fixedDeltaTime);
+        }
+        else
+        {
+            if (Input.GetButton("Jump") && !stoppedJumping && !noMoreJumping && !isDead)
+            {
+                if (jumpTimeCounter > 0)
+                {
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                     jumpTimeCounter -= Time.deltaTime;
-               }
-          }          
+                }
+            }
+        }
      }
 
      void PlayerMove ()
@@ -538,4 +551,29 @@ public class Player_Move : Photon.MonoBehaviour {
           starPower = false;
           myAnimator.SetBool("starPower", false);
      }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        // Just in case we are called before we are setup
+        if(rb == null)
+        {
+            return;
+        }
+
+        if(stream.isWriting)
+        {
+            stream.SendNext(rb.position);
+            stream.SendNext(rb.rotation);
+            stream.SendNext(rb.velocity);
+        }
+        else
+        {
+            networkPosition = (Vector2)stream.ReceiveNext();
+            networkRotation = (float)stream.ReceiveNext();
+            rb.velocity = (Vector2)stream.ReceiveNext();
+
+            float lag = Mathf.Abs((float)(PhotonNetwork.time - info.timestamp));
+            networkPosition += (rb.velocity * lag);
+        }
+    }
 }
