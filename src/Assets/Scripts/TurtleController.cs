@@ -18,6 +18,11 @@ public class TurtleController : MonoBehaviour
      public float timeBeforeDestroy = 1.0f;
      private Animator myAnimator;
      private bool neverHit = true;
+     private bool invincible = false;
+     Coroutine invincibleCoroutine = null;
+     Coroutine recovering = null;
+     private float recoveryWaitTime = 4f;
+     private float recoveryTime = 2f;
 
      public enum EnemyState
      {
@@ -41,7 +46,7 @@ public class TurtleController : MonoBehaviour
 
      // Update is called once per frame
      void Update()
-     {
+     {          
           UpdateEnemyPosition();
           CheckAbove();
 
@@ -64,12 +69,6 @@ public class TurtleController : MonoBehaviour
      private void OnBecameVisible()
      {
           enabled = true;
-     }
-
-
-     void Fall()
-     {
-          grounded = false;
      }
 
      void UpdateEnemyPosition()
@@ -108,10 +107,12 @@ public class TurtleController : MonoBehaviour
           if (leftCollision)
           {
                isMovingLeft = false;
+               transform.localScale = new Vector2(-1f, 1f);
           }
           else if (rightCollision)
           {
                isMovingLeft = true;
+               transform.localScale = new Vector2(1f, 1f);
           }
      }
 
@@ -119,40 +120,39 @@ public class TurtleController : MonoBehaviour
      {
           RaycastHit2D leftCollision, rightCollision;
           leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, playerLayer);
-          rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, playerLayer);
-          Debug.DrawRay(transform.position, Vector2.left * 0.1f, Color.red);
+          rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, playerLayer);          
           if (leftCollision.collider != null || rightCollision.collider != null)
           {
                if (leftCollision.collider != null)
                {                    
                     state = EnemyState.movingShell;
                     isMovingLeft = false;
-                    velocity.x = 2.5f;
+                    velocity.x = 2f;
                }
                else
                {
                     state = EnemyState.movingShell;
                     isMovingLeft = true;
-                    velocity.x = 2.5f;
+                    velocity.x = 2f;
                }
+               StartCoroutine(Invincible());
+               neverHit = false;
           }
      }
      void CheckWallCollisionMovingShell()
      {
-          RaycastHit2D groundEnemyCollision, playerCollision;
+          RaycastHit2D groundEnemyCollision;
 
           if (isMovingLeft)
           {
-               groundEnemyCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, groundEnemyMask);
-               playerCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, playerLayer);
+               groundEnemyCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, groundEnemyMask);               
           }
           else
           {
-               groundEnemyCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, groundEnemyMask);
-               playerCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, playerLayer);
+               groundEnemyCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, groundEnemyMask);               
           }         
           
-          if (groundEnemyCollision.collider != null || playerCollision.collider != null)
+          if (groundEnemyCollision.collider != null)
           {
                if (groundEnemyCollision.collider != null)
                {
@@ -178,22 +178,17 @@ public class TurtleController : MonoBehaviour
      void CheckAbove()
      {
           RaycastHit2D aboveLeft, aboveMiddle, aboveRight, hitRay;
-          if (state == EnemyState.walking && isMovingLeft)
+          if (state == EnemyState.walking)
           {
-               aboveLeft = Physics2D.Raycast(new Vector2(transform.position.x - 0.04f, transform.position.y + 0.09f), Vector2.up, 0.04f, playerLayer);
-               aboveMiddle = Physics2D.Raycast(new Vector2(transform.position.x + 0.02f, transform.position.y + 0.02f), Vector2.up, 0.04f, playerLayer);
-               aboveRight = Physics2D.Raycast(new Vector2(transform.position.x + 0.06f, transform.position.y + 0.01f), Vector2.up, 0.04f, playerLayer);
-          }
-
-          else if (state == EnemyState.walking && !isMovingLeft)
-          {
-               aboveRight = Physics2D.Raycast(new Vector2(transform.position.x - 0.04f, transform.position.y + 0.09f), Vector2.up, 0.04f, playerLayer);
-               aboveMiddle = Physics2D.Raycast(new Vector2(transform.position.x + 0.02f, transform.position.y + 0.02f), Vector2.up, 0.04f, playerLayer);
-               aboveLeft = Physics2D.Raycast(new Vector2(transform.position.x + 0.06f, transform.position.y + 0.01f), Vector2.up, 0.04f, playerLayer);
+               aboveLeft = Physics2D.Raycast(new Vector2(transform.position.x - 0.06f, transform.position.y + 0.02f), Vector2.up, 0.05f, playerLayer);
+               aboveMiddle = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.02f), Vector2.up, 0.05f, playerLayer);
+               aboveRight = Physics2D.Raycast(new Vector2(transform.position.x + 0.06f, transform.position.y + 0.02f), Vector2.up, 0.05f, playerLayer);
           }
           else
           {
-               return;
+               aboveRight = Physics2D.Raycast(new Vector2(transform.position.x - 0.08f, transform.position.y + 0.05f), Vector2.up, 0.04f, playerLayer);
+               aboveMiddle = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.05f), Vector2.up, 0.04f, playerLayer);
+               aboveLeft = Physics2D.Raycast(new Vector2(transform.position.x + 0.08f, transform.position.y + 0.05f), Vector2.up, 0.04f, playerLayer);
           }
 
           if (aboveLeft.collider != null || aboveMiddle.collider != null || aboveRight.collider != null)
@@ -213,56 +208,94 @@ public class TurtleController : MonoBehaviour
 
                if (hitRay.collider.tag == "Player")
                {
-                    OnHitFromMario();
+                    Debug.Log(hitRay);
+                    OnHitAboveFromMario();
                }
           }
      }
 
-     void OnHitFromMario()
+     void OnHitAboveFromMario()
      {
-          if (state == EnemyState.walking)
+          if (!invincible)
           {
-               state = EnemyState.shellIdle;
-               velocity.x = 0;
-               myAnimator.SetBool("idleShell", true);
+               if (state == EnemyState.walking)
+               {
+                    if (neverHit)
+                    {
+                         StartCoroutine(Recovering());
+                    }
+                    
+                    state = EnemyState.shellIdle;
+                    velocity.x = 0;
+                    myAnimator.SetBool("idleShell", true);                    
+               }
+               else if (state == EnemyState.shellIdle)
+               {
+                    neverHit = false;
+                    state = EnemyState.movingShell;
+                    velocity.x = 2f;
+                    isMovingLeft = false;                    
+               }
+               else
+               {
+                    state = EnemyState.shellIdle;
+                    velocity.x = 0;
+               }
+               StartCoroutine(Invincible());
           }
      }
 
-     private void OnDrawGizmos()
+     public IEnumerator Invincible()
      {
+          if (invincibleCoroutine != null)
+          {
+               StopCoroutine(invincibleCoroutine);
+          }
+
+          invincible = true;          
+          yield return new WaitForSeconds(0.3f);
+          invincible = false;
      }
 
-     /*public void Death()
-     {          
-          state = EnemyState.dead;
-          GetComponent<Rigidbody2D>().gravityScale = 0;
-          GetComponent<Animator>().SetBool("isCrushed", true);
-          GetComponent<Collider2D>().enabled = false;
-          shouldDie = true;
+     public IEnumerator Recovering()
+     {
+          float currentTime = 0f;
+
+          while (currentTime < recoveryWaitTime)
+          {
+               currentTime += 0.1f;
+               if (!neverHit)
+               {
+                    yield break;
+               }
+               yield return new WaitForSeconds(0.1f);
+          }
+
+          currentTime = 0;
+          myAnimator.SetBool("recovering", true);
+          while (currentTime < recoveryTime)
+          {
+               currentTime += 0.1f;
+               if (!neverHit)
+               {
+                    myAnimator.SetBool("recovering", false);
+                    yield break;
+               }
+               yield return new WaitForSeconds(0.1f);
+          }
+          state = EnemyState.walking;
+          velocity.x = 0.5f;
+          myAnimator.SetBool("recovering", false);
+          myAnimator.SetBool("idleShell", false);
+          yield return null;
      }
 
      public void StarDeath()
      {
-          state = EnemyState.dead;
+          myAnimator.SetBool("idleShell", true);
           GetComponent<Collider2D>().enabled = false;
           transform.rotation = new Quaternion(180, 0, 0, 0);
           rb.velocity = new Vector2(0.5f, 2f);
           shouldDie = true;
      }
-
-     void checkDeath()
-     {
-          if (shouldDie)
-          {
-               if (deathTimer <= timeBeforeDestroy)
-               {
-                    deathTimer += Time.deltaTime;
-               }
-               else
-               {
-                    shouldDie = false;
-                    Destroy(this.gameObject);
-               }
-          }
-     }*/
 }

@@ -52,6 +52,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      //Death
      private bool isDead;
      Coroutine hasStarPower = null;
+     Coroutine turtleInvincibility = null;
 
     //Network
     private Vector2 networkPosition;
@@ -480,6 +481,10 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
      public IEnumerator TurtleHitInvincibility()
      {
+          if (turtleInvincibility != null)
+          {
+               StopCoroutine(turtleInvincibility);
+          }
           invincible = true;
           yield return new WaitForSeconds(0.2f);
           invincible = false;
@@ -495,16 +500,21 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
           if (starPower)
           {
-               if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("Goomba"))
+               if (hitRay.collider.tag == "Goomba")
                {
                     hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
-               }               
+               }   
+               else if (hitRay.collider.tag == "Turtle")
+               {
+                    hitRay.collider.gameObject.GetComponent<TurtleController>().StarDeath();
+               }
           }
           else
           {
                if(hitRay.collider.tag == "Turtle" && hitRay.collider.gameObject.GetComponent<TurtleController>().state == TurtleController.EnemyState.shellIdle)
                {
-                    StartCoroutine(TurtleHitInvincibility());
+                    invincible = true;
+                    turtleInvincibility = StartCoroutine(TurtleHitInvincibility());
                     return;
                }
 
