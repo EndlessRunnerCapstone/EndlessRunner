@@ -174,7 +174,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
      private void FixedUpdate()
      {
-        if (!photonView.isMine)
+        if (Globals.TwoPlayer && !photonView.isMine)
         {
             rb.position = Vector2.MoveTowards(rb.position, networkPosition, Time.fixedDeltaTime);
         }
