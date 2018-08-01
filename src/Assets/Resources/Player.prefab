@@ -228,7 +228,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   isBig: 0
+  fireFlower: 0
   invincible: 0
+  fireball: {fileID: 1289683606651660, guid: b23f51cfca6e08847888b27ecbc90b77, type: 2}
 --- !u!114 &114297762869956178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -362,6 +364,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: starPower
+  - Type: 4
+    SynchronizeType: 0
+    Name: fireFlower
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

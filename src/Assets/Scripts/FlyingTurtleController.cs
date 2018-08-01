@@ -78,7 +78,7 @@ public class FlyingTurtleController : MonoBehaviour
 
      void UpdateEnemyPosition()
      {
-          if (state != EnemyState.shellIdle)
+          if (state != EnemyState.shellIdle && !shouldDie)
           {
                Vector3 pos = transform.localPosition;
                Vector3 scale = transform.localScale;
@@ -333,6 +333,7 @@ public class FlyingTurtleController : MonoBehaviour
      public void StarDeath()
      {
           myAnimator.SetBool("idleShell", true);
+          myAnimator.SetBool("flying", false);
           GetComponent<Collider2D>().enabled = false;
           transform.rotation = new Quaternion(180, 0, 0, 0);
           rb.velocity = new Vector2(0.5f, 2f);

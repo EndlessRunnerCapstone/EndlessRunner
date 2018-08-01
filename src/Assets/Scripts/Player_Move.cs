@@ -42,6 +42,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
      //Animation bools
      public bool isBig = false;
+     public bool fireFlower = false;
 
      //Invincibility
      [SerializeField] private bool invincible;
@@ -53,6 +54,11 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      private bool isDead;
      Coroutine hasStarPower = null;
      Coroutine turtleInvincibility = null;
+
+     //Fireball
+     public GameObject fireball;
+     private float nextFire = -1f;
+    
 
     //Network
     private Vector2 networkPosition;
@@ -170,6 +176,11 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                }
           }
 
+          if (Input.GetKeyDown(KeyCode.W) && Time.time > nextFire && fireFlower)
+          {
+               ShootFireball();
+          }
+
      }
 
      private void FixedUpdate()
@@ -235,6 +246,16 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      {
           bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
           bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
+
+
+          if (fireFlower)
+          {
+               myAnimator.SetBool("fireFlower", true);
+          }
+          else
+          {
+               myAnimator.SetBool("fireFlower", false);
+          }
 
           if (isBig)
           {
@@ -463,6 +484,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      public IEnumerator Invincible()
      {
           isBig = false;
+          fireFlower = false;
           float time = 0f;
           bool showSprite = false;
           invincible = true;
@@ -586,4 +608,20 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
             networkPosition += (rb.velocity * lag);
         }
     }
+
+     public void ShootFireball()
+     {
+          nextFire = Time.time + 0.8f;
+          if (transform.localScale.x == -1f)
+          {
+               GameObject bullet = Instantiate(fireball, new Vector2(transform.localPosition.x - 0.15f, transform.localPosition.y), transform.rotation);
+               bullet.GetComponent<Rigidbody2D>().velocity = (new Vector2(-3f, -2.5f));
+               
+          }
+          else
+          {
+               GameObject bullet = Instantiate(fireball, new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y), transform.rotation);
+               bullet.GetComponent<Rigidbody2D>().velocity = (new Vector2(3f, -2.5f));
+          }
+     }
 }

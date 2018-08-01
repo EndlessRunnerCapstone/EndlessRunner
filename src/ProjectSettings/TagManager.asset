@@ -12,6 +12,7 @@ TagManager:
   - Turtle
   - Goomba
   - FlyingTurtle
+  - FireFlower
   layers:
   - Default
   - TransparentFX
