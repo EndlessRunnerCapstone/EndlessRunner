@@ -11,6 +11,8 @@ TagManager:
   - Star
   - Turtle
   - Goomba
+  - FlyingTurtle
+  - FireFlower
   layers:
   - Default
   - TransparentFX

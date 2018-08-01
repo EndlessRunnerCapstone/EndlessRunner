@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: GrayTurtleAnimator
+  m_Controller: {fileID: 9100000, guid: 3fbaa0727db5a4847a106fdd4ab2a275, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a72a0d25d3cdeb142b6930f1de7847ea, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d11d5f71244fa144d8f9552d1669e7e0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: bd619a5e492362f458576a18506d8871, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1a800879563664b4496a513741e16b99, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 69163c9cf2ea01e4787cc6b376b41669, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c48c22e2a8cc23b4ea4a5c0d533aba85, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ac77bce5d0f0a26439408933c89d95f1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fdcafa8911179b94c871534dca66741c, type: 2}

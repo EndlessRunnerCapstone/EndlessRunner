@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TurtleController : MonoBehaviour
+public class FlyingTurtleController : MonoBehaviour
 {
 
      public float gravity;
@@ -23,15 +23,18 @@ public class TurtleController : MonoBehaviour
      Coroutine recovering = null;
      private float recoveryWaitTime = 4f;
      private float recoveryTime = 2f;
+     private bool isGrounded = true;
+     private float jumpPower = 3.5f;
 
      public enum EnemyState
      {
           walking,
+          flying,
           shellIdle,
           movingShell
      }
 
-     public EnemyState state = EnemyState.walking;
+     public EnemyState state;
 
      // Use this for initialization
      void Start()
@@ -39,9 +42,11 @@ public class TurtleController : MonoBehaviour
           rb = GetComponent<Rigidbody2D>();
           rb.freezeRotation = true;
           enabled = false;
-          gravity = 60f;
+          gravity = 20f;
           velocity.x = 0.5f;
           myAnimator = GetComponent<Animator>();
+          state = EnemyState.flying;
+          myAnimator.SetBool("flying", true);
      }
 
      // Update is called once per frame
@@ -50,7 +55,7 @@ public class TurtleController : MonoBehaviour
           UpdateEnemyPosition();
           CheckAbove();
 
-          if (state == EnemyState.walking)
+          if (state == EnemyState.walking || state == EnemyState.flying)
           {
                CheckWallCollisionWalking();
           }
@@ -73,15 +78,10 @@ public class TurtleController : MonoBehaviour
 
      void UpdateEnemyPosition()
      {
-          if (state != EnemyState.shellIdle)
+          if (state != EnemyState.shellIdle && !shouldDie)
           {
                Vector3 pos = transform.localPosition;
                Vector3 scale = transform.localScale;
-
-               if (state == EnemyState.walking)
-               {
-                    CheckWallCollisionWalking();
-               }
 
                if (isMovingLeft)
                {
@@ -91,10 +91,36 @@ public class TurtleController : MonoBehaviour
                {
                     pos.x += velocity.x * Time.deltaTime;
                }
+               
+               if (state == EnemyState.flying)
+               {
+                    GroundCheck();
+                    if (isGrounded == true)
+                    {
+                         rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                    }
+               }                
 
                transform.localPosition = pos;
                transform.localScale = scale;
           }          
+     }
+
+     void GroundCheck()
+     {
+          RaycastHit2D left, middle, right;
+          left = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.06f, transform.localPosition.y - .1f), Vector2.down, 0.04f, groundEnemyMask);
+          middle = Physics2D.Raycast(new Vector2(transform.localPosition.x, transform.localPosition.y - .1f), Vector2.down, 0.04f, groundEnemyMask);
+          right = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.06f, transform.localPosition.y - .1f), Vector2.down, 0.04f, groundEnemyMask);
+
+          if (left.collider != null || middle.collider != null || right.collider != null)
+          {
+               isGrounded = true;
+          }
+          else
+          {
+               isGrounded = false;
+          }
      }
 
 
@@ -226,7 +252,13 @@ public class TurtleController : MonoBehaviour
      {
           if (!invincible)
           {
-               if (state == EnemyState.walking)
+               if (state == EnemyState.flying)
+               {
+                    state = EnemyState.walking;
+                    myAnimator.SetBool("flying", false);
+                    velocity.x = 0.5f;
+               }
+               else if (state == EnemyState.walking)
                {
                     if (neverHit)
                     {
@@ -301,6 +333,7 @@ public class TurtleController : MonoBehaviour
      public void StarDeath()
      {
           myAnimator.SetBool("idleShell", true);
+          myAnimator.SetBool("flying", false);
           GetComponent<Collider2D>().enabled = false;
           transform.rotation = new Quaternion(180, 0, 0, 0);
           rb.velocity = new Vector2(0.5f, 2f);

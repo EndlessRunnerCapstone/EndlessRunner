@@ -23,7 +23,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     private float sprintSpeed;
     private float moveX;
     private bool isRunning;
-    private float fallMultiplier;     
+    private float fallMultiplier;
 
      //jumping variables
      private float jumpForce;
@@ -38,13 +38,14 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
      //ground check variables
      public bool isGrounded;
-     public LayerMask floorMask;    
+     public LayerMask floorMask;
 
      //Animation bools
      public bool isBig = false;
+     public bool fireFlower = false;
 
      //Invincibility
-     private bool invincible;
+     [SerializeField] private bool invincible;
      float invincibilityTime = 2f;
      float flickerTime = 0.1f;
      private bool starPower;
@@ -53,6 +54,11 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      private bool isDead;
      Coroutine hasStarPower = null;
      Coroutine turtleInvincibility = null;
+
+     //Fireball
+     public GameObject fireball;
+     private float nextFire = -1f;
+    
 
     //Network
     private Vector2 networkPosition;
@@ -77,7 +83,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
         PhotonNetwork.sendRateOnSerialize = 20;
 
         sfxPlayer = GetComponent<AudioSource>();
-        
+
         if (!PhotonNetwork.connected || photonView.isMine)
         {
             LocalPlayerInstance = this.gameObject;
@@ -124,7 +130,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           isGrounded = true;
           noMoreJumping = false;
           myAnimator = GetComponent<Animator>();
-          fallMultiplier = 1.5f;          
+          fallMultiplier = 1.5f;
      }
 
      // Update is called once per frame
@@ -142,8 +148,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                CollisionCheckAbove();
                CheckSideCollision();
           }
-		
-          Animate();        
+
+          Animate();
 
           if (!isDead)
           {
@@ -169,7 +175,12 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
                }
           }
-          
+
+          if (Input.GetKeyDown(KeyCode.W) && Time.time > nextFire && fireFlower)
+          {
+               ShootFireball();
+          }
+
      }
 
      private void FixedUpdate()
@@ -235,6 +246,16 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      {
           bool playerHasHorizontalSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
           bool playerHasVerticalSpeed = Mathf.Abs(rb.velocity.y) > 0;
+
+
+          if (fireFlower)
+          {
+               myAnimator.SetBool("fireFlower", true);
+          }
+          else
+          {
+               myAnimator.SetBool("fireFlower", false);
+          }
 
           if (isBig)
           {
@@ -323,22 +344,22 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                }
 
                if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
-               {                    
+               {
                     if (starPower)
                     {
                          if (hitRay.collider.tag == "Goomba")
                          {
                               hitRay.collider.GetComponent<GoombaController>().StarDeath();
-                         }                         
+                         }
                     }
                     else
-                    {                         
+                    {
                          if (hitRay.collider.tag == "Goomba")
                          {
                               Debug.Log(hitRay);
                               hitRay.collider.GetComponent<GoombaController>().Death();
                          }
-                         
+
                          if (Input.GetButton("Jump"))
                          {
                               rb.velocity = new Vector2(rb.velocity.x, 7);
@@ -361,7 +382,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           RaycastHit2D hitAbove;
           if (!isBig)
           {
-               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up, 0.04f, floorMask);               
+               hitAbove = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.07f), Vector2.up, 0.04f, floorMask);
           }
           else
           {
@@ -398,7 +419,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     if (!starPower)
                     {
                          hasStarPower = StartCoroutine(StarPower());
-                    }                    
+                    }
                }
           }
      }
@@ -463,12 +484,13 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      public IEnumerator Invincible()
      {
           isBig = false;
+          fireFlower = false;
           float time = 0f;
           bool showSprite = false;
-          invincible = true;        
+          invincible = true;
 
           while (time < invincibilityTime)
-          {               
+          {
                GetComponent<SpriteRenderer>().enabled = showSprite;
                yield return new WaitForSeconds(flickerTime);
                showSprite = !showSprite;
@@ -476,7 +498,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           }
 
           GetComponent<SpriteRenderer>().enabled = true;
-          invincible = false; 
+          invincible = false;
      }
 
      public IEnumerator TurtleHitInvincibility()
@@ -503,7 +525,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                if (hitRay.collider.tag == "Goomba")
                {
                     hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
-               }   
+               }
                else if (hitRay.collider.tag == "Turtle")
                {
                     hitRay.collider.gameObject.GetComponent<TurtleController>().StarDeath();
@@ -511,14 +533,14 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           }
           else
           {
-               if(hitRay.collider.tag == "Turtle" && hitRay.collider.gameObject.GetComponent<TurtleController>().state == TurtleController.EnemyState.shellIdle)
-               {
+               if((hitRay.collider.tag == "Turtle" && hitRay.collider.gameObject.GetComponent<TurtleController>().state == TurtleController.EnemyState.shellIdle) ||
+                    (hitRay.collider.tag == "FlyingTurtle" && hitRay.collider.gameObject.GetComponent<FlyingTurtleController>().state == FlyingTurtleController.EnemyState.shellIdle))
+               {                    
                     invincible = true;
                     turtleInvincibility = StartCoroutine(TurtleHitInvincibility());
                     return;
                }
-
-               if (!invincible)
+               else if (!invincible)
                {
                     if (isBig)
                     {
@@ -586,4 +608,20 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
             networkPosition += (rb.velocity * lag);
         }
     }
+
+     public void ShootFireball()
+     {
+          nextFire = Time.time + 0.8f;
+          if (transform.localScale.x == -1f)
+          {
+               GameObject bullet = Instantiate(fireball, new Vector2(transform.localPosition.x - 0.15f, transform.localPosition.y), transform.rotation);
+               bullet.GetComponent<Rigidbody2D>().velocity = (new Vector2(-3f, -2.5f));
+               
+          }
+          else
+          {
+               GameObject bullet = Instantiate(fireball, new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y), transform.rotation);
+               bullet.GetComponent<Rigidbody2D>().velocity = (new Vector2(3f, -2.5f));
+          }
+     }
 }
