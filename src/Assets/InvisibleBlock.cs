@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Controls bounce of question mark block
-public class QuestionBlock : Photon.MonoBehaviour
-{
-    SpriteRenderer spriteRenderer;
+public class InvisibleBlock : Photon.MonoBehaviour
+{/*
     [SerializeField] SoundEffectsManager sfx;
     [SerializeField] AudioClip coinSfx;
     private bool canBounce = true;
@@ -21,7 +20,7 @@ public class QuestionBlock : Photon.MonoBehaviour
     void Start()
     {
         originalPos = transform.position;
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        this.spriteRenderer = GetComponent<SpriteRenderer>;
     }
 
     IEnumerator QuestionBlockBounce()
@@ -38,11 +37,9 @@ public class QuestionBlock : Photon.MonoBehaviour
 
     void ChangeSprite()
     {
-        GetComponent<Animator>().enabled = false;
-
-        if (spriteRenderer.enabled == false)
+        if(GetComponent<SpriteRenderer>().enabled == false)
         {
-            spriteRenderer.enabled = true;
+            GetComponent<SpriteRenderer>().enabled == true;
         }
 
         GetComponent<SpriteRenderer>().sprite = afterHitSprite;
@@ -58,9 +55,9 @@ public class QuestionBlock : Photon.MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(Globals.TwoPlayer)
+        if (Globals.TwoPlayer)
         {
-            photonView.RPC("HitInternal", PhotonTargets.All);   
+            photonView.RPC("HitInternal", PhotonTargets.All);
         }
         else
         {
@@ -83,7 +80,7 @@ public class QuestionBlock : Photon.MonoBehaviour
 
     IEnumerator MoveBlock()
     {
-        transform.position += Vector3.up * Time.deltaTime; //possibly change this to make it more dramatic
+        transform.position += Vector3.up * Time.deltaTime; 
         yield return new WaitForSeconds(0.1f);
         transform.position = originalPos;
     }
@@ -112,7 +109,7 @@ public class QuestionBlock : Photon.MonoBehaviour
             yield return null;
         }
     }
-
+    */
 }
 
 
