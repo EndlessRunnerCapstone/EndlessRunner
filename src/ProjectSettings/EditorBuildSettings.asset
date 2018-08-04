@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoadingScreen2.unity
     guid: b2239cadb1b2f4d4e86ae9dc7d28e9ee
+  - enabled: 1
+    path: Assets/Scenes/HighScores.unity
+    guid: 03465afe96c4a654b8ac5b0b719e5bac
   m_configObjects: {}
