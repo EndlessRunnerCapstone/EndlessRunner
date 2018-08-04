@@ -16,10 +16,7 @@ public class DeathArea : MonoBehaviour {
           }
           else if (collision.gameObject.tag == "Player")
           {
-              if (!Globals.TwoPlayer)
-              {
-                    StartCoroutine(collision.GetComponent<Player_Move>().Die());
-              }
+              StartCoroutine(collision.GetComponent<Player_Move>().Die());
           }
      }
 }
