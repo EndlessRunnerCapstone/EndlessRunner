@@ -16,6 +16,7 @@ TagManager:
   - DownPipe
   - MovingPlatform
   - Bowser
+  - BowserFire
   layers:
   - Default
   - TransparentFX
@@ -62,11 +63,11 @@ TagManager:
   - name: Player
     uniqueID: 2134992861
     locked: 0
-  - name: enemyLayer
-    uniqueID: 844142093
-    locked: 0
   - name: Foreground
     uniqueID: 659605839
+    locked: 0
+  - name: enemyLayer
+    uniqueID: 844142093
     locked: 0
   - name: UI
     uniqueID: 837880325

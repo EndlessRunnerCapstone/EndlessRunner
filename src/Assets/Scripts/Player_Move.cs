@@ -431,6 +431,10 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           {
                transform.parent = collision.transform;
           }
+          else if (collision.gameObject.tag == "Bowser")
+          {
+               HitByBowser();
+          }
      }
 
      private void CheckSideCollision()
@@ -660,5 +664,24 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           {
                transform.parent = null;
           }          
+     }
+
+     public void HitByBowser()
+     {
+          if (!invincible)
+          {
+               if (isBig)
+               {
+                    PlaySoundEffect(loseBigSound);
+                    StartCoroutine(Invincible());
+               }
+               else
+               {
+                    if (!isDead)
+                    {
+                         StartCoroutine(Die());
+                    }
+               }
+          }
      }
 }

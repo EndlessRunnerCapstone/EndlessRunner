@@ -7,7 +7,7 @@ public class DeathArea : MonoBehaviour {
 
      private void OnTriggerEnter2D(Collider2D collision)
      {
-          if (collision.gameObject.tag == "Enemy")
+          if (collision.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
           {
               if (!Globals.TwoPlayer)
               {
@@ -18,5 +18,6 @@ public class DeathArea : MonoBehaviour {
           {
               StartCoroutine(collision.GetComponent<Player_Move>().Die());
           }
+
      }
 }

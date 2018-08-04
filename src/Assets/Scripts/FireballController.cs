@@ -46,6 +46,11 @@ public class FireballController : MonoBehaviour {
                enemy.GetComponent<FlyingTurtleController>().StarDeath();
                StartCoroutine(Die());
           }
+          else if (enemy.tag == "Bowser")
+          {
+               enemy.GetComponent<BowserController>().health--;
+               StartCoroutine(Die());
+          }
      }
 
      private void OnCollisionEnter2D(Collision2D collision)
