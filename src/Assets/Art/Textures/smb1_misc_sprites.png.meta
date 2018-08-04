@@ -3,7 +3,7 @@ guid: 3bea37fdf12fdc442806c10bd279d897
 TextureImporter:
   fileIDToRecycleName:
     21300000: smb1_misc_sprites_0
-    21300002: smb1_misc_sprites_1
+    21300002: RaisedFlag
     21300004: smb1_misc_sprites_2
     21300006: smb1_misc_sprites_3
     21300008: smb1_misc_sprites_4
@@ -147,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb1_misc_sprites_1
+      name: RaisedFlag
       rect:
         serializedVersion: 2
         x: 389

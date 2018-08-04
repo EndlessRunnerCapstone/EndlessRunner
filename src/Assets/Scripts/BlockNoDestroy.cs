@@ -53,6 +53,8 @@ public class BlockNoDestroy : MonoBehaviour
                 CreateCoin();
                 sfx.PlaySoundEffect(coinSfx);
                 hitCount++;
+                ScoreKeeping.scoreValue += 200;
+                CoinTracker.coinValue += 1;
             }
             else if (hitCount >= 8)
             {

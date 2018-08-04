@@ -14,12 +14,12 @@ public class FlagFall : MonoBehaviour {
 		anim = GetComponent<Animator>();
 	}
 
-	IEnumerator OnCollisionEnter2D (Collision2D coll)
+	IEnumerator OnTriggerEnter2D (Collider2D coll)
 	{
 		if (coll.gameObject.tag == "Player") {
 			sfx.PlayEndMusic();
 			sfx.PlaySoundEffect(flagSound);
-			anim.Play("FlagFall");
+			anim.Play("Flag_Fall");
 		}
 
 		yield return null;

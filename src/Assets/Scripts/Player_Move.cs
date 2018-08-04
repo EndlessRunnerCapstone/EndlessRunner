@@ -181,9 +181,9 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                ShootFireball();
           }
 
-     }
+    }
 
-     private void FixedUpdate()
+    private void FixedUpdate()
      {
         if (Globals.TwoPlayer && !photonView.isMine)
         {
@@ -408,6 +408,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           {
                if (collision.gameObject.tag == "RedMushroom")
                {
+                   ScoreKeeping.scoreValue += 1000;
                    PlaySoundEffect(redMushroomSound);
                    isBig = true;
                    Destroy(collision.gameObject);
@@ -572,6 +573,12 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           myAnimator.SetBool("isDead", false);
           myAnimator.SetBool("starPower", false);
           rb.gravityScale = 2;
+
+          // Reset UI
+          TimeKeeping.timeValue = 400;
+          ScoreKeeping.scoreValue = 0;
+          CoinTracker.coinValue = 0;
+
         if (SceneManager.GetActiveScene().name == "Level01")
         {
             SceneManager.LoadScene("Level01");

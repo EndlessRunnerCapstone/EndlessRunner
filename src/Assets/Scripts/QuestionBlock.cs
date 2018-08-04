@@ -77,6 +77,8 @@ public class QuestionBlock : Photon.MonoBehaviour
             ChangeSprite();
             CreateCoin();
             sfx.PlaySoundEffect(coinSfx);
+            ScoreKeeping.scoreValue += 200;
+            CoinTracker.coinValue += 1;
             hitCount++;
         }
     }
