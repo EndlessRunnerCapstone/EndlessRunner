@@ -8,14 +8,11 @@ public class BrickDestroy : Photon.MonoBehaviour
     [SerializeField] SoundEffectsManager sfx;
     [SerializeField] AudioClip breakSound;
     public Sprite destroyedSprite;
-   // Animator anim;
-
 
     // Use this for initialization
     void Start()
     {
-        //anim = GetComponent<Animator>();
-        //anim.enabled = false;
+
     }
 
     void OnTriggerEnter2D(Collider2D coll)

@@ -29,6 +29,7 @@ TextureImporter:
     21300048: Scenery_9
     21300050: Scenery_10
     21300052: Scenery_11
+    21300054: Scenery_12
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -657,13 +658,33 @@ TextureImporter:
         width: 32
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: a72bb064728018541a04c8e30a8a03c3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scenery_12
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 561
+        width: 28
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e361ae3554b7f74fb009d1c35d4ca13
       vertices: []
       indices: 
       edges: []
