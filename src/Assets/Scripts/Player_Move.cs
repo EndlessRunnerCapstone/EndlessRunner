@@ -373,7 +373,12 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           }
           else
           {
-               isGrounded = false;
+               if (transform.parent != null)
+               {
+                    jumpTimeCounter = jumpTime;
+                    noMoreJumping = false;
+                    isGrounded = true;
+               }               
           }
      }
 
@@ -422,6 +427,11 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                          hasStarPower = StartCoroutine(StarPower());
                     }
                }
+          }
+
+          if (collision.gameObject.tag == "MovingPlatform")
+          {
+               transform.parent = collision.transform;
           }
      }
 
@@ -561,6 +571,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
      public IEnumerator Die()
      {
+          DontDestroyOnLoad(this.gameObject);
           StopAllAudio();
           PlaySoundEffect(gameOverSound);
           rb.gravityScale = 0.9f;
@@ -647,5 +658,13 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                GameObject bullet = Instantiate(fireball, new Vector2(transform.localPosition.x + 0.15f, transform.localPosition.y), transform.rotation);
                bullet.GetComponent<Rigidbody2D>().velocity = (new Vector2(3f, -2.5f));
           }
+     }
+
+     private void OnCollisionExit2D(Collision2D collision)
+     {
+          if (collision.gameObject.tag == "MovingPlatform")
+          {
+               transform.parent = null;
+          }          
      }
 }
