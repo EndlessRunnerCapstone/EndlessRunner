@@ -24,6 +24,7 @@ public class SoundEffectsManager : MonoBehaviour
     public void PlayEndMusic()
     {
         levelMusic.Stop();
+        undergroundMusic.Stop();
         PlaySoundEffect(stageClear);
     }
 
@@ -33,4 +34,9 @@ public class SoundEffectsManager : MonoBehaviour
         undergroundMusic.Play();
     }
 
+    public void PlayOWMusic()
+    {
+        undergroundMusic.Stop();
+        levelMusic.Play();
+    }
 }

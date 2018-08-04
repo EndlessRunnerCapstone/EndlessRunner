@@ -23,25 +23,26 @@ public class Fireworks : MonoBehaviour {
 		if(coll.gameObject.tag == "Player")
 		{
 			anim.Play("FlagRaise");
+            anim.Play("FlagRaise_Level2");
 			sfx.PlaySoundEffect(fireworksSound);
 			fireworks.Play("Fireworks");
-			yield return new WaitForSeconds(0.07f);
+			yield return new WaitForSeconds(0.9f);
 			fireworks.gameObject.SetActive(false);
 			sfx.PlaySoundEffect(fireworksSound);
 			fireworks2.Play("Fireworks");
-			yield return new WaitForSeconds(0.07f);
+			yield return new WaitForSeconds(0.9f);
 			fireworks2.gameObject.SetActive(false);
 			sfx.PlaySoundEffect(fireworksSound);
 			fireworks3.Play("Fireworks");
-			yield return new WaitForSeconds(0.07f);
+			yield return new WaitForSeconds(0.9f);
 			fireworks3.gameObject.SetActive(false);
 			sfx.PlaySoundEffect(fireworksSound);
 			fireworks4.Play("Fireworks");
-			yield return new WaitForSeconds(0.07f);
+			yield return new WaitForSeconds(0.9f);
 			fireworks4.gameObject.SetActive(false);
 			sfx.PlaySoundEffect(fireworksSound);
 			fireworks5.Play("Fireworks");
-			yield return new WaitForSeconds(0.07f);
+			yield return new WaitForSeconds(0.9f);
 			fireworks5.gameObject.SetActive(false);
 		}
 		yield return null;
