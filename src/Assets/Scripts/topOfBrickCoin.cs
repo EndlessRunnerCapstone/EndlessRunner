@@ -13,6 +13,8 @@ public class topOfBrickCoin : MonoBehaviour {
         {
             sfx.PlaySoundEffect(coinSfx);
             Destroy(gameObject);
+            ScoreKeeping.scoreValue += 200;
+            CoinTracker.coinValue += 1;
         }
     }
     

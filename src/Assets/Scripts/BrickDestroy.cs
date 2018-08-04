@@ -39,6 +39,7 @@ public class BrickDestroy : Photon.MonoBehaviour
     {
         sfx.PlaySoundEffect(breakSound);
         Destroy(gameObject);
+        ScoreKeeping.scoreValue += 50;
     }
 
 }

@@ -127,6 +127,7 @@ public class GoombaController : Photon.MonoBehaviour {
      {
         Debug.Log(info.sender);
 
+        ScoreKeeping.scoreValue += 100;
         audioSource.PlayOneShot(squishSound);
         state = EnemyState.dead;
         GetComponent<Rigidbody2D>().gravityScale = 0;
