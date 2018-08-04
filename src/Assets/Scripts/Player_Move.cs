@@ -88,8 +88,6 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
         {
             LocalPlayerInstance = this.gameObject;
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public void ResetMario()
@@ -571,7 +569,6 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
      public IEnumerator Die()
      {
-          DontDestroyOnLoad(this.gameObject);
           StopAllAudio();
           PlaySoundEffect(gameOverSound);
           rb.gravityScale = 0.9f;
@@ -590,24 +587,21 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           ScoreKeeping.scoreValue = 0;
           CoinTracker.coinValue = 0;
 
-        if (SceneManager.GetActiveScene().name == "Level01")
+        if (!Globals.TwoPlayer)
         {
-            SceneManager.LoadScene("Level01");
-        }
-        else if (SceneManager.GetActiveScene().name == "Level02")
-        {
-            SceneManager.LoadScene("Level02");
-        }
-        else if (SceneManager.GetActiveScene().name == "Level03")
-        {
-            SceneManager.LoadScene("Level03");
-        }
-        else if (SceneManager.GetActiveScene().name == "Level04")
-        {
-            SceneManager.LoadScene("Level04");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
-            Debug.Log("Issue with player death level loading.");
+        {
+            NetworkedDeath();
+        }
+    }
+
+    [PunRPC]
+    void NetworkedDeath()
+    {
+        photonView.RPC("NetworkedDeath", PhotonTargets.Others);
+        PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().name);
     }
 
      private IEnumerator StarPower()
