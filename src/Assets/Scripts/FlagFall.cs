@@ -20,6 +20,8 @@ public class FlagFall : MonoBehaviour {
 			sfx.PlayEndMusic();
 			sfx.PlaySoundEffect(flagSound);
 			anim.Play("Flag_Fall");
+            anim.Play("FlagFall_Level3");
+            anim.Play("FlagFall_Level1");
 		}
 
 		yield return null;
