@@ -14,6 +14,7 @@ TagManager:
   - FlyingTurtle
   - FireFlower
   - DownPipe
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
