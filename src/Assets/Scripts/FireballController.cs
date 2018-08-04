@@ -68,7 +68,6 @@ public class FireballController : MonoBehaviour {
                     StartCoroutine(Die());
                }
           }
-
      }
 
      private IEnumerator Die()

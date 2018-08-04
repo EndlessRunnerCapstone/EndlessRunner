@@ -14,7 +14,10 @@ public class BowserController : MonoBehaviour {
      private bool shouldDie;
      private Coroutine jumpingCoroutine;
      private Coroutine shootingFire;
+     private Coroutine movingCoroutine;
      [SerializeField] private GameObject fireball;
+     private bool movingLeft, movingRight;
+     private Animator myAnimator;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +29,7 @@ public class BowserController : MonoBehaviour {
           isJumping = false;
           health = 8;
           shouldDie = false;
+          myAnimator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +37,18 @@ public class BowserController : MonoBehaviour {
           if (!shouldDie)
           {
                DeathCheck();
+               if (movingLeft == true)
+               {
+                    rb.velocity = new Vector2(-0.4f, rb.velocity.y);
+
+               }
+               else if (movingRight == true)
+               {
+                    rb.velocity = new Vector2(0.4f, rb.velocity.y);
+               }
+               Vector2 clampedPosition = transform.position;
+               clampedPosition.x = Mathf.Clamp(transform.position.x, 15, 17.7f);
+               transform.position = clampedPosition;
           }
 
           if (jumpingCoroutine == null)
@@ -43,6 +59,11 @@ public class BowserController : MonoBehaviour {
           if (shootingFire == null)
           {
                shootingFire = StartCoroutine(Fireballs());
+          }
+
+          if (movingCoroutine == null)
+          {
+               movingCoroutine = StartCoroutine(RandomMovement());
           }
      }
 
@@ -66,6 +87,34 @@ public class BowserController : MonoBehaviour {
                {
                     Jump();
                }             
+          }
+     }
+
+     private IEnumerator RandomMovement()
+     {
+          float minWaitTime = 2.0f;
+          float maxWaitTime = 4.0f;
+          int moveDirection;
+
+          while (true)
+          {
+               moveDirection = Random.Range(0, 2);
+               myAnimator.SetBool("isMoving", true);
+               if (moveDirection == 0)
+               {
+                    movingLeft = true;                    
+                    yield return new WaitForSeconds(1.2f);
+                    movingLeft = false;                    
+               }
+               else
+               {
+                    movingRight = true;
+                    yield return new WaitForSeconds(1.2f);
+                    movingRight = false;
+               }
+               myAnimator.SetBool("isMoving", false);
+
+               yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
           }
      }
 
