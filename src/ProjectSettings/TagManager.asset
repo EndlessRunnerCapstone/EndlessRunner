@@ -15,6 +15,7 @@ TagManager:
   - FireFlower
   - DownPipe
   - MovingPlatform
+  - Bowser
   layers:
   - Default
   - TransparentFX
