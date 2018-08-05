@@ -3364,6 +3364,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4623927462554044, guid: f04025bcee6ead34babb7f74530e3284,
     type: 2}
   m_PrefabInternal: {fileID: 344197639}
+--- !u!1 &346874839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1147110810918244, guid: e046a310ff94a94409cb429dd79e92a6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1733176697}
+--- !u!251 &346874842
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 346874839}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &352138783
 Prefab:
   m_ObjectHideFlags: 0
@@ -3980,6 +4003,11 @@ Prefab:
         type: 2}
       propertyPath: m_Text
       value: 1-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224453232477786328, guid: f82ca56a8aaf350408ce519fbee0f3d7,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -62.900024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f82ca56a8aaf350408ce519fbee0f3d7, type: 2}
@@ -4789,6 +4817,7 @@ GameObject:
   - component: {fileID: 448225224}
   - component: {fileID: 448225226}
   - component: {fileID: 448225227}
+  - component: {fileID: 448225228}
   m_Layer: 0
   m_Name: BigL_Pipe
   m_TagString: Untagged
@@ -4878,7 +4907,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: -0.09054607, y: -0.48396802}
   m_SpriteTilingProperty:
@@ -4893,6 +4922,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33375764, y: 0.21290922}
   m_EdgeRadius: 0
+--- !u!251 &448225228
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 448225223}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &450418885
 Prefab:
   m_ObjectHideFlags: 0
@@ -5582,10 +5629,11 @@ GameObject:
   m_Component:
   - component: {fileID: 550509160}
   - component: {fileID: 550509162}
+  - component: {fileID: 550509163}
   - component: {fileID: 550509161}
   m_Layer: 9
   m_Name: Moving_Platform (2)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5674,6 +5722,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &550509163
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 550509159}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &558675089
 Prefab:
   m_ObjectHideFlags: 0
@@ -6360,11 +6426,12 @@ GameObject:
   m_Component:
   - component: {fileID: 607899896}
   - component: {fileID: 607899895}
-  - component: {fileID: 607899894}
   - component: {fileID: 607899893}
+  - component: {fileID: 607899897}
+  - component: {fileID: 607899894}
   m_Layer: 9
   m_Name: Moving_Platform (1)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6475,6 +6542,24 @@ Transform:
   m_Father: {fileID: 1575001565}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!251 &607899897
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 607899892}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &618618928
 Prefab:
   m_ObjectHideFlags: 0
@@ -6717,7 +6802,7 @@ GameObject:
   - component: {fileID: 624899394}
   m_Layer: 9
   m_Name: Moving_Platform (1)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7719,10 +7804,11 @@ GameObject:
   m_Component:
   - component: {fileID: 711037928}
   - component: {fileID: 711037930}
+  - component: {fileID: 711037931}
   - component: {fileID: 711037929}
   m_Layer: 9
   m_Name: Moving_Platform (3)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7811,6 +7897,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &711037931
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 711037927}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &732519309
 Prefab:
   m_ObjectHideFlags: 0
@@ -7917,6 +8021,11 @@ Prefab:
     - target: {fileID: 1408821537730428, guid: ef4a6828ffb43bd4f98b96b329fa6465, type: 2}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 61942651366122274, guid: ef4a6828ffb43bd4f98b96b329fa6465,
+        type: 2}
+      propertyPath: m_UsedByEffector
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4a6828ffb43bd4f98b96b329fa6465, type: 2}
@@ -26542,7 +26651,7 @@ GameObject:
   - component: {fileID: 896897490}
   m_Layer: 9
   m_Name: Moving_Platform (3)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26875,10 +26984,11 @@ GameObject:
   m_Component:
   - component: {fileID: 940116003}
   - component: {fileID: 940116005}
+  - component: {fileID: 940116006}
   - component: {fileID: 940116004}
   m_Layer: 9
   m_Name: Moving_Platform (4)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26967,6 +27077,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &940116006
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 940116002}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &953515410
 Prefab:
   m_ObjectHideFlags: 0
@@ -30445,11 +30573,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1330224749}
   - component: {fileID: 1330224748}
-  - component: {fileID: 1330224747}
   - component: {fileID: 1330224750}
+  - component: {fileID: 1330224751}
+  - component: {fileID: 1330224747}
   m_Layer: 9
   m_Name: MovingPlatform
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30560,6 +30689,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!251 &1330224751
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1330224746}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &1335213809
 Prefab:
   m_ObjectHideFlags: 0
@@ -31088,7 +31235,7 @@ GameObject:
   - component: {fileID: 1393613778}
   m_Layer: 9
   m_Name: Moving_Platform (4)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31118,7 +31265,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0019226074, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -31129,7 +31276,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4978485, y: 0.07}
+  m_Size: {x: 0.48, y: 0.07}
   m_EdgeRadius: 0
 --- !u!212 &1393613779
 SpriteRenderer:
@@ -31913,6 +32060,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4623927462554044, guid: f04025bcee6ead34babb7f74530e3284,
     type: 2}
   m_PrefabInternal: {fileID: 1458287704}
+--- !u!1 &1466036842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1597253303414592, guid: 1e10e50fb6fa5814098846eb2278c1a1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1764873764}
+--- !u!251 &1466036845
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1466036842}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &1479407823
 Prefab:
   m_ObjectHideFlags: 0
@@ -33597,7 +33767,7 @@ GameObject:
   - component: {fileID: 1601823277}
   m_Layer: 9
   m_Name: Moving_Platform (2)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35071,6 +35241,11 @@ Prefab:
       propertyPath: m_Size.y
       value: 0.47170806
       objectReference: {fileID: 0}
+    - target: {fileID: 61794328994740670, guid: e046a310ff94a94409cb429dd79e92a6,
+        type: 2}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e046a310ff94a94409cb429dd79e92a6, type: 2}
   m_IsPrefabAsset: 0
@@ -35470,6 +35645,11 @@ Prefab:
     - target: {fileID: 1597253303414592, guid: 1e10e50fb6fa5814098846eb2278c1a1, type: 2}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 61001512152903812, guid: 1e10e50fb6fa5814098846eb2278c1a1,
+        type: 2}
+      propertyPath: m_UsedByEffector
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e10e50fb6fa5814098846eb2278c1a1, type: 2}
@@ -36814,6 +36994,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4623927462554044, guid: f04025bcee6ead34babb7f74530e3284,
     type: 2}
   m_PrefabInternal: {fileID: 1907050000}
+--- !u!1 &1910246433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1408821537730428, guid: ef4a6828ffb43bd4f98b96b329fa6465,
+    type: 2}
+  m_PrefabInternal: {fileID: 736187369}
+--- !u!251 &1910246436
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1910246433}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1916782911
 GameObject:
   m_ObjectHideFlags: 0
@@ -36823,10 +37026,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1916782912}
   - component: {fileID: 1916782914}
+  - component: {fileID: 1916782915}
   - component: {fileID: 1916782913}
   m_Layer: 9
   m_Name: Moving_Platform (1)
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36915,6 +37119,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &1916782915
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1916782911}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &1924467760
 Prefab:
   m_ObjectHideFlags: 0
