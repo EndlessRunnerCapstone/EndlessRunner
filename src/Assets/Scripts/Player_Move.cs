@@ -50,6 +50,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      float invincibilityTime = 2f;
      float flickerTime = 0.1f;
      private bool starPower;
+     float currentTime;
 
      //Death
      private bool isDead;
@@ -59,7 +60,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      //Fireball
      public GameObject fireball;
      private float nextFire = -1f;
-    
+
 
     //Network
     private Vector2 networkPosition;
@@ -131,6 +132,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           myAnimator = GetComponent<Animator>();
           fallMultiplier = 1.5f;
           PlayerState = 0; // indicates base state of player
+          currentTime = -1;
      }
 
      // Update is called once per frame
@@ -179,6 +181,11 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           if (Input.GetKeyDown(KeyCode.W) && Time.time > nextFire && fireFlower)
           {
                ShootFireball();
+          }
+
+          if (currentTime + 0.2f < Time.time)
+          {
+               invincible = false;
           }
 
     }
@@ -378,7 +385,11 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     jumpTimeCounter = jumpTime;
                     noMoreJumping = false;
                     isGrounded = true;
-               }               
+               }
+               else
+               {
+                    isGrounded = false;
+               }
           }
      }
 
@@ -446,12 +457,12 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           RaycastHit2D hitRay, upLeft, midLeft, botLeft, upRight, midRight, botRight;
           if (!isBig)
           {
-               upLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y + 0.06f), Vector2.left, 0.04f, floorMask);
-               midLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y), Vector2.left, 0.04f, floorMask);
-               botLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y - 0.06f), Vector2.left, 0.04f, floorMask);
-               upRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y + 0.06f), Vector2.right, 0.04f, floorMask);
-               midRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y), Vector2.right, 0.04f, floorMask);
-               botRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y - 0.06f), Vector2.right, 0.04f, floorMask);
+               upLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y + 0.06f), Vector2.left, 0.05f, floorMask);
+               midLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y), Vector2.left, 0.05f, floorMask);
+               botLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y - 0.06f), Vector2.left, 0.05f, floorMask);
+               upRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y + 0.06f), Vector2.right, 0.05f, floorMask);
+               midRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y), Vector2.right, 0.05f, floorMask);
+               botRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y - 0.06f), Vector2.right, 0.05f, floorMask);
           }
           else
           {
@@ -518,17 +529,6 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           invincible = false;
      }
 
-     public IEnumerator TurtleHitInvincibility()
-     {
-          if (turtleInvincibility != null)
-          {
-               StopCoroutine(turtleInvincibility);
-          }
-          invincible = true;
-          yield return new WaitForSeconds(0.2f);
-          invincible = false;
-     }
-
      void OnEnemyHit(RaycastHit2D hitRay)
      {
           //TODO: Multiplayer
@@ -552,10 +552,10 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           {
                if((hitRay.collider.tag == "Turtle" && hitRay.collider.gameObject.GetComponent<TurtleController>().state == TurtleController.EnemyState.shellIdle) ||
                     (hitRay.collider.tag == "FlyingTurtle" && hitRay.collider.gameObject.GetComponent<FlyingTurtleController>().state == FlyingTurtleController.EnemyState.shellIdle))
-               {                    
+               {
                     invincible = true;
-                    turtleInvincibility = StartCoroutine(TurtleHitInvincibility());
-                    return;
+                    currentTime = Time.time;
+
                }
                else if (!invincible)
                {
@@ -654,7 +654,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           {
                GameObject bullet = Instantiate(fireball, new Vector2(transform.localPosition.x - 0.15f, transform.localPosition.y), transform.rotation);
                bullet.GetComponent<Rigidbody2D>().velocity = (new Vector2(-3f, -2.5f));
-               
+
           }
           else
           {
@@ -668,7 +668,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           if (collision.gameObject.tag == "MovingPlatform")
           {
                transform.parent = null;
-          }          
+          }
      }
 
      public void HitByBowser()

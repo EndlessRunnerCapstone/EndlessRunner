@@ -145,8 +145,8 @@ public class FlyingTurtleController : MonoBehaviour
      void CheckWallCollisionIdleShell()
      {
           RaycastHit2D leftCollision, rightCollision;
-          leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, playerLayer);
-          rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, playerLayer);          
+          leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.097f, playerLayer);
+          rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.097f, playerLayer);          
           if (leftCollision.collider != null || rightCollision.collider != null)
           {
                if (leftCollision.collider != null)

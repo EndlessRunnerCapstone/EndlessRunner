@@ -48,8 +48,13 @@ public class TurtleController : MonoBehaviour
      void Update()
      {          
           UpdateEnemyPosition();
-          CheckAbove();
+          
+          //checkDeath();
+     }
 
+     private void LateUpdate()
+     {
+          CheckAbove();
           if (state == EnemyState.walking)
           {
                CheckWallCollisionWalking();
@@ -62,7 +67,6 @@ public class TurtleController : MonoBehaviour
           {
                CheckWallCollisionMovingShell();
           }
-          //checkDeath();
      }
 
 
@@ -119,8 +123,8 @@ public class TurtleController : MonoBehaviour
      void CheckWallCollisionIdleShell()
      {
           RaycastHit2D leftCollision, rightCollision;
-          leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, playerLayer);
-          rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, playerLayer);          
+          leftCollision = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.02f), Vector2.left, 0.097f, playerLayer);
+          rightCollision = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.02f), Vector2.right, 0.097f, playerLayer);          
           if (leftCollision.collider != null || rightCollision.collider != null)
           {
                if (leftCollision.collider != null)
