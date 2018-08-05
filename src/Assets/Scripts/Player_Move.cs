@@ -67,6 +67,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     private Vector2 networkPosition;
     private float networkRotation;
 
+    private bool networkSet = false;
+
     public void PlaySoundEffect(AudioClip sfx)
     {
         sfxPlayer.PlayOneShot(sfx);
@@ -193,7 +195,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
     private void FixedUpdate()
      {
-        if (Globals.TwoPlayer && !photonView.isMine)
+        if (Globals.TwoPlayer && !photonView.isMine && networkSet)
         {
             rb.position = Vector2.MoveTowards(rb.position, networkPosition, Time.fixedDeltaTime);
         }
@@ -654,6 +656,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
             float lag = Mathf.Abs((float)(PhotonNetwork.time - info.timestamp));
             networkPosition += (rb.velocity * lag);
+            networkSet = true;
         }
     }
 

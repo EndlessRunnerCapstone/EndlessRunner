@@ -18,7 +18,7 @@ public class GameManager : Photon.PunBehaviour {
     void Start ()
     {
 
-        var masterPosition = new Vector3 { x = -7.85f, y = -4.719f, z = 0 };
+        var masterPosition = new Vector3 { x = -7.75f, y = -4.719f, z = 0 };
 
         var secondPosition = new Vector3 { x = -8.15f, y = -4.719f, z = 0 };
 
