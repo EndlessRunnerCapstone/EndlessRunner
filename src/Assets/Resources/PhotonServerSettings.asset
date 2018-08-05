@@ -47,4 +47,6 @@ MonoBehaviour:
   - HitInternal
   - DestroyInternal
   - NetworkedDeath
+  - ReloadInternal
+  - SetDead
   DisableAutoOpenWizard: 1

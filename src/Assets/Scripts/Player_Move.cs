@@ -68,6 +68,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     private float networkRotation;
 
     private bool networkSet = false;
+    private bool peerReadyToReload = false;
+    private bool readyToReload = false;
 
     public void PlaySoundEffect(AudioClip sfx)
     {
@@ -543,8 +545,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
      void OnEnemyHit(RaycastHit2D hitRay)
      {
-          //TODO: Multiplayer
-          if(Globals.TwoPlayer)
+          if(Globals.TwoPlayer && !photonView.isMine)
           {
               return;
           }
@@ -623,18 +624,11 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
         }
         else
         {
-            NetworkedDeath();
+            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().ReloadScene(SceneManager.GetActiveScene().name);
         }
     }
 
-    [PunRPC]
-    void NetworkedDeath()
-    {
-        photonView.RPC("NetworkedDeath", PhotonTargets.Others);
-        PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().name);
-    }
-
-     private IEnumerator StarPower()
+    private IEnumerator StarPower()
      {
           starPower = true;
           myAnimator.SetBool("starPower", true);
@@ -656,12 +650,14 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
             stream.SendNext(rb.position);
             stream.SendNext(rb.rotation);
             stream.SendNext(rb.velocity);
+            stream.SendNext(readyToReload);
         }
         else
         {
             networkPosition = (Vector2)stream.ReceiveNext();
             networkRotation = (float)stream.ReceiveNext();
             rb.velocity = (Vector2)stream.ReceiveNext();
+            peerReadyToReload = (bool)stream.ReceiveNext();
 
             float lag = Mathf.Abs((float)(PhotonNetwork.time - info.timestamp));
             networkPosition += (rb.velocity * lag);
