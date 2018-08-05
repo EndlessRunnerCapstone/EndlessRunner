@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+///  This class controls what scene is loaded based on what loading screen we are on
+/// </summary>
+
 public class LoadingScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
- 
         StartCoroutine(LoadTime());
-
     }
 	
     IEnumerator LoadTime()
     {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(3); // wait a few seconds to show screen before loading
 
         if (SceneManager.GetActiveScene().name == "LoadingScreen1")
         {

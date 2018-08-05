@@ -8,10 +8,8 @@ using UnityEngine;
 public class BlockNoDestroy : MonoBehaviour
 {
 
-    [SerializeField]
-    SoundEffectsManager sfx;
-    [SerializeField]
-    AudioClip coinSfx;
+    [SerializeField] SoundEffectsManager sfx;
+    [SerializeField] AudioClip coinSfx;
     private int hitCount = 0; //can be used to limit hits
     Vector3 originalPos;
     public Sprite afterHitSprite;
@@ -33,10 +31,17 @@ public class BlockNoDestroy : MonoBehaviour
 
     void CreateCoin()
     {
+        // Instantiate a prefab object with the spinning coin animation on it
         GameObject spinningCoin = (GameObject)Instantiate(Resources.Load("Prefabs/SpinningCoin", typeof(GameObject)));
-        spinningCoin.transform.SetParent(this.transform.parent);
+
+        //set as a child to this object
+        spinningCoin.transform.SetParent(this.transform.parent); 
+
+        // set the spinningCoin object to just above the parent object
         spinningCoin.transform.position = new Vector3(originalPos.x, originalPos.y + 0.5f, originalPos.z);
-        StartCoroutine(MoveCoin(spinningCoin));
+
+        // move the coin!
+        StartCoroutine(MoveCoin(spinningCoin)); 
     }
 
 
@@ -44,18 +49,24 @@ public class BlockNoDestroy : MonoBehaviour
     {
         if (coll.gameObject.tag == "Player")
         {
-
             if (hitCount < 8)
             {
-                transform.position += Vector3.up * Time.deltaTime; //possibly change this to make it more dramatic
+                // bounce block up and down
+                transform.position += Vector3.up * Time.deltaTime; 
                 yield return new WaitForSeconds(0.1f);
                 transform.position = originalPos;
+
+                // create coin, play sound effect, increment hit counter
                 CreateCoin();
                 sfx.PlaySoundEffect(coinSfx);
                 hitCount++;
+
+                // add scores
                 ScoreKeeping.scoreValue += 200;
                 CoinTracker.coinValue += 1;
             }
+
+            // if hit count has maxed out, change sprite to "after hit sprite"
             else if (hitCount >= 8)
             {
                 ChangeSprite();
@@ -64,6 +75,7 @@ public class BlockNoDestroy : MonoBehaviour
 
     }
 
+    // This function moves the coin up to a specified height and back down to original location
     IEnumerator MoveCoin(GameObject coin)
     {
         while (true)
@@ -81,7 +93,7 @@ public class BlockNoDestroy : MonoBehaviour
             coin.transform.position = new Vector3(coin.transform.position.x, coin.transform.position.y - coinMoveSpeed * Time.deltaTime);
             if (coin.transform.position.y <= originalPos.y + coinFallDistance - 2f)
             {
-                Destroy(coin.gameObject);
+                Destroy(coin.gameObject); // destroy object once it's in the original position
                 break;
             }
 

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class is used for bricks that can be destroyed. They disappear when hit by player
+/// </summary>
 public class BrickDestroy : Photon.MonoBehaviour
 {
 

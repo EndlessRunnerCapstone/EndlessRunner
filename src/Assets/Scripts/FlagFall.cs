@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This function is used for the flag that falls down the flagpole at the end of the scene.
+/// It plays a sound effect, intiates the animation, and sets bool canPlay to false so it only does so once.
+/// </summary>
+
 public class FlagFall : MonoBehaviour {
 
 	[SerializeField] SoundEffectsManager sfx;
 	[SerializeField] AudioClip flagSound;
     private bool canPlay = true;
-
 	public Animator anim;
 
 	// Use this for initialization

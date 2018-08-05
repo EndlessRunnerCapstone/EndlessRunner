@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class is used to start the level 2 music
+/// </summary>
 public class Level2Music : MonoBehaviour {
 
     [SerializeField] SoundEffectsManager MusicManager;
