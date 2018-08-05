@@ -352,8 +352,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     noMoreJumping = false;
                     isGrounded = true;
                }
-
-               if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
+               else if (hitRay.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
                {
                     if (starPower)
                     {
@@ -436,8 +435,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                    Destroy(collision.gameObject);
                    PlayerState = 1;
                }
-
-               if (collision.gameObject.tag == "Star")
+               else if (collision.gameObject.tag == "Star")
                {
                     Destroy(collision.gameObject);
                     if (!starPower)
@@ -446,11 +444,19 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                          PlaySoundEffect(powerUpSound);
                     }
                }
+               else if (collision.gameObject.tag == "LifeMushroom") {
+                    Globals.PlayerOne.NumberOfLives++;
+                    Globals.PlayerTwo.NumberOfLives++;
+                    PlaySoundEffect(powerUpSound);
+                    Destroy(collision.gameObject);
+               }
           }
 
           if (collision.gameObject.tag == "MovingPlatform")
           {
-               transform.parent = collision.transform;
+               {
+                    transform.parent = collision.transform;
+               }
           }
           else if (collision.gameObject.tag == "Bowser")
           {
@@ -602,6 +608,9 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           myAnimator.SetBool("isDead", false);
           myAnimator.SetBool("starPower", false);
           rb.gravityScale = 2;
+          Globals.PlayerTwo.NumberOfLives--;
+          Globals.PlayerOne.NumberOfLives--;
+
 
           // Reset UI
           TimeKeeping.timeValue = 400;
