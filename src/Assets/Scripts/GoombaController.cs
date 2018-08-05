@@ -20,7 +20,7 @@ public class GoombaController : Photon.MonoBehaviour {
      private float deathTimer = 0;
      public float timeBeforeDestroy = 1.0f;
 
-     private enum EnemyState
+     public enum EnemyState
      {
           walking,           
           dead
@@ -140,6 +140,24 @@ public class GoombaController : Photon.MonoBehaviour {
     private void SetEnabled()
     {
         enabled = true;
+    }
+
+    public void Stop()
+    {
+        if(PhotonNetwork.isMasterClient)
+        {
+            SetDead();
+        }
+        else
+        {
+            photonView.RPC("SetDead", PhotonTargets.MasterClient);
+        }
+    }
+
+    [PunRPC]
+    private void SetDead()
+    {
+        state = EnemyState.walking;
     }
 
      public void StarDeath()

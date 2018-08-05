@@ -18,6 +18,7 @@ TagManager:
   - Bowser
   - BowserFire
   - LifeMushroom
+  - GameManager
   layers:
   - Default
   - TransparentFX

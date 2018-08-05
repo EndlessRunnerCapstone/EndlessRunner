@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Photon.PunBehaviour {
 
@@ -17,7 +18,6 @@ public class GameManager : Photon.PunBehaviour {
     // Use this for initialization
     void Start ()
     {
-
         var masterPosition = new Vector3 { x = -7.75f, y = -4.719f, z = 0 };
 
         var secondPosition = new Vector3 { x = -8.15f, y = -4.719f, z = 0 };
@@ -66,9 +66,32 @@ public class GameManager : Photon.PunBehaviour {
         }
 		
 	}
+
+    public void ReloadScene(string sceneName)
+    {
+        photonView.RPC("ReloadInternal", PhotonTargets.AllBufferedViaServer, sceneName);
+    }
+
+    [PunRPC]
+    void ReloadInternal(string sceneName)
+    {
+        PhotonNetwork.LoadLevel(sceneName);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!Globals.TwoPlayer)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+            else
+            {
+                PhotonNetwork.Disconnect();
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
+
+    }
 }
