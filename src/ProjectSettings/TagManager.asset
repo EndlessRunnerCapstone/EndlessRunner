@@ -17,6 +17,7 @@ TagManager:
   - MovingPlatform
   - Bowser
   - BowserFire
+  - LifeMushroom
   layers:
   - Default
   - TransparentFX
