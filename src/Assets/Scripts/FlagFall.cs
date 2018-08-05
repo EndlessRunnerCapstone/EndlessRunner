@@ -6,6 +6,7 @@ public class FlagFall : MonoBehaviour {
 
 	[SerializeField] SoundEffectsManager sfx;
 	[SerializeField] AudioClip flagSound;
+    private bool canPlay = true;
 
 	public Animator anim;
 
@@ -17,11 +18,16 @@ public class FlagFall : MonoBehaviour {
 	IEnumerator OnTriggerEnter2D (Collider2D coll)
 	{
 		if (coll.gameObject.tag == "Player") {
-			sfx.PlayEndMusic();
-			sfx.PlaySoundEffect(flagSound);
-			anim.Play("Flag_Fall");
-            anim.Play("FlagFall_Level3");
-            anim.Play("FlagFall_Level1");
+            if (canPlay)
+            {
+                sfx.PlayEndMusic();
+                sfx.PlaySoundEffect(flagSound);
+                anim.Play("Flag_Fall");
+                anim.Play("FlagFall_Level3");
+                anim.Play("FlagFall_Level1");
+                canPlay = false;
+            }
+			
 		}
 
 		yield return null;
