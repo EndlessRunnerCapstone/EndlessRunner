@@ -7,7 +7,7 @@ public class BrickDestroy : Photon.MonoBehaviour
 
     [SerializeField] SoundEffectsManager sfx;
     [SerializeField] AudioClip breakSound;
-    public Sprite destroyedSprite;
+    public Sprite destroyedSprite;     
 
     // Use this for initialization
     void Start()
@@ -21,6 +21,8 @@ public class BrickDestroy : Photon.MonoBehaviour
         {
             return;
         }
+
+          coll.gameObject.GetComponent<Player_Move>().jumpTimeCounter = 0;
 
         if (Globals.TwoPlayer)
         {
@@ -40,6 +42,7 @@ public class BrickDestroy : Photon.MonoBehaviour
         sfx.PlaySoundEffect(breakSound);
         Destroy(gameObject);
         ScoreKeeping.scoreValue += 50;
+
     }
 
 }

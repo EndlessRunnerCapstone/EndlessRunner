@@ -29,7 +29,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      //jumping variables
      private float jumpForce;
      private float jumpTime;
-     private float jumpTimeCounter;
+     public float jumpTimeCounter;
      private bool stoppedJumping;
      private bool noMoreJumping;
 
@@ -51,6 +51,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      float flickerTime = 0.1f;
      private bool starPower;
      float currentTime;
+     private bool turtleInvincible;
 
      //Death
      private bool isDead;
@@ -183,9 +184,9 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                ShootFireball();
           }
 
-          if (currentTime + 0.2f < Time.time)
+          if (currentTime + 0.3f < Time.time)
           {
-               invincible = false;
+               turtleInvincible = false;
           }
 
     }
@@ -407,7 +408,10 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
           if (hitAbove)
           {
+               Debug.Log(hitAbove);
                jumpTimeCounter = 0;
+               stoppedJumping = true;
+               noMoreJumping = true;
                rb.velocity = new Vector2(rb.velocity.x, 0);
 
 
@@ -457,21 +461,21 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           RaycastHit2D hitRay, upLeft, midLeft, botLeft, upRight, midRight, botRight;
           if (!isBig)
           {
-               upLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y + 0.06f), Vector2.left, 0.05f, floorMask);
-               midLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y), Vector2.left, 0.05f, floorMask);
-               botLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y - 0.06f), Vector2.left, 0.05f, floorMask);
-               upRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y + 0.06f), Vector2.right, 0.05f, floorMask);
-               midRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y), Vector2.right, 0.05f, floorMask);
-               botRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y - 0.06f), Vector2.right, 0.05f, floorMask);
+               upLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y + 0.06f), Vector2.left, 0.055f, floorMask);
+               midLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y), Vector2.left, 0.055f, floorMask);
+               botLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.035f, transform.localPosition.y - 0.06f), Vector2.left, 0.055f, floorMask);
+               upRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y + 0.06f), Vector2.right, 0.055f, floorMask);
+               midRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y), Vector2.right, 0.055f, floorMask);
+               botRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.035f, transform.localPosition.y - 0.06f), Vector2.right, 0.055f, floorMask);
           }
           else
           {
-               upLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y + 0.12f), Vector2.left, 0.04f, floorMask);
-               midLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y), Vector2.left, 0.04f, floorMask);
-               botLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y - 0.12f), Vector2.left, 0.04f, floorMask);
-               upRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y + 0.12f), Vector2.right, 0.04f, floorMask);
-               midRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y), Vector2.right, 0.04f, floorMask);
-               botRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y - 0.12f), Vector2.right, 0.04f, floorMask);
+               upLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y + 0.12f), Vector2.left, 0.055f, floorMask);
+               midLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y), Vector2.left, 0.055f, floorMask);
+               botLeft = Physics2D.Raycast(new Vector2(transform.localPosition.x - 0.04f, transform.localPosition.y - 0.12f), Vector2.left, 0.05f, floorMask);
+               upRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y + 0.12f), Vector2.right, 0.055f, floorMask);
+               midRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y), Vector2.right, 0.055f, floorMask);
+               botRight = Physics2D.Raycast(new Vector2(transform.localPosition.x + 0.04f, transform.localPosition.y - 0.12f), Vector2.right, 0.055f, floorMask);
           }
 
           hitRay = upLeft;
@@ -553,18 +557,24 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                if((hitRay.collider.tag == "Turtle" && hitRay.collider.gameObject.GetComponent<TurtleController>().state == TurtleController.EnemyState.shellIdle) ||
                     (hitRay.collider.tag == "FlyingTurtle" && hitRay.collider.gameObject.GetComponent<FlyingTurtleController>().state == FlyingTurtleController.EnemyState.shellIdle))
                {
-                    invincible = true;
+                    turtleInvincible = true;
                     currentTime = Time.time;
 
                }
                else if (!invincible)
                {
+                    if ((hitRay.collider.tag == "Turtle" || hitRay.collider.tag == "FlyingTurtle") && turtleInvincible)
+                    {
+                         return;
+                    }
+
                     if (isBig)
                     {
+
                          PlaySoundEffect(loseBigSound);
                          StartCoroutine(Invincible());
                          PlayerState = 0;
-                }
+                    }
                     else
                     {
                          if (!isDead)
