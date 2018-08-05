@@ -404,21 +404,16 @@ MonoBehaviour:
   smallJumpSound: {fileID: 8300000, guid: 5894707c64097124ca89b95af91e5f0c, type: 3}
   bigJumpSound: {fileID: 8300000, guid: f38cfc91151f7454dbcb43d8ca8cb78e, type: 3}
   gameOverSound: {fileID: 8300000, guid: dfae6913dcd5ad443a56c83521ad6562, type: 3}
-  redMushroomSound: {fileID: 8300000, guid: 0c359632566a98f48a906b27f81ebd22, type: 3}
+  powerUpSound: {fileID: 8300000, guid: 0c359632566a98f48a906b27f81ebd22, type: 3}
   loseBigSound: {fileID: 8300000, guid: 1984e162d0eff6642bf26529d9e6bdf0, type: 3}
-  runSpeed: 0
-  sprintSpeed: 0
-  fallMultiplier: 2.5
-  jumpForce: 0
-  jumpTime: 0
-  jumpTimeCounter: 0
-  stoppedJumping: 0
-  noMoreJumping: 0
   isGrounded: 0
   floorMask:
     serializedVersion: 2
     m_Bits: 1536
   isBig: 0
+  fireFlower: 0
+  invincible: 0
+  fireball: {fileID: 0}
 --- !u!212 &212377944715970798
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -14,7 +14,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     public AudioClip smallJumpSound;
     public AudioClip bigJumpSound;
     public AudioClip gameOverSound;
-    public AudioClip redMushroomSound;
+    public AudioClip powerUpSound;
     public AudioClip loseBigSound;
     private AudioSource[] allAudioSources;
 
@@ -24,6 +24,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     private float moveX;
     private bool isRunning;
     private float fallMultiplier;
+    public static int PlayerState;
 
      //jumping variables
      private float jumpForce;
@@ -129,6 +130,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           noMoreJumping = false;
           myAnimator = GetComponent<Animator>();
           fallMultiplier = 1.5f;
+          PlayerState = 0; // indicates base state of player
      }
 
      // Update is called once per frame
@@ -249,7 +251,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           if (fireFlower)
           {
                myAnimator.SetBool("fireFlower", true);
-          }
+        }
           else
           {
                myAnimator.SetBool("fireFlower", false);
@@ -412,9 +414,10 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                if (collision.gameObject.tag == "RedMushroom")
                {
                    ScoreKeeping.scoreValue += 1000;
-                   PlaySoundEffect(redMushroomSound);
+                   PlaySoundEffect(powerUpSound);
                    isBig = true;
                    Destroy(collision.gameObject);
+                   PlayerState = 1;
                }
 
                if (collision.gameObject.tag == "Star")
@@ -423,6 +426,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     if (!starPower)
                     {
                          hasStarPower = StartCoroutine(StarPower());
+                         PlaySoundEffect(powerUpSound);
                     }
                }
           }
@@ -559,7 +563,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     {
                          PlaySoundEffect(loseBigSound);
                          StartCoroutine(Invincible());
-                    }
+                         PlayerState = 0;
+                }
                     else
                     {
                          if (!isDead)
