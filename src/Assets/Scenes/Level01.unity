@@ -1458,7 +1458,6 @@ Transform:
   - {fileID: 1538797232}
   - {fileID: 1829552119}
   - {fileID: 2016900261}
-  - {fileID: 594972803}
   m_Father: {fileID: 1117330111}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11589,6 +11588,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 114117767998833086, guid: a0c0fe08e60b692449e3e80aed7c2ea1,
+        type: 2}
+      propertyPath: sfx
+      value: 
+      objectReference: {fileID: 1448232587}
+    - target: {fileID: 114117767998833086, guid: a0c0fe08e60b692449e3e80aed7c2ea1,
+        type: 2}
+      propertyPath: coinSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 230a9e965e138054b9734c8a8ee51946, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0c0fe08e60b692449e3e80aed7c2ea1, type: 2}
   m_IsPrefabAsset: 0

@@ -30869,6 +30869,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 114117767998833086, guid: a0c0fe08e60b692449e3e80aed7c2ea1,
+        type: 2}
+      propertyPath: sfx
+      value: 
+      objectReference: {fileID: 1594010469}
+    - target: {fileID: 114117767998833086, guid: a0c0fe08e60b692449e3e80aed7c2ea1,
+        type: 2}
+      propertyPath: coinSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 230a9e965e138054b9734c8a8ee51946, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0c0fe08e60b692449e3e80aed7c2ea1, type: 2}
   m_IsPrefabAsset: 0

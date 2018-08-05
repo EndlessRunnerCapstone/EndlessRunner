@@ -15,7 +15,16 @@ public class ScoreKeeping : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        UpdateScore();
+    }
+
+    public void Reset()
+    {
+        scoreValue -= scoreValue;
+    }
+
+    public void UpdateScore()
+    {
         if (scoreValue < 10)
         {
             score.text = "00000" + scoreValue;
@@ -40,10 +49,5 @@ public class ScoreKeeping : MonoBehaviour {
         {
             score.text = "" + scoreValue;
         }
-    }
-
-    public void Reset()
-    {
-        scoreValue -= scoreValue;
     }
 }
