@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Controls bounce of question mark block
+/// <summary>
+///  This class controls the bounce and animation of the question block.
+///  Once hit, it produces an animated coin that jumps out of the block and then is destroyed.
+///  It increments score appropriately for player.
+/// </summary>
+
 public class QuestionBlock : Photon.MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
@@ -24,48 +29,48 @@ public class QuestionBlock : Photon.MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
-    IEnumerator QuestionBlockBounce()
-    {
-
-        if (canBounce)
-        {
-            canBounce = false;
-            transform.position += Vector3.up * Time.deltaTime;
-            yield return new WaitForSeconds(0.01f);
-            transform.position = originalPos;
-        }
-    }
-
     void ChangeSprite()
     {
-        GetComponent<Animator>().enabled = false;
+        GetComponent<Animator>().enabled = false; // turn off the idle animation
 
+        // if the block was invisible, make it visible
         if (spriteRenderer.enabled == false)
         {
             spriteRenderer.enabled = true;
         }
 
+        // change to after hit sprite
         GetComponent<SpriteRenderer>().sprite = afterHitSprite;
     }
 
     void CreateCoin()
     {
-        GameObject spinningCoin = (GameObject)Instantiate(Resources.Load("Prefabs/SpinningCoin", typeof(GameObject)) as GameObject);
+        // Instantiate a prefab object with the spinning coin animation on it
+        GameObject spinningCoin = (GameObject)Instantiate(Resources.Load("Prefabs/SpinningCoin", typeof(GameObject)));
+
+        //set as a child to this object
         spinningCoin.transform.SetParent(this.transform.parent);
+
+        // set the spinningCoin object to just above the parent object
         spinningCoin.transform.position = new Vector3(originalPos.x, originalPos.y + 0.5f, originalPos.z);
+
+        // move the coin!
         StartCoroutine(MoveCoin(spinningCoin));
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(Globals.TwoPlayer)
+        if (coll.gameObject.tag == "Player")
         {
-            photonView.RPC("HitInternal", PhotonTargets.All);   
-        }
-        else
-        {
-            HitInternal();
-        }
+            if (Globals.TwoPlayer)
+            {
+                photonView.RPC("HitInternal", PhotonTargets.All);
+            }
+            else
+            {
+                HitInternal();
+            }
+        }       
     }
 
     [PunRPC]
@@ -83,13 +88,15 @@ public class QuestionBlock : Photon.MonoBehaviour
         }
     }
 
+    // bounce the block up and back to original position
     IEnumerator MoveBlock()
     {
-        transform.position += Vector3.up * Time.deltaTime; //possibly change this to make it more dramatic
+        transform.position += Vector3.up * Time.deltaTime; 
         yield return new WaitForSeconds(0.1f);
         transform.position = originalPos;
     }
 
+    // This function moves the coin up to a specified height and back down to original location
     IEnumerator MoveCoin(GameObject coin)
     {
         while (true)

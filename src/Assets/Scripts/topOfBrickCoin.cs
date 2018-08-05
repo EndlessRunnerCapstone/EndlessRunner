@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  This class controls the coins that sit on top of blocks
+/// </summary>
 public class topOfBrickCoin : MonoBehaviour {
 
     [SerializeField] SoundEffectsManager sfx;

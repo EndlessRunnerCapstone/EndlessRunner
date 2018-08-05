@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// This class is used to control the very ending animations of the level
+/// </summary>
 public class Fireworks : MonoBehaviour {
 
 	[SerializeField] SoundEffectsManager sfx;
@@ -12,7 +16,7 @@ public class Fireworks : MonoBehaviour {
 	public Animator fireworks3;
 	public Animator fireworks4;
 	public Animator fireworks5;
-    private bool canPlay = true;
+    private bool canPlay = true; // ensure only works once
 
 	// Use this for initialization
 	void Start () {
@@ -25,14 +29,16 @@ public class Fireworks : MonoBehaviour {
 		{
             if(canPlay)
             {
+                // raise the flag from the castle
                 anim.Play("FlagRaise");
                 anim.Play("FlagRaise_Level2");
                 canPlay = false;
 
+                // animate the individual fireworks and play their sound effects
                 sfx.PlaySoundEffect(fireworksSound);
                 fireworks.Play("Fireworks");
-                yield return new WaitForSeconds(0.9f);
-                fireworks.gameObject.SetActive(false);
+                yield return new WaitForSeconds(0.9f); // wait a small bit to show animation
+                fireworks.gameObject.SetActive(false); // destroy object once done
 
                 sfx.PlaySoundEffect(fireworksSound);
                 fireworks2.Play("Fireworks");

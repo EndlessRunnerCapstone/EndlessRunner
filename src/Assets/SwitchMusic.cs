@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchMusic : MonoBehaviour {
+/// <summary>
+///  This class is used to switch the music from the UW theme to the OW theme in Level 2 at the end.
+/// </summary>
 
-    [SerializeField] SoundEffectsManager sfx;
+public class SwitchMusic : MonoBehaviour
+{
+
+    [SerializeField]
+    SoundEffectsManager sfx;
 
     IEnumerator OnTriggerEnter2D(Collider2D coll)
     {

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class just controls the pipe sound effect
+/// </summary>
 public class pipeWarp : MonoBehaviour
 {
 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+///  This class controls what loading screens are loaded based on what level we are on
+/// </summary>
 public class LevelLoad : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
