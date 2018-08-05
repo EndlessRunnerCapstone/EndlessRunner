@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Warp : MonoBehaviour {
+public class Warp : Photon.MonoBehaviour {
 
     public Transform warpTarget;
     public GameObject player;
@@ -28,11 +28,22 @@ public class Warp : MonoBehaviour {
             else
             {
                 CameraControl cameraControl = player.gameObject.GetComponent<CameraControl>();
-                player.gameObject.transform.position = warpTarget.position;
+
+                var players = GameObject.FindGameObjectsWithTag("Player");
+
+                Debug.Log(players.Length);
+
+                if (players.Length == 2)
+                {
+                    Vector3 offsetPos = new Vector3 { x = warpTarget.position.x, y = warpTarget.position.y + .50f, z = warpTarget.position.z };
+
+                    players[1].gameObject.transform.position = offsetPos;
+                }
+
+                players[0].gameObject.transform.position = warpTarget.position;
             }
         }
     }
-
 
     void OnTriggerEnter2D(Collider2D coll)
     {
