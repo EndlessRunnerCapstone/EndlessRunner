@@ -310,4 +310,15 @@ public class TurtleController : MonoBehaviour
           rb.velocity = new Vector2(0.5f, 2f);
           shouldDie = true;
      }
+
+     private void OnCollisionEnter2D(Collision2D collision)
+     {
+          if (state == EnemyState.walking)
+          {
+               if (collision.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
+               {
+                    isMovingLeft = !isMovingLeft;
+               }
+          }
+     }
 }
