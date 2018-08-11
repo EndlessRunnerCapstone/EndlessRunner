@@ -36,7 +36,8 @@ public class Level3 : Photon.MonoBehaviour
           CreateGoombas(GoombaPositions);
           CreateTurtles(TurtlePositions);
           CreateFlyingTurtle(flyingTurtlePosition);
-     }
+          WorldTracker.worldNumber = "1-3";
+    }
 
      // Update is called once per frame
      void Update()

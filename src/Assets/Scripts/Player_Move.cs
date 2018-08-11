@@ -613,39 +613,24 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           Globals.PlayerOne.NumberOfLives--;
 
 
-          // Reset UI
+          // Reset Timer
           TimeKeeping.timeValue = 400;
-          ScoreKeeping.scoreValue = 0;
-          CoinTracker.coinValue = 0;
 
         if (!Globals.TwoPlayer)
         {
                if (Globals.PlayerOne.NumberOfLives > 0)
                {
-                    if (SceneManager.GetActiveScene().name == "Level01")
-                    {
-                         SceneManager.LoadScene("LoadingScreen4");
-                    }
-                    else if (SceneManager.GetActiveScene().name == "Level02")
-                    {
-                         SceneManager.LoadScene("LoadingScreen1");
-                    }
-                    else if (SceneManager.GetActiveScene().name == "Level03")
-                    {
-                         SceneManager.LoadScene("LoadingScreen2");
-                    }
-                    else if (SceneManager.GetActiveScene().name == "Level04")
-                    {
-                         SceneManager.LoadScene("LoadingScreen3");
-                    }
-                    //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                
+                  SceneManager.LoadScene("LoadingScreen1");
+     
                }
                else
                {
                     Globals.PlayerOne.NumberOfLives = 3;
                     Globals.PlayerTwo.NumberOfLives = 3;
+
                     SceneManager.LoadScene("GameOver");
-               }
+            }
         }
         else
         {

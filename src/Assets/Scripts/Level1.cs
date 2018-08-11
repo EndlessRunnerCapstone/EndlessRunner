@@ -8,6 +8,7 @@ public class Level1 : Photon.MonoBehaviour {
 
     public GameObject Goomba;
      public GameObject Turtle;
+ 
 
     private IList<Vector3> GoombaPositions = new List<Vector3>
     {
@@ -28,8 +29,9 @@ public class Level1 : Photon.MonoBehaviour {
         Debug.Log("Level controller is online!");
 
         CreateGoombas(GoombaPositions);
-          CreateTurtle(turtlePosition);		
-	}
+        CreateTurtle(turtlePosition);
+        WorldTracker.worldNumber = "1-1";
+    }
 	
 	// Update is called once per frame
 	void Update () {

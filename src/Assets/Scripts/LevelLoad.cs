@@ -12,6 +12,7 @@ public class LevelLoad : MonoBehaviour {
 
     [SerializeField] SoundEffectsManager sfx;
     [SerializeField] AudioClip coinSfx;
+    public static bool levelComplete = false;
 
     void OnTriggerEnter2D(Collider2D coll)
     {
@@ -21,35 +22,31 @@ public class LevelLoad : MonoBehaviour {
 
     IEnumerator ChangeScene()
     {
-        Debug.Log("Pause");
-
-
+        levelComplete = true;
         yield return new WaitForSeconds(2f);
 
-        // Call the correct loading screen based on what level we are on
-        // Also rest time value for next level
-        if (SceneManager.GetActiveScene().name == "Level01")
+        // Call the loading screen
+        // Also rest time value for next level  
+
+        if(WorldTracker.worldNumber == "1-1")
         {
-            SceneManager.LoadScene("LoadingScreen1");
-            TimeKeeping.timeValue = 400;
+            WorldTracker.worldNumber = "1-2";
         }
-        else if (SceneManager.GetActiveScene().name == "Level02")
+        else if(WorldTracker.worldNumber == "1-2")
         {
-            SceneManager.LoadScene("LoadingScreen2");
-            TimeKeeping.timeValue = 400;
+            WorldTracker.worldNumber = "1-3";
         }
-        else if (SceneManager.GetActiveScene().name == "Level03")
+        else if (WorldTracker.worldNumber == "1-3")
         {
-            SceneManager.LoadScene("LoadingScreen3");
-            TimeKeeping.timeValue = 400;
+            WorldTracker.worldNumber = "1-4";
         }
-        else if (SceneManager.GetActiveScene().name == "Level04")
+        else if (WorldTracker.worldNumber == "1-4")
         {
-            SceneManager.LoadScene("LoadingScreen4");
-            TimeKeeping.timeValue = 400;
+            WorldTracker.worldNumber = "1-1";
         }
-        else
-            Debug.Log("Level Load script on wrong scene.");
+
+        SceneManager.LoadScene("LoadingScreen1");
+        TimeKeeping.timeValue = 400;
     }
 
     void FinalScore()
