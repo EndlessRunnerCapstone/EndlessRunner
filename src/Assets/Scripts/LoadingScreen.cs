@@ -18,29 +18,32 @@ public class LoadingScreen : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(3); // wait a few seconds to show screen before loading
 
-        if (SceneManager.GetActiveScene().name == "LoadingScreen1")
+        if (SceneManager.GetActiveScene().name == "GameOver")
         {
-            SceneManager.LoadScene("Level02");
+            SceneManager.LoadScene("MainMenu");
+            TimeKeeping.timeValue = 400;
+            ScoreKeeping.scoreValue = 0;
+            CoinTracker.coinValue = 0;
+            yield break;
         }
-        else if (SceneManager.GetActiveScene().name == "LoadingScreen2")
+        else if (WorldTracker.worldNumber == "1-1")
         {
-            SceneManager.LoadScene("Level03");
+                SceneManager.LoadScene("Level01");
+            
         }
-        else if (SceneManager.GetActiveScene().name == "LoadingScreen3")
+        else if (WorldTracker.worldNumber == "1-2")
         {
-            SceneManager.LoadScene("Level04");
+                SceneManager.LoadScene("Level02");
         }
-        else if (SceneManager.GetActiveScene().name == "LoadingScreen4")
+        else if (WorldTracker.worldNumber == "1-3")
         {
-            SceneManager.LoadScene("Level01");
+                SceneManager.LoadScene("Level03");
         }
-        else if (SceneManager.GetActiveScene().name == "GameOver")
-          {
-               SceneManager.LoadScene("MainMenu");
-          }
+        else if (WorldTracker.worldNumber == "1-4")
+        {
+                SceneManager.LoadScene("Level04"); 
+        }
         else
-          {
-               Debug.Log("Loading Screen script on wrong scene.");
-          }      
+               Debug.Log("Loading Screen script on wrong scene.");   
     }
 }

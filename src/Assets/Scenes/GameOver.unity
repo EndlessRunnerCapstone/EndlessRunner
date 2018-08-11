@@ -1030,6 +1030,7 @@ GameObject:
   - component: {fileID: 1624037078}
   - component: {fileID: 1624037080}
   - component: {fileID: 1624037079}
+  - component: {fileID: 1624037081}
   m_Layer: 5
   m_Name: WorldTracker
   m_TagString: Untagged
@@ -1089,7 +1090,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1-2
+  m_Text: 
 --- !u!222 &1624037080
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1098,6 +1099,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1624037077}
   m_CullTransparentMesh: 0
+--- !u!114 &1624037081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1624037077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abdaa5828a81a942bb71943ad81bb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1748513453
 GameObject:
   m_ObjectHideFlags: 0

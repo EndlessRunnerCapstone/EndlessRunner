@@ -49,7 +49,8 @@ public class Level2 : Photon.MonoBehaviour
           CreateGoombas(GoombaPositions);
           CreateTurtles(TurtlePositions);
           CreateRedTurtle(redTurtlePosition);
-     }
+          WorldTracker.worldNumber = "1-2";
+    }
 
      // Update is called once per frame
      void Update()
