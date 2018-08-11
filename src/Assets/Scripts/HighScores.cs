@@ -51,7 +51,7 @@ public class HighScores : MonoBehaviour
         if(Scores == null && scoreService.Scores != null)
         {
             Scores = JsonHelper.getJsonArray<ScoreEntry>(scoreService.Scores);
-            StringBuilder builder = new StringBuilder("High scores:\n");
+            StringBuilder builder = new StringBuilder();
 
             foreach(var score in Scores)
             {
