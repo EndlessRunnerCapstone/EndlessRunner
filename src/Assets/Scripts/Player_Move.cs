@@ -620,11 +620,43 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
         if (!Globals.TwoPlayer)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+               if (Globals.PlayerOne.NumberOfLives > 0)
+               {
+                    if (SceneManager.GetActiveScene().name == "Level01")
+                    {
+                         SceneManager.LoadScene("LoadingScreen4");
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Level02")
+                    {
+                         SceneManager.LoadScene("LoadingScreen1");
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Level03")
+                    {
+                         SceneManager.LoadScene("LoadingScreen2");
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Level04")
+                    {
+                         SceneManager.LoadScene("LoadingScreen3");
+                    }
+                    //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+               }
+               else
+               {
+                    Globals.PlayerOne.NumberOfLives = 3;
+                    Globals.PlayerTwo.NumberOfLives = 3;
+                    SceneManager.LoadScene("GameOver");
+               }
         }
         else
         {
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().ReloadScene(SceneManager.GetActiveScene().name);
+            if (Globals.PlayerOne.NumberOfLives > 0)
+               {
+                    GameObject.FindWithTag("GameManager").GetComponent<GameManager>().ReloadScene(SceneManager.GetActiveScene().name);
+               }
+            else
+               {
+                    GameObject.FindWithTag("GameManager").GetComponent<GameManager>().ReloadScene("GameOver");
+               }            
         }
     }
 

@@ -732,6 +732,7 @@ GameObject:
   - component: {fileID: 718513337}
   - component: {fileID: 718513339}
   - component: {fileID: 718513338}
+  - component: {fileID: 718513340}
   m_Layer: 5
   m_Name: LivesText
   m_TagString: Untagged
@@ -801,6 +802,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 718513336}
   m_CullTransparentMesh: 0
+--- !u!114 &718513340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 718513336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c853711860b83b74bb8d9fa4b0f8cfb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &974098802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,7 +1231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -31.6, y: -62.90001}
+  m_AnchoredPosition: {x: -31.6, y: -62.900024}
   m_SizeDelta: {x: 43.89, y: 27.190002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1931881718

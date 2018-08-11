@@ -34,7 +34,13 @@ public class LoadingScreen : MonoBehaviour {
         {
             SceneManager.LoadScene("Level01");
         }
+        else if (SceneManager.GetActiveScene().name == "GameOver")
+          {
+               SceneManager.LoadScene("MainMenu");
+          }
         else
-            Debug.Log("Loading Screen script on wrong scene.");
+          {
+               Debug.Log("Loading Screen script on wrong scene.");
+          }      
     }
 }

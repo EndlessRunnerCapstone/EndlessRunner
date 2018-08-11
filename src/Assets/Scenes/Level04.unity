@@ -1810,6 +1810,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1906762562208096, guid: c74c137488f59f449a36e082afbd17d1,
         type: 2}
+    - target: {fileID: 114499885664766260, guid: 61d2b3f1ff9ddb84ea13f64698f8856d,
+        type: 2}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499885664766260, guid: 61d2b3f1ff9ddb84ea13f64698f8856d,
+        type: 2}
+      propertyPath: instantiationId
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61d2b3f1ff9ddb84ea13f64698f8856d, type: 2}
   m_IsPrefabAsset: 0

@@ -192,4 +192,12 @@ public class GoombaController : Photon.MonoBehaviour {
             }
           }
      }
+
+     private void OnCollisionEnter2D(Collision2D collision)
+     {
+          if (collision.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
+          {
+               isWalkingLeft = !isWalkingLeft;
+          }
+     }
 }
