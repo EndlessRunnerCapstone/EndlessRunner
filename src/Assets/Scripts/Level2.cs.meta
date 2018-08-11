@@ -3,7 +3,11 @@ guid: 447a3648c82259343b64922d0ae4b6ff
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Goomba: {fileID: 1766943514197660, guid: 6b49025432f446945bf485657726953f, type: 2}
+  - Turtle: {fileID: 1031221964079312, guid: f6cad03207b6d4240b5c34b750b20524, type: 2}
+  - RedTurtle: {fileID: 1070325975592018, guid: 18e66f5f2ef61dc44806e11f7dc3fd10,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
