@@ -132,7 +132,7 @@ public class GameManager : Photon.PunBehaviour {
         {
             if (!Globals.TwoPlayer)
             {
-                SceneManager.LoadScene("Level03");
+                SceneManager.LoadScene("Level04");
             }
             else
             {
