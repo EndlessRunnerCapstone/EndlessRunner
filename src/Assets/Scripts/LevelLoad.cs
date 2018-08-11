@@ -12,41 +12,50 @@ public class LevelLoad : MonoBehaviour {
 
     [SerializeField] SoundEffectsManager sfx;
     [SerializeField] AudioClip coinSfx;
-    public static bool levelComplete = false;
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+        if(WorldTracker.worldNumber == "1-4")
+        {
+            sfx.PlayWorldDoneMusic();
+        }
         //  This function calls the "FinalScore function every 0.1 seconds
         InvokeRepeating("FinalScore", 0.01f, 0.1f);
     }
 
     IEnumerator ChangeScene()
     {
-        levelComplete = true;
         yield return new WaitForSeconds(2f);
 
         // Call the loading screen
         // Also rest time value for next level  
 
-        if(WorldTracker.worldNumber == "1-1")
+        if (WorldTracker.worldNumber == "1-4")
         {
-            WorldTracker.worldNumber = "1-2";
+            SceneManager.LoadScene("MainMenu");
         }
-        else if(WorldTracker.worldNumber == "1-2")
+        else
         {
-            WorldTracker.worldNumber = "1-3";
-        }
-        else if (WorldTracker.worldNumber == "1-3")
-        {
-            WorldTracker.worldNumber = "1-4";
-        }
-        else if (WorldTracker.worldNumber == "1-4")
-        {
-            WorldTracker.worldNumber = "1-1";
-        }
+            if (WorldTracker.worldNumber == "1-1")
+            {
+                WorldTracker.worldNumber = "1-2";
+            }
+            else if (WorldTracker.worldNumber == "1-2")
+            {
+                WorldTracker.worldNumber = "1-3";
+            }
+            else if (WorldTracker.worldNumber == "1-3")
+            {
+                WorldTracker.worldNumber = "1-4";
+            }
+            else if (WorldTracker.worldNumber == "1-4")
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
 
-        SceneManager.LoadScene("LoadingScreen1");
-        TimeKeeping.timeValue = 400;
+            SceneManager.LoadScene("LoadingScreen1");
+            TimeKeeping.timeValue = 400;
+        }      
     }
 
     void FinalScore()

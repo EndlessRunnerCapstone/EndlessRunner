@@ -13,7 +13,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     private AudioSource sfxPlayer;
     public AudioClip smallJumpSound;
     public AudioClip bigJumpSound;
-    public AudioClip gameOverSound;
+    public AudioClip deathSound;
     public AudioClip powerUpSound;
     public AudioClip loseBigSound;
     public AudioClip fireBallSound;
@@ -603,7 +603,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      public IEnumerator Die()
      {
           StopAllAudio();
-          PlaySoundEffect(gameOverSound);
+          PlaySoundEffect(deathSound);
           rb.gravityScale = 0.9f;
           myAnimator.SetBool("isDead", true);
           isDead = true;
@@ -633,7 +633,6 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                {
                     Globals.PlayerOne.NumberOfLives = 3;
                     Globals.PlayerTwo.NumberOfLives = 3;
-
                     SceneManager.LoadScene("GameOver");
             }
         }
