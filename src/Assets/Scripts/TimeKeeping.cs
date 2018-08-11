@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+///  This class is used to track the timer for each level and links to the UI text box
+/// </summary>
 public class TimeKeeping : MonoBehaviour {
 
-    public static float timeValue = 400;
-    Text time;
+    public static float timeValue = 400; // global variable
+    Text time; //links to UI text box
 
 	// Use this for initialization
 	void Start () {

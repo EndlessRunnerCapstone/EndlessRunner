@@ -53,7 +53,7 @@ public class StarBlock : MonoBehaviour
                 FakeStar.GetComponent<Animator>().Play("FakeStar");
                 yield return new WaitForSeconds(1.0f);
 
-                // Destroy the "fake star" object and instantiate the real mushroom
+                // Destroy the "fake star" object and instantiate the real star
                 Destroy(FakeStar);
                 Instantiate(Star, Spawn.transform.position, Quaternion.identity);
             }

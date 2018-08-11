@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class is used to keep score in the UI and track through the game.
+/// </summary>
 public class ScoreKeeping : MonoBehaviour {
 
-    public static int scoreValue = 0;
-    Text score;
+    public static int scoreValue = 0; // global variable
+    Text score; //linked to UI text box
 
 	// Use this for initialization
 	void Start () {

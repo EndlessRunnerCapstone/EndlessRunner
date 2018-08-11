@@ -10,11 +10,15 @@ public class BrickDestroy : Photon.MonoBehaviour
 
     [SerializeField] SoundEffectsManager sfx;
     [SerializeField] AudioClip breakSound;
-    public Sprite destroyedSprite;     
+    public GameObject particles;
+    SpriteRenderer spriteRenderer;
+    ParticleSystem particleSystem;
 
     // Use this for initialization
     void Start()
     {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        particleSystem = particles.GetComponent<ParticleSystem>();
 
     }
 
@@ -43,7 +47,9 @@ public class BrickDestroy : Photon.MonoBehaviour
     void HitInternal()
     {
         sfx.PlaySoundEffect(breakSound);
-        Destroy(gameObject);
+        spriteRenderer.enabled = false;
+        particleSystem.Play();
+      //  Destroy(gameObject);
         ScoreKeeping.scoreValue += 50;
 
     }
