@@ -16,6 +16,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     public AudioClip gameOverSound;
     public AudioClip powerUpSound;
     public AudioClip loseBigSound;
+    public AudioClip fireBallSound;
+    public AudioClip oneUp;
     private AudioSource[] allAudioSources;
 
     //movement variables
@@ -186,7 +188,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           if (Input.GetKeyDown(KeyCode.W) && Time.time > nextFire && fireFlower)
           {
                ShootFireball();
-          }
+            PlaySoundEffect(fireBallSound);
+        }
 
           if (currentTime + 0.3f < Time.time)
           {
@@ -439,7 +442,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                }
                else if (collision.gameObject.tag == "Star")
                {
-                    Destroy(collision.gameObject);
+                   ScoreKeeping.scoreValue += 1000;
+                   Destroy(collision.gameObject);
                     if (!starPower)
                     {
                          hasStarPower = StartCoroutine(StarPower());
@@ -447,9 +451,10 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     }
                }
                else if (collision.gameObject.tag == "LifeMushroom") {
+    
+                    PlaySoundEffect(oneUp);
                     Globals.PlayerOne.NumberOfLives++;
                     Globals.PlayerTwo.NumberOfLives++;
-                    PlaySoundEffect(powerUpSound);
                     Destroy(collision.gameObject);
                }
           }
