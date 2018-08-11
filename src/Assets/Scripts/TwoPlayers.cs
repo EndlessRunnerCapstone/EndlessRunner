@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TwoPlayers : MonoBehaviour
+public class YesButton : MonoBehaviour
 {
 
     public void Start()
