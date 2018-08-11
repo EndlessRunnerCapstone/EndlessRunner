@@ -403,7 +403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallJumpSound: {fileID: 8300000, guid: 5894707c64097124ca89b95af91e5f0c, type: 3}
   bigJumpSound: {fileID: 8300000, guid: f38cfc91151f7454dbcb43d8ca8cb78e, type: 3}
-  gameOverSound: {fileID: 8300000, guid: dfae6913dcd5ad443a56c83521ad6562, type: 3}
+  deathSound: {fileID: 8300000, guid: dfae6913dcd5ad443a56c83521ad6562, type: 3}
+  gameOverSound: {fileID: 8300000, guid: 1426f535a2873f948b90a81bcf501c31, type: 3}
   powerUpSound: {fileID: 8300000, guid: 0c359632566a98f48a906b27f81ebd22, type: 3}
   loseBigSound: {fileID: 8300000, guid: 1984e162d0eff6642bf26529d9e6bdf0, type: 3}
   fireBallSound: {fileID: 8300000, guid: 31e6bc8aba51611409ee3c113e3faeff, type: 3}

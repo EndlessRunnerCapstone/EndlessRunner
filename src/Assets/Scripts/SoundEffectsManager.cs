@@ -11,6 +11,7 @@ public class SoundEffectsManager : MonoBehaviour
     AudioSource sfxPlayer;
     public AudioSource levelMusic;
     public AudioSource undergroundMusic;
+    public AudioSource worldDone;
     [SerializeField] AudioClip stageClear;
 
     public void Start()
@@ -44,5 +45,11 @@ public class SoundEffectsManager : MonoBehaviour
     {
         undergroundMusic.Stop();
         levelMusic.Play();
+    }
+
+    public void PlayWorldDoneMusic()
+    {
+        levelMusic.Stop();
+        worldDone.Play();
     }
 }

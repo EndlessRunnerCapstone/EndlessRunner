@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public class GameOver : Photon.MonoBehaviour
     {
-        private void Awake()
+       private void Awake()
         {
             if (Globals.TwoPlayer)
             {
@@ -18,7 +18,7 @@ namespace Assets.Scripts
 
         private void Start()
         {
-            
+     
         }
     }
 }
