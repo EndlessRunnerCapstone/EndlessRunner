@@ -92,6 +92,54 @@ public class GameManager : Photon.PunBehaviour {
                 SceneManager.LoadScene("MainMenu");
             }
         }
+        else if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (!Globals.TwoPlayer)
+            {
+                SceneManager.LoadScene("Level01");
+            }
+            else
+            {
+                Debug.Log("We are trying to reload the scene");
+                ReloadScene("Level01");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.F2))
+        {
+            if (!Globals.TwoPlayer)
+            {
+                SceneManager.LoadScene("Level02");
+            }
+            else
+            {
+                Debug.Log("We are trying to reload the scene");
+                ReloadScene("Level02");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.F3))
+        {
+            if (!Globals.TwoPlayer)
+            {
+                SceneManager.LoadScene("Level03");
+            }
+            else
+            {
+                Debug.Log("We are trying to reload the scene");
+                ReloadScene("Level03");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.F4))
+        {
+            if (!Globals.TwoPlayer)
+            {
+                SceneManager.LoadScene("Level03");
+            }
+            else
+            {
+                Debug.Log("We are trying to reload the scene");
+                ReloadScene("Level04");
+            }
+        }
 
     }
 }

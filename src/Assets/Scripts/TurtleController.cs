@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TurtleController : MonoBehaviour
+public class TurtleController : Photon.MonoBehaviour
 {
 
      public float gravity;
@@ -228,34 +228,47 @@ public class TurtleController : MonoBehaviour
 
      void OnHitAboveFromMario()
      {
-          if (!invincible)
-          {
-               if (state == EnemyState.walking)
-               {
-                    if (neverHit)
-                    {
-                         StartCoroutine(Recovering());
-                    }
-                    
-                    state = EnemyState.shellIdle;
-                    velocity.x = 0;
-                    myAnimator.SetBool("idleShell", true);                    
-               }
-               else if (state == EnemyState.shellIdle)
-               {
-                    neverHit = false;
-                    state = EnemyState.movingShell;
-                    velocity.x = 2f;
-                    isMovingLeft = false;                    
-               }
-               else
-               {
-                    state = EnemyState.shellIdle;
-                    velocity.x = 0;
-               }
-               StartCoroutine(Invincible());
-          }
+        if(!Globals.TwoPlayer)
+        {
+            HitAboveInternal();
+        }
+        else
+        {
+            photonView.RPC("HitAboveInternal", PhotonTargets.All);
+        }
      }
+
+    [PunRPC]
+    void HitAboveInternal()
+    {
+        if (!invincible)
+        {
+            if (state == EnemyState.walking)
+            {
+                if (neverHit)
+                {
+                    StartCoroutine(Recovering());
+                }
+
+                state = EnemyState.shellIdle;
+                velocity.x = 0;
+                myAnimator.SetBool("idleShell", true);
+            }
+            else if (state == EnemyState.shellIdle)
+            {
+                neverHit = false;
+                state = EnemyState.movingShell;
+                velocity.x = 2f;
+                isMovingLeft = false;
+            }
+            else
+            {
+                state = EnemyState.shellIdle;
+                velocity.x = 0;
+            }
+            StartCoroutine(Invincible());
+        }
+    }
 
      public IEnumerator Invincible()
      {
