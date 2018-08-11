@@ -49,7 +49,7 @@ public class BrickDestroy : Photon.MonoBehaviour
         sfx.PlaySoundEffect(breakSound);
         spriteRenderer.enabled = false;
         particleSystem.Play();
-      //  Destroy(gameObject);
+        Destroy(gameObject, 0.5f);
         ScoreKeeping.scoreValue += 50;
 
     }

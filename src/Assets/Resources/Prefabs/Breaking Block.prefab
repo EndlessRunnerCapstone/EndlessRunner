@@ -169,7 +169,7 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 0.5
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -4765,7 +4765,7 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 98969cc8beef5a849b06cdcf06f9ebba, type: 2}
+  - {fileID: 2100000, guid: 57bac0fd932c2b045b0830279e7f4db1, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
