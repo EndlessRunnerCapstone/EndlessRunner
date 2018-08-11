@@ -34,6 +34,7 @@ TextureImporter:
     21300058: smb1_misc_sprites_25
     21300060: smb1_misc_sprites_26
     21300062: smb1_misc_sprites_27
+    21300064: Broken Block
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -762,6 +763,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 42116bfadfdd47848809a52c33f7a949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken Block
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 1197
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68598d22bb3906e47a09ffc0bd153bfc
       vertices: []
       indices: 
       edges: []

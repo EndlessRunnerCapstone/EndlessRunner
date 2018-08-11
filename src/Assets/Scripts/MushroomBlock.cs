@@ -22,7 +22,7 @@ public class MushroomBlock : MonoBehaviour {
     private Animator anim;
     private bool canHit = true; 
 
-    // Use this for initialization
+   
     void Start () {
         originalPos = transform.position;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
