@@ -24,6 +24,13 @@ namespace ScoreService.Controllers
         [HttpGet]
         public IEnumerable<Score> Get(int? top, int? skip)
         {
+            if(top != null && top.Value < 1)
+            {
+                return Enumerable.Empty<Score>();
+            }
+
+            int numberOfResults = top.HasValue ? top.Value : 5;
+
             if(string.IsNullOrEmpty(StorageConnection) || !CloudStorageAccount.TryParse(StorageConnection, out CloudStorageAccount cloudStorageAccount))
             {
                 cloudStorageAccount = CloudStorageAccount.DevelopmentStorageAccount;
@@ -40,7 +47,7 @@ namespace ScoreService.Controllers
             if(blob.ExistsAsync().Result)
             {
                 var text = blob.DownloadTextAsync().Result;
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Score>>(text).OrderByDescending(x => x.Value);
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Score>>(text).OrderByDescending(x => x.Value).Take(numberOfResults);
             }
             else
             {
