@@ -223,6 +223,9 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: dfae6913dcd5ad443a56c83521ad6562, type: 3}
   powerUpSound: {fileID: 8300000, guid: 0c359632566a98f48a906b27f81ebd22, type: 3}
   loseBigSound: {fileID: 8300000, guid: 1984e162d0eff6642bf26529d9e6bdf0, type: 3}
+  fireBallSound: {fileID: 8300000, guid: 31e6bc8aba51611409ee3c113e3faeff, type: 3}
+  oneUp: {fileID: 8300000, guid: 393e73548669060459523ae2854ddcce, type: 3}
+  jumpTimeCounter: 0
   isGrounded: 0
   floorMask:
     serializedVersion: 2
