@@ -18,6 +18,7 @@ public class BowserController : MonoBehaviour {
      [SerializeField] private GameObject fireball;
      private bool movingLeft, movingRight;
      private Animator myAnimator;
+     public bool stoppedCoroutines = false;
 
 	// Use this for initialization
 	void Start () {
@@ -51,17 +52,17 @@ public class BowserController : MonoBehaviour {
                transform.position = clampedPosition;
           }
 
-          if (jumpingCoroutine == null)
+          if (jumpingCoroutine == null && !stoppedCoroutines)
           {
                jumpingCoroutine = StartCoroutine(JumpTimer());
           }
 
-          if (shootingFire == null)
+          if (shootingFire == null && !stoppedCoroutines)
           {
                shootingFire = StartCoroutine(Fireballs());
           }
 
-          if (movingCoroutine == null)
+          if (movingCoroutine == null && !stoppedCoroutines)
           {
                movingCoroutine = StartCoroutine(RandomMovement());
           }
@@ -71,14 +72,14 @@ public class BowserController : MonoBehaviour {
      {
           if (isJumping && Time.fixedTime - jumpStart < jumpTime && !shouldDie)
           {
-               rb.AddForce(new Vector2(0, 1100f));
+               rb.AddForce(new Vector2(0, 1000f));
           }
      }
 
-     private IEnumerator JumpTimer()
+     public IEnumerator JumpTimer()
      {
-          float minWaitTime = 3.5f;
-          float maxWaitTime = 6.5f;
+          float minWaitTime = 2.5f;
+          float maxWaitTime = 4.5f;
 
           while (true)
           {
@@ -90,7 +91,7 @@ public class BowserController : MonoBehaviour {
           }
      }
 
-     private IEnumerator RandomMovement()
+     public IEnumerator RandomMovement()
      {
           float minWaitTime = 2.0f;
           float maxWaitTime = 4.0f;
@@ -109,7 +110,7 @@ public class BowserController : MonoBehaviour {
                else
                {
                     movingRight = true;
-                    yield return new WaitForSeconds(1.2f);
+                    yield return new WaitForSeconds(1.5f);
                     movingRight = false;
                }
                myAnimator.SetBool("isMoving", false);
@@ -120,9 +121,12 @@ public class BowserController : MonoBehaviour {
 
      private void Jump()
      {
-          jumpStart = Time.time;
-          rb.AddForce(new Vector2(0, 1100f));
-          isJumping = true;
+          if (!stoppedCoroutines)
+          {
+               jumpStart = Time.time;
+               rb.AddForce(new Vector2(0, 1000f));
+               isJumping = true;
+          }
      }
 
      private void OnCollisionEnter2D(Collision2D collision)
@@ -151,7 +155,7 @@ public class BowserController : MonoBehaviour {
           }
      }
 
-     private IEnumerator Fireballs()
+     public IEnumerator Fireballs()
      {
           float minWaitTime = 2f;
           float maxWaitTime = 4f;
@@ -165,7 +169,10 @@ public class BowserController : MonoBehaviour {
 
      private void ShootFireball()
      {
-          GameObject bullet = Instantiate(fireball, new Vector2(transform.localPosition.x - 0.15f, transform.localPosition.y), transform.rotation);
-          bullet.GetComponent<Rigidbody2D>().velocity = (new Vector2(-1.5f, 0));
+          if (!stoppedCoroutines)
+          {
+               GameObject bullet = Instantiate(fireball, new Vector2(transform.localPosition.x - 0.15f, transform.localPosition.y), transform.rotation);
+               bullet.GetComponent<Rigidbody2D>().velocity = (new Vector2(-1, 0));
+          }
      }
 }

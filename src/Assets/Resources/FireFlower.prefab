@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212857677477785188}
   - component: {fileID: 61303784090840794}
   - component: {fileID: 114369659884013542}
+  - component: {fileID: 95610966604112980}
   m_Layer: 0
   m_Name: FireFlower
   m_TagString: Untagged
@@ -67,6 +68,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!95 &95610966604112980
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020237145863884}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114369659884013542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db85bbd7f3b5f2144adbf8a6e57464b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpSound: {fileID: 0}
 --- !u!212 &212857677477785188
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -111,7 +131,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 844142093
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300008, guid: ef0371ddfbe3154428f7d42fa2d469e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
