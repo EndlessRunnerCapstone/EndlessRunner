@@ -169,15 +169,18 @@ public class TurtleController : Photon.MonoBehaviour
                     {
                          if (groundEnemyCollision.collider.tag == "Goomba")
                          {
-                              groundEnemyCollision.collider.gameObject.GetComponent<GoombaController>().StarDeath();
+                                sfxPlayer.PlayOneShot(kickSound);
+                                groundEnemyCollision.collider.gameObject.GetComponent<GoombaController>().StarDeath();
                          }
                          else if (groundEnemyCollision.collider.tag == "Turtle")
                          {
-                              groundEnemyCollision.collider.gameObject.GetComponent<TurtleController>().StarDeath();
+                                sfxPlayer.PlayOneShot(kickSound);
+                                groundEnemyCollision.collider.gameObject.GetComponent<TurtleController>().StarDeath();
                          }
                          else if (groundEnemyCollision.collider.tag == "FlyingTurtle")
                          {
-                              groundEnemyCollision.collider.gameObject.GetComponent<FlyingTurtleController>().StarDeath();
+                                sfxPlayer.PlayOneShot(kickSound);
+                                 groundEnemyCollision.collider.gameObject.GetComponent<FlyingTurtleController>().StarDeath();
                          }
                     }
                     else
