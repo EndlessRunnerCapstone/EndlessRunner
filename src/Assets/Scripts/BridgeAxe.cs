@@ -6,11 +6,14 @@ public class BridgeAxe : MonoBehaviour {
 
      [SerializeField] private GameObject[] bridgeBlocks = new GameObject[17];
      public GameObject bowser;
+    [SerializeField] SoundEffectsManager sfx;
+    [SerializeField] AudioClip bowserDiesSound;
+    SpriteRenderer spriteRenderer;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    // Use this for initialization
+    void Start () {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,6 +25,7 @@ public class BridgeAxe : MonoBehaviour {
           if (collision.gameObject.tag == "Player")
           {
                StartCoroutine(DestroyBridge());
+            spriteRenderer.enabled = false;
           }
      }
 
@@ -31,8 +35,9 @@ public class BridgeAxe : MonoBehaviour {
           StopCoroutine(bowser.GetComponent<BowserController>().Fireballs());
           StopCoroutine(bowser.GetComponent<BowserController>().RandomMovement());
           StopCoroutine(bowser.GetComponent<BowserController>().JumpTimer());
+          sfx.PlaySoundEffect(bowserDiesSound);
 
-          for (int i = 0; i < bridgeBlocks.Length; i++)
+        for (int i = 0; i < bridgeBlocks.Length; i++)
           {
                Destroy(bridgeBlocks[i]);
                yield return new WaitForSeconds(0.05f);

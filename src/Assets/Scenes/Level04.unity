@@ -4025,8 +4025,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 659605839
-  m_SortingLayer: 4
+  m_SortingLayerID: -885296589
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -28464,11 +28464,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4352802294975428, guid: a0c0fe08e60b692449e3e80aed7c2ea1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 21.386
+      value: 20.065
       objectReference: {fileID: 0}
     - target: {fileID: 4352802294975428, guid: a0c0fe08e60b692449e3e80aed7c2ea1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.69
+      value: -4.65
       objectReference: {fileID: 0}
     - target: {fileID: 4352802294975428, guid: a0c0fe08e60b692449e3e80aed7c2ea1, type: 2}
       propertyPath: m_LocalPosition.z
@@ -28504,6 +28504,16 @@ Prefab:
       propertyPath: coinSfx
       value: 
       objectReference: {fileID: 8300000, guid: 230a9e965e138054b9734c8a8ee51946, type: 3}
+    - target: {fileID: 61515136712750374, guid: a0c0fe08e60b692449e3e80aed7c2ea1,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.34392357
+      objectReference: {fileID: 0}
+    - target: {fileID: 61515136712750374, guid: a0c0fe08e60b692449e3e80aed7c2ea1,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3.5636292
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0c0fe08e60b692449e3e80aed7c2ea1, type: 2}
   m_IsPrefabAsset: 0
@@ -29432,6 +29442,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114314282895839196, guid: 2c83fc4959f220141a70e1ace6af1f93,
+        type: 2}
+      propertyPath: bowserDiesSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c30602e28029be4092e2ff7df9f044e, type: 3}
+    - target: {fileID: 114314282895839196, guid: 2c83fc4959f220141a70e1ace6af1f93,
+        type: 2}
+      propertyPath: fireBallSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 00c5c123c5936f5499bc1f612e81f5f4, type: 3}
+    - target: {fileID: 114314282895839196, guid: 2c83fc4959f220141a70e1ace6af1f93,
+        type: 2}
+      propertyPath: sfx
+      value: 
+      objectReference: {fileID: 1448232587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c83fc4959f220141a70e1ace6af1f93, type: 2}
   m_IsPrefabAsset: 0
@@ -30204,6 +30229,8 @@ MonoBehaviour:
   - {fileID: 1800160585}
   - {fileID: 2029337068}
   bowser: {fileID: 973386959}
+  sfx: {fileID: 1448232587}
+  bowserDiesSound: {fileID: 8300000, guid: 1c30602e28029be4092e2ff7df9f044e, type: 3}
 --- !u!61 &1371998017
 BoxCollider2D:
   m_ObjectHideFlags: 0
