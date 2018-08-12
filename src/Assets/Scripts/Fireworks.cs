@@ -59,6 +59,8 @@ public class Fireworks : MonoBehaviour {
                 fireworks5.Play("Fireworks");
                 yield return new WaitForSeconds(0.9f);
                 fireworks5.gameObject.SetActive(false);
+
+                CameraControl.lockX = false;
             }
 
 		}

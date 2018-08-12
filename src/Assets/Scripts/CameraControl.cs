@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour {
 
-	public bool lockY = true;
+	public bool lockY = false;
 	private Vector3 offset;
 	private Vector3 tempVect;
     private Transform cameraTransform;
     public bool FollowOnStart = false;
     private bool isFollowing = false;
+    public static bool lockX = false;
 
 	void Start ()
 	{
@@ -26,14 +27,24 @@ public class CameraControl : MonoBehaviour {
         {
             lockY = false;
             Debug.Log("lock off");
-       //     tempVect = cameraTransform.position;
-      //      tempVect.x -= cameraTransform.position.x + 4.7f;
-     //       offset = tempVect.position;// + transform.position;
-     //       Apply();
         }
         else
         {
             lockY = true;
+            Debug.Log("lock on");
+        }
+    }
+
+    public void setXLock()
+    {
+        if (lockX)
+        {
+            lockX = false;
+            Debug.Log("lock off");
+        }
+        else
+        {
+            lockX = true;
             Debug.Log("lock on");
         }
     }
@@ -46,27 +57,8 @@ public class CameraControl : MonoBehaviour {
        Apply();
     }
 
-    public void SetEnabled(bool trueOrFalse)
-    {
-        enabled = trueOrFalse;
-    }
-
-    void OnEnabled()
-    {
-     //   Debug.Log(name + " was enabled.");
-
-    }
-
-    void OnDisabled()
-    {
-     //   Debug.Log(name + " was disabled.");
-
-    }
-
     void LateUpdate ()
 	{
-     //   Debug.Log("We are on frame " + Time.frameCount);
-
         if (cameraTransform == null && isFollowing)
         {
             OnStartFollowing();
@@ -82,16 +74,12 @@ public class CameraControl : MonoBehaviour {
     {
         tempVect = transform.position + offset;
 
-        if (lockY)
+        if(!lockX)
         {
             tempVect.y -= transform.position.y + 4.7f; // remove y component of player position
             cameraTransform.position = tempVect;
         }
-        else
-        {
-            cameraTransform.position = tempVect;
-        }
-        
+    
     }
 
 }
