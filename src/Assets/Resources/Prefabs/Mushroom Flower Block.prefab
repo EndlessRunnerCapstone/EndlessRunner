@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 251865512868561088}
   - component: {fileID: 95243170755504088}
   - component: {fileID: 114198455213120206}
+  - component: {fileID: 114724524144636742}
+  - component: {fileID: 114017181808111986}
   m_Layer: 9
   m_Name: Mushroom Flower Block
   m_TagString: BrickNoDestroy
@@ -203,6 +205,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114017181808111986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425462141436308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!114 &114198455213120206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,6 +240,32 @@ MonoBehaviour:
   FakeMushroom: {fileID: 1918304412918704}
   sfx: {fileID: 0}
   powerUpSound: {fileID: 8300000, guid: f6b9724471afdd944bd35358f6efbf27, type: 3}
+--- !u!114 &114724524144636742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425462141436308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 114017181808111986}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!212 &212257501218569182
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -254,7 +299,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 659605839
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 266aad21b7cc2a14e838c41d3e0b936f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
