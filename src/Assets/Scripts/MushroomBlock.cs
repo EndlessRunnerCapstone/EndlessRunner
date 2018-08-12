@@ -14,6 +14,7 @@ public class MushroomBlock : MonoBehaviour {
     public GameObject Flower; 
     public Sprite afterHitSprite;
     public GameObject FakeMushroom;
+    public GameObject FakeFlower;
     SpriteRenderer spriteRenderer;
 
     // sound effects variabless
@@ -74,7 +75,12 @@ public class MushroomBlock : MonoBehaviour {
                 // if the palyer is big, produce a flower 
                 else if (Player_Move.PlayerState == 1)
                 {
+                    // Animate our "fake mushroom" to appear to come out of the block
+                    FakeFlower.GetComponent<Animator>().Play("FakeMushroom");
+                    yield return new WaitForSeconds(1.0f);
+
                     // Instantiate Flower at spawn point
+                    Destroy(FakeFlower);
                     Instantiate(Flower, Spawn.transform.position, Quaternion.identity);
                 }
 

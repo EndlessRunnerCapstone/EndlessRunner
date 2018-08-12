@@ -24,7 +24,11 @@ public class TurtleController : Photon.MonoBehaviour
      private float recoveryWaitTime = 4f;
      private float recoveryTime = 2f;
 
-     public enum EnemyState
+    private AudioSource sfxPlayer;
+    public AudioClip kickSound;
+    public AudioClip stompSound;
+
+    public enum EnemyState
      {
           walking,
           shellIdle,
@@ -42,6 +46,7 @@ public class TurtleController : Photon.MonoBehaviour
           gravity = 60f;
           velocity.x = 0.5f;
           myAnimator = GetComponent<Animator>();
+          sfxPlayer = GetComponent<AudioSource>();
      }
 
      // Update is called once per frame
@@ -250,12 +255,14 @@ public class TurtleController : Photon.MonoBehaviour
                     StartCoroutine(Recovering());
                 }
 
+                sfxPlayer.PlayOneShot(stompSound);
                 state = EnemyState.shellIdle;
                 velocity.x = 0;
                 myAnimator.SetBool("idleShell", true);
             }
             else if (state == EnemyState.shellIdle)
             {
+                sfxPlayer.PlayOneShot(kickSound);
                 neverHit = false;
                 state = EnemyState.movingShell;
                 velocity.x = 2f;
