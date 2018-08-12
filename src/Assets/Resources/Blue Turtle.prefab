@@ -262,6 +262,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   timeBeforeDestroy: 1
+  kickSound: {fileID: 8300000, guid: c0cb84a2e510ec84baad5a059650cdcc, type: 3}
+  stompSound: {fileID: 8300000, guid: 4b243eb9e02cbb6469c2edcaa5fd1ca5, type: 3}
   state: 0
 --- !u!212 &212514165372382472
 SpriteRenderer:

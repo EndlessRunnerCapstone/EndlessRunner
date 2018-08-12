@@ -18,7 +18,12 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
     public AudioClip loseBigSound;
     public AudioClip fireBallSound;
     public AudioClip oneUp;
+    public AudioClip kickSound;
     private AudioSource[] allAudioSources;
+    private GameObject audioStar;
+
+    public GameObject starManMusic;
+    public GameObject levelMusic;
 
     //movement variables
     private float runSpeed;
@@ -97,6 +102,9 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
         {
             LocalPlayerInstance = this.gameObject;
         }
+
+        starManMusic = GameObject.Find("/Audio/StarMan");
+        levelMusic = GameObject.Find("/Audio/LevelMusic");
     }
 
     public void ResetMario()
@@ -118,7 +126,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
         CameraControl cameraControl = this.gameObject.GetComponent<CameraControl>();
 
-        if(cameraControl != null)
+        if (cameraControl != null)
         {
             if(!PhotonNetwork.connected || photonView.isMine)
             {
@@ -363,6 +371,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     {
                          if (hitRay.collider.tag == "Goomba")
                          {
+                          //    sfxPlayer.PlaySoundEffect(kickSound);
                               hitRay.collider.GetComponent<GoombaController>().StarDeath();
                          }
                     }
@@ -370,8 +379,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     {
                          if (hitRay.collider.tag == "Goomba")
                          {
-                              Debug.Log(hitRay);
-                              hitRay.collider.GetComponent<GoombaController>().Death();
+                                Debug.Log(hitRay);
+                                hitRay.collider.GetComponent<GoombaController>().Death();
                          }
 
                          if (Input.GetButton("Jump"))
@@ -559,11 +568,13 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
           {
                if (hitRay.collider.tag == "Goomba")
                {
-                    hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
+                      PlaySoundEffect(kickSound);
+                      hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
                }
                else if (hitRay.collider.tag == "Turtle")
                {
-                    hitRay.collider.gameObject.GetComponent<TurtleController>().StarDeath();
+                     PlaySoundEffect(kickSound);
+                     hitRay.collider.gameObject.GetComponent<TurtleController>().StarDeath();
                }
           }
           else
@@ -651,12 +662,17 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
 
     private IEnumerator StarPower()
      {
-          starPower = true;
-          myAnimator.SetBool("starPower", true);
+    
+        starPower = true;
+        levelMusic.GetComponent<AudioSource>().Stop();
+        starManMusic.GetComponent<AudioSource>().Play();
+        myAnimator.SetBool("starPower", true);
           yield return new WaitForSeconds(10);
-          starPower = false;
-          myAnimator.SetBool("starPower", false);
-     }
+        starManMusic.GetComponent<AudioSource>().Stop();
+        levelMusic.GetComponent<AudioSource>().Play();
+        starPower = false;
+        myAnimator.SetBool("starPower", false);
+    }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
