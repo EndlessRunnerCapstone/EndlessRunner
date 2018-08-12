@@ -61,12 +61,11 @@ public class LevelLoad : MonoBehaviour {
     void FinalScore()
     {
         int timeRemaining = (int)TimeKeeping.timeValue; // get timer value
-        Debug.Log(timeRemaining);
+
         // for the amount of time remaining, add score value and take from time value
         // these are the bonus coins for time remaining on the clock
         if (timeRemaining > 0)
         {
-            Debug.Log(timeRemaining);
             ScoreKeeping.scoreValue += 10;
             sfx.PlaySoundEffect(coinSfx);
             TimeKeeping.timeValue -= 10;

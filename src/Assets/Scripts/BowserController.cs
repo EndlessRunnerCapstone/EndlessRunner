@@ -19,9 +19,11 @@ public class BowserController : MonoBehaviour {
      private bool movingLeft, movingRight;
      private Animator myAnimator;
      public bool stoppedCoroutines = false;
+    [SerializeField] SoundEffectsManager sfx;
+    [SerializeField] AudioClip fireBallSound;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
           enabled = false;
           isDead = false;
           rb = GetComponent<Rigidbody2D>();          
@@ -163,6 +165,7 @@ public class BowserController : MonoBehaviour {
           while (true)
           {
                yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
+            sfx.PlaySoundEffect(fireBallSound);
                ShootFireball();
           }
      }
