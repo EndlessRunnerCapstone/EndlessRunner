@@ -327,7 +327,9 @@ public class TurtleController : Photon.MonoBehaviour
 
      public void StarDeath()
      {
-          myAnimator.SetBool("idleShell", true);
+         ScoreKeeping.scoreValue += 100;
+         sfxPlayer.PlayOneShot(kickSound);
+         myAnimator.SetBool("idleShell", true);
           GetComponent<Collider2D>().enabled = false;
           transform.rotation = new Quaternion(180, 0, 0, 0);
           rb.velocity = new Vector2(0.5f, 2f);

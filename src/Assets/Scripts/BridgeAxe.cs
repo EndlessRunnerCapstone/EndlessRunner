@@ -23,7 +23,8 @@ public class BridgeAxe : MonoBehaviour {
      private void OnTriggerEnter2D(Collider2D collision)
      {
           if (collision.gameObject.tag == "Player")
-          {
+          { 
+                
                StartCoroutine(DestroyBridge());
             spriteRenderer.enabled = false;
           }
@@ -31,6 +32,7 @@ public class BridgeAxe : MonoBehaviour {
 
      private IEnumerator DestroyBridge()
      {
+        CameraControl.lockX = true;
           bowser.GetComponent<BowserController>().stoppedCoroutines = true;
           StopCoroutine(bowser.GetComponent<BowserController>().Fireballs());
           StopCoroutine(bowser.GetComponent<BowserController>().RandomMovement());
@@ -39,8 +41,11 @@ public class BridgeAxe : MonoBehaviour {
 
         for (int i = 0; i < bridgeBlocks.Length; i++)
           {
+               ScoreKeeping.scoreValue += 2000;
                Destroy(bridgeBlocks[i]);
                yield return new WaitForSeconds(0.05f);
           }
+
+        CameraControl.lockX = false;
      }
 }

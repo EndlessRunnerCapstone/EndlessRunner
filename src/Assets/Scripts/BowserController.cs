@@ -154,6 +154,7 @@ public class BowserController : MonoBehaviour {
                StopCoroutine(jumpingCoroutine);
                StopCoroutine(shootingFire);
                Die();
+               ScoreKeeping.scoreValue += 1500;
           }
      }
 

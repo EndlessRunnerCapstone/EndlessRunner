@@ -60,7 +60,7 @@ public class Fireworks : MonoBehaviour {
                 yield return new WaitForSeconds(0.9f);
                 fireworks5.gameObject.SetActive(false);
 
-                CameraControl.lockX = false;
+           //     CameraControl.lockX = false;
             }
 
 		}
