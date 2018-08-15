@@ -56,7 +56,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
      [SerializeField] private bool invincible;
      float invincibilityTime = 2f;
      float flickerTime = 0.1f;
-     private bool starPower;
+     public bool starPower;
      float currentTime;
      private bool turtleInvincible;
 
@@ -390,6 +390,10 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                          else
                          {
                               rb.velocity = new Vector2(rb.velocity.x, 2);
+                         }
+                         if (hitRay.collider.tag == "Piranha")
+                         {
+                              OnEnemyHit(hitRay);
                          }
                     }
                }
