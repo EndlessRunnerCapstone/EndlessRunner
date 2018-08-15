@@ -278,6 +278,7 @@ public class FlyingTurtleController : MonoBehaviour
                }
                else
                {
+                    ScoreKeeping.scoreValue += 100;
                     state = EnemyState.shellIdle;
                     velocity.x = 0;
                }
@@ -332,6 +333,7 @@ public class FlyingTurtleController : MonoBehaviour
 
      public void StarDeath()
      {
+          ScoreKeeping.scoreValue += 100;
           myAnimator.SetBool("idleShell", true);
           myAnimator.SetBool("flying", false);
           GetComponent<Collider2D>().enabled = false;

@@ -26,6 +26,7 @@ public class LevelLoad : MonoBehaviour {
     IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(2f);
+    
 
         // Call the loading screen
         // Also rest time value for next level  
@@ -54,6 +55,7 @@ public class LevelLoad : MonoBehaviour {
             }
 
             SceneManager.LoadScene("LoadingScreen1");
+            CameraControl.lockX = false;
             TimeKeeping.timeValue = 400;
         }      
     }

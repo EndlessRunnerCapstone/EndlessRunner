@@ -371,7 +371,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     {
                          if (hitRay.collider.tag == "Goomba")
                          {
-                          //    sfxPlayer.PlaySoundEffect(kickSound);
+                             // sfxPlayer.PlaySoundEffect(kickSound);
                               hitRay.collider.GetComponent<GoombaController>().StarDeath();
                          }
                     }
@@ -464,7 +464,8 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                     }
                }
                else if (collision.gameObject.tag == "LifeMushroom") {
-    
+
+                    ScoreKeeping.scoreValue += 1000;
                     PlaySoundEffect(oneUp);
                     Globals.PlayerOne.NumberOfLives++;
                     Globals.PlayerTwo.NumberOfLives++;
@@ -573,6 +574,7 @@ public class Player_Move : Photon.MonoBehaviour, IPunObservable {
                if (hitRay.collider.tag == "Goomba")
                {
                       PlaySoundEffect(kickSound);
+                      
                       hitRay.collider.gameObject.GetComponent<GoombaController>().StarDeath();
                }
                else if (hitRay.collider.tag == "Turtle")

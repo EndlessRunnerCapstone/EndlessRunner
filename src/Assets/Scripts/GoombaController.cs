@@ -162,6 +162,7 @@ public class GoombaController : Photon.MonoBehaviour {
 
      public void StarDeath()
      {
+          ScoreKeeping.scoreValue += 100;
           state = EnemyState.dead;
           GetComponent<Collider2D>().enabled = false;
           transform.rotation = new Quaternion(180, 0, 0, 0);
