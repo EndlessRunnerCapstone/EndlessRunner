@@ -12,12 +12,18 @@ public class LevelLoad : MonoBehaviour {
 
     [SerializeField] SoundEffectsManager sfx;
     [SerializeField] AudioClip coinSfx;
+    private bool canPlay = true;
 
     void OnTriggerEnter2D(Collider2D coll)
     {
         if(WorldTracker.worldNumber == "1-4")
         {
-            sfx.PlayWorldDoneMusic();
+            if(canPlay)
+            {
+                sfx.PlayWorldDoneMusic();
+                canPlay = false;
+            }
+      
         }
         //  This function calls the "FinalScore function every 0.1 seconds
         InvokeRepeating("FinalScore", 0.01f, 0.1f);
@@ -33,7 +39,7 @@ public class LevelLoad : MonoBehaviour {
 
         if (WorldTracker.worldNumber == "1-4")
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("GameOver");
         }
         else
         {
