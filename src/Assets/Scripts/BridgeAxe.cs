@@ -32,7 +32,7 @@ public class BridgeAxe : MonoBehaviour {
 
      private IEnumerator DestroyBridge()
      {
-        CameraControl.lockX = true;
+      //  CameraControl.lockX = true;
           bowser.GetComponent<BowserController>().stoppedCoroutines = true;
           StopCoroutine(bowser.GetComponent<BowserController>().Fireballs());
           StopCoroutine(bowser.GetComponent<BowserController>().RandomMovement());
@@ -41,11 +41,10 @@ public class BridgeAxe : MonoBehaviour {
 
         for (int i = 0; i < bridgeBlocks.Length; i++)
           {
-               ScoreKeeping.scoreValue += 2000;
                Destroy(bridgeBlocks[i]);
                yield return new WaitForSeconds(0.05f);
           }
-
-        CameraControl.lockX = false;
-     }
+        ScoreKeeping.scoreValue += 2000;
+        //  CameraControl.lockX = false;
+    }
 }
