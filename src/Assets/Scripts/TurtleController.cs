@@ -53,6 +53,7 @@ public class TurtleController : Photon.MonoBehaviour
      void Update()
      {          
           UpdateEnemyPosition();
+          FlipTurtle();
           
           //checkDeath();
      }
@@ -101,27 +102,36 @@ public class TurtleController : Photon.MonoBehaviour
                     pos.x += velocity.x * Time.deltaTime;
                }
 
-               transform.localPosition = pos;
-               transform.localScale = scale;
+               transform.localPosition = pos;               
           }          
+     }
+
+     void FlipTurtle()
+     {
+          if (isMovingLeft)
+          {
+               transform.localScale = new Vector2(1f, 1f);
+          }
+          else
+          {
+               transform.localScale = new Vector2(-1f, 1f);
+          }
      }
 
 
      void CheckWallCollisionWalking()
      {
-          bool leftCollision, rightCollision;        
+          RaycastHit2D leftCollision, rightCollision;        
           leftCollision = Physics2D.Raycast(transform.position, Vector2.left, 0.1f, groundEnemyMask);
           rightCollision = Physics2D.Raycast(transform.position, Vector2.right, 0.1f, groundEnemyMask);
 
-          if (leftCollision)
+          if (leftCollision.collider != null && leftCollision.collider.gameObject.layer == LayerMask.NameToLayer("groundLayer"))
           {
-               isMovingLeft = false;
-               transform.localScale = new Vector2(-1f, 1f);
+               isMovingLeft = false;               
           }
-          else if (rightCollision)
+          else if (rightCollision.collider != null && rightCollision.collider.gameObject.layer == LayerMask.NameToLayer("groundLayer"))
           {
-               isMovingLeft = true;
-               transform.localScale = new Vector2(1f, 1f);
+               isMovingLeft = true;               
           }
      }
 
@@ -338,12 +348,9 @@ public class TurtleController : Photon.MonoBehaviour
 
      private void OnCollisionEnter2D(Collision2D collision)
      {
-          if (state == EnemyState.walking)
+          if (collision.collider.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
           {
-               if (collision.gameObject.layer == LayerMask.NameToLayer("enemyLayer"))
-               {
-                    isMovingLeft = !isMovingLeft;
-               }
+               isMovingLeft = !isMovingLeft;
           }
      }
 }
