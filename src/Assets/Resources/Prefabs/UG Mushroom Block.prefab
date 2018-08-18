@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 114530103311320612}
   - component: {fileID: 114223489366845216}
   - component: {fileID: 95941786034737904}
+  - component: {fileID: 114372740278168904}
   m_Layer: 9
   m_Name: UG Mushroom Block
   m_TagString: Untagged
@@ -253,6 +254,21 @@ MonoBehaviour:
   FakeFlower: {fileID: 1111538561402384}
   sfx: {fileID: 0}
   powerUpSound: {fileID: 8300000, guid: f6b9724471afdd944bd35358f6efbf27, type: 3}
+--- !u!114 &114372740278168904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942897989878804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!114 &114530103311320612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,7 +289,8 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 114586709748744838, guid: afcc9a4ddc918d24c9250bf850822d76, type: 2}
+  - {fileID: 114223489366845216}
+  - {fileID: 114372740278168904}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
